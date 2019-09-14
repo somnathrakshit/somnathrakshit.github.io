@@ -1,0 +1,56 @@
+==================================================================
+https://keybase.io/somnath
+--------------------------------------------------------------------
+
+I hereby claim:
+
+  * I am an admin of https://somnathrakshit.github.io
+  * I am somnath (https://keybase.io/somnath) on keybase.
+  * I have a public key ASAw5T94gm1LqSmR4EsFHZhsMRDXG0FWDOeSrzKxnSV1Fgo
+
+To do so, I am signing this object:
+
+{
+  "body": {
+    "key": {
+      "eldest_kid": "010134df458aebb11d1fcfbcda48d43a3cf42f7f8e76f824c961c5fe90b5849c1d0e0a",
+      "host": "keybase.io",
+      "kid": "012030e53f78826d4ba92991e04b051d986c3110d71b41560ce792af32b19d2575160a",
+      "uid": "a8a3ea951fc539b57830bc6d61165519",
+      "username": "somnath"
+    },
+    "merkle_root": {
+      "ctime": 1567837528,
+      "hash": "374801cd1ad88fb69f1984c7d54d6879ea38cb39f405a4a16700e1d0a5f19d7ad40322c434a1fdd48b837201b6db49f11f7658bb6dd83c7a8a871a06a5ddef97",
+      "hash_meta": "a8c4f4f23c4a26ae47968e6d45afaa6507a7f891c08dd08b48745454ed6ee972",
+      "seqno": 6192811
+    },
+    "service": {
+      "entropy": "pgYaLq3NCwHTg3VylS6hAJAy",
+      "hostname": "somnathrakshit.github.io",
+      "protocol": "https:"
+    },
+    "type": "web_service_binding",
+    "version": 2
+  },
+  "client": {
+    "name": "keybase.io go client",
+    "version": "4.3.2"
+  },
+  "ctime": 1567837541,
+  "expire_in": 504576000,
+  "prev": "5c9f84099e8a39f0c1aee51a1adfe5c995931f79fcf436cc4740bce7d71f6908",
+  "seqno": 47,
+  "tag": "signature"
+}
+
+which yields the signature:
+
+hKRib2R5hqhkZXRhY2hlZMOpaGFzaF90eXBlCqNrZXnEIwEgMOU/eIJtS6kpkeBLBR2YbDEQ1xtBVgznkq8ysZ0ldRYKp3BheWxvYWTESpcCL8QgXJ+ECZ6KOfDBruUaGt/lyZWTH3n89DbMR0C859cfaQjEIHFz8FSd3IccS6WVvPmvMry6WRSOX0LvksRX98U8V25JAgHCo3NpZ8RA5k2BV4oGWswB6AfG1DWG9AXgJApw/Sk/e8K0/yZHNbYS3iwnj3uSe0SR25b1RYeBzyEoCtuc/2+jQDm+yVjsDqhzaWdfdHlwZSCkaGFzaIKkdHlwZQildmFsdWXEIHAY8ZjEgeXJaymKz/BUj2S+nvwBVezhdH7dQt1W5dSNo3RhZ80CAqd2ZXJzaW9uAQ==
+
+And finally, I am proving ownership of this host by posting or
+appending to this document.
+
+View my publicly-auditable identity here: https://keybase.io/somnath
+
+==================================================================
