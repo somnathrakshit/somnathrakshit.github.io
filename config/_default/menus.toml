@@ -15,7 +15,7 @@
 
 [[main]]
   name = "Publications"
-  identifier = "publication"
+  url = "publication"
   weight = 30
 
 [[main]]
