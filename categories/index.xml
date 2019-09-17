@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Categories | Somnath Rakshit</title>
+    <link>https://somnathrakshit.github.io/categories/</link>
+      <atom:link href="https://somnathrakshit.github.io/categories/index.xml" rel="self" type="application/rss+xml" />
+    <description>Categories</description>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>© Somnath Rakshit, 2019</copyright><lastBuildDate>Sat, 01 Jun 2019 12:52:56 +0200</lastBuildDate>
+    <image>
+      <url>https://somnathrakshit.github.io/img/icon-192.png</url>
+      <title>Categories</title>
+      <link>https://somnathrakshit.github.io/categories/</link>
+    </image>
+    
+    <item>
+      <title>programming</title>
+      <link>https://somnathrakshit.github.io/categories/programming/</link>
+      <pubDate>Sat, 01 Jun 2019 12:52:56 +0200</pubDate>
+      <guid>https://somnathrakshit.github.io/categories/programming/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>random</title>
+      <link>https://somnathrakshit.github.io/categories/random/</link>
+      <pubDate>Sat, 01 Jun 2019 02:46:52 +0200</pubDate>
+      <guid>https://somnathrakshit.github.io/categories/random/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>

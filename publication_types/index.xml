@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Publication_types | Somnath Rakshit</title>
+    <link>https://somnathrakshit.github.io/publication_types/</link>
+      <atom:link href="https://somnathrakshit.github.io/publication_types/index.xml" rel="self" type="application/rss+xml" />
+    <description>Publication_types</description>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>© Somnath Rakshit, 2019</copyright><lastBuildDate>Fri, 02 Aug 2019 20:02:51 +0530</lastBuildDate>
+    <image>
+      <url>https://somnathrakshit.github.io/img/icon-192.png</url>
+      <title>Publication_types</title>
+      <link>https://somnathrakshit.github.io/publication_types/</link>
+    </image>
+    
+    <item>
+      <title>1</title>
+      <link>https://somnathrakshit.github.io/publication_types/1/</link>
+      <pubDate>Fri, 02 Aug 2019 20:02:51 +0530</pubDate>
+      <guid>https://somnathrakshit.github.io/publication_types/1/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>2</title>
+      <link>https://somnathrakshit.github.io/publication_types/2/</link>
+      <pubDate>Thu, 25 Jul 2019 20:40:46 +0530</pubDate>
+      <guid>https://somnathrakshit.github.io/publication_types/2/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>

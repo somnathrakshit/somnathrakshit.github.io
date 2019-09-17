@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Anasua Sarkar | Somnath Rakshit</title>
+    <link>https://somnathrakshit.github.io/authors/anasua-sarkar/</link>
+      <atom:link href="https://somnathrakshit.github.io/authors/anasua-sarkar/index.xml" rel="self" type="application/rss+xml" />
+    <description>Anasua Sarkar</description>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>© Somnath Rakshit, 2019</copyright><lastBuildDate>Wed, 01 May 2019 10:47:26 +0200</lastBuildDate>
+    <image>
+      <url>https://somnathrakshit.github.io/img/icon-192.png</url>
+      <title>Anasua Sarkar</title>
+      <link>https://somnathrakshit.github.io/authors/anasua-sarkar/</link>
+    </image>
+    
+    <item>
+      <title>A New Evolutionary Rough Fuzzy Integrated Machine Learning Technique for microRNA selection using Next-Generation Sequencing data of Breast Cancer</title>
+      <link>https://somnathrakshit.github.io/publication/gecco-pso-rfcm-rf/</link>
+      <pubDate>Wed, 01 May 2019 10:47:26 +0200</pubDate>
+      <guid>https://somnathrakshit.github.io/publication/gecco-pso-rfcm-rf/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>
