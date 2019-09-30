@@ -32,7 +32,7 @@ summary = "MicroRNAs (miRNA) play an important role in various biological proces
 doi = ""
 
 # Is this a featured publication? (true/false)
-featured = true
+featured = false
 
 # Tags (optional).
 #   Set `tags = []` for no tags, or use the form `tags = ["A Tag", "Another Tag"]` for one or more tags.

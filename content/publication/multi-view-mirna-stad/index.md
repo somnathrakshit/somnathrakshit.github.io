@@ -26,7 +26,7 @@ summary: "Stomach cancer is one of the leading causes of cancer-related deaths w
 
 tags: ["computational biology"]
 categories: []
-featured: true
+featured: false
 
 # Custom links (optional).
 #   Uncomment and edit lines below to show custom links.

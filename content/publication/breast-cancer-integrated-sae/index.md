@@ -33,7 +33,7 @@ summary = "In this work, it is seen that deep learning technique such as stacked
 doi = "10.1109/TENCON.2018.8650144"
 
 # Is this a featured publication? (true/false)
-featured = true
+featured = false
 
 # Tags (optional).
 #   Set `tags = []` for no tags, or use the form `tags = ["A Tag", "Another Tag"]` for one or more tags.

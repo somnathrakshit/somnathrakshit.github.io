@@ -44,7 +44,7 @@ local_business_type = ""
 org_name = ""
 
 # Description for social sharing and search engines. If undefined, superuser role is used in place.
-description = "I am a Masters student (Data Science track) at the School of Information, The University of Texas at Austin. My current interests lie in deep learning, natural language processing and knowledge graphs."
+description = "I am a Masters student (Data Science track) at the School of Information and a Teaching Assistant for MIS 385N: User Generated Content Analytics at Department of Information, Risk and Operations Management, McCombs School of Business, The University of Texas at Asutin. My current interests lie in deep learning, natural language processing and knowledge graphs."
 
 # Display a logo in navigation bar rather than title (optional).
 #   To enable, place an image in `static/img/` and reference its filename below. To disable, set the value to "".
@@ -75,7 +75,7 @@ privacy_pack = false
 
 # Enable visitors to edit pages?
 #   `repo` defines the repository URL. `editable` defines which page types can be edited.
-edit_page = {repo_url = "https://github.com/somnathrakshit/somnathrakshit.github.io", repo_branch = "master", editable = {docs = false, page = false, post = false}}
+edit_page = {repo_url = "https://github.com/somnathrakshit/somnathrakshit.github.io", repo_branch = "source", editable = {docs = false, page = false, post = false}}
 
 ############################
 ## Contact details

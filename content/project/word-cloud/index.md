@@ -1,7 +1,7 @@
 +++
 title = "Word Cloud"
 date = 2018-10-03T01:26:16+05:30
-draft = false
+draft = true
 authors = ["admin"]
 
 # Tags: can be used for filtering projects.

@@ -1,7 +1,7 @@
 +++
 title = "A statistical approach to predict flight delay using gradient boosted decision tree"
 date = 2017-06-02T01:18:50+05:30
-draft = false
+draft = true
 authors = ["admin"]
 
 # Tags: can be used for filtering projects.

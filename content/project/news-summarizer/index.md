@@ -1,7 +1,7 @@
 +++
 title = "Automated News Summarizer"
 date = 2017-06-29T00:57:13+05:30
-draft = false
+draft = true
 authors = ["admin"]
 
 # Tags: can be used for filtering projects.
