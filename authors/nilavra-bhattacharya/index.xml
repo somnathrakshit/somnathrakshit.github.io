@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Nilavra	Bhattacharya | Somnath Rakshit</title>
+    <link>https://somnathrakshit.github.io/authors/nilavra-bhattacharya/</link>
+      <atom:link href="https://somnathrakshit.github.io/authors/nilavra-bhattacharya/index.xml" rel="self" type="application/rss+xml" />
+    <description>Nilavra	Bhattacharya</description>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>© Somnath Rakshit, 2019</copyright><lastBuildDate>Tue, 10 Dec 2019 16:16:12 -0600</lastBuildDate>
+    <image>
+      <url>https://somnathrakshit.github.io/img/icon-192.png</url>
+      <title>Nilavra	Bhattacharya</title>
+      <link>https://somnathrakshit.github.io/authors/nilavra-bhattacharya/</link>
+    </image>
+    
+    <item>
+      <title>Relevance Prediction from Eye-movements Using Semi-interpretable Convolutional Neural Networks</title>
+      <link>https://somnathrakshit.github.io/publication/relevance-prediction-eye-movements-chiir-2020/</link>
+      <pubDate>Tue, 10 Dec 2019 16:16:12 -0600</pubDate>
+      <guid>https://somnathrakshit.github.io/publication/relevance-prediction-eye-movements-chiir-2020/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>
