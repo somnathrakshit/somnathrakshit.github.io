@@ -1,535 +1,437 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-  <channel>
-    <title>programming | Somnath Rakshit</title>
-    <link>https://somnathrakshit.github.io/categories/programming/</link>
-      <atom:link href="https://somnathrakshit.github.io/categories/programming/index.xml" rel="self" type="application/rss+xml" />
-    <description>programming</description>
-    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>© Somnath Rakshit, 2019</copyright><lastBuildDate>Sat, 01 Jun 2019 12:52:56 +0200</lastBuildDate>
-    <image>
-      <url>https://somnathrakshit.github.io/img/icon-192.png</url>
-      <title>programming</title>
-      <link>https://somnathrakshit.github.io/categories/programming/</link>
-    </image>
-    
-    <item>
-      <title>A Comprehensive Guide to Sorting in Pandas</title>
-      <link>https://somnathrakshit.github.io/post/sorting_in_pandas/</link>
-      <pubDate>Sat, 01 Jun 2019 12:52:56 +0200</pubDate>
-      <guid>https://somnathrakshit.github.io/post/sorting_in_pandas/</guid>
-      <description>
-
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>programming | Somnath Rakshit</title><link>https://somnathrakshit.github.io/categories/programming/</link><atom:link href="https://somnathrakshit.github.io/categories/programming/index.xml" rel="self" type="application/rss+xml"/><description>programming</description><generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>© Somnath Rakshit, 2019</copyright><lastBuildDate>Sat, 01 Jun 2019 12:52:56 +0200</lastBuildDate><image><url>https://somnathrakshit.github.io/img/icon-192.png</url><title>programming</title><link>https://somnathrakshit.github.io/categories/programming/</link></image><item><title>A Comprehensive Guide to Sorting in Pandas</title><link>https://somnathrakshit.github.io/post/sorting_in_pandas/</link><pubDate>Sat, 01 Jun 2019 12:52:56 +0200</pubDate><guid>https://somnathrakshit.github.io/post/sorting_in_pandas/</guid><description>
 &lt;p&gt;In order to sort rows in &lt;code&gt;Pandas&lt;/code&gt;, you can use the &lt;code&gt;sort_values()&lt;/code&gt; function. I have taken examples from this excellant &lt;a href=&#34;https://datatofish.com/sort-pandas-dataframe/&#34; target=&#34;_blank&#34;&gt;blog&lt;/a&gt;. Although it shows a lot of the use cases covered here, the last case is absent pretty much everywhere.&lt;/p&gt;
-
 &lt;p&gt;In this tutorial, I will be showing how to use &lt;code&gt;Pandas&lt;/code&gt; to sort rows based on different criterion.&lt;/p&gt;
-
 &lt;p&gt;&lt;h2&gt;Table of Contents&lt;/h2&gt;
 HAHAHUGOSHORTCODE-TOC0-HBHB&lt;/p&gt;
-
 &lt;p&gt;You can run a colab notebook containing all code present in this post by clicking here.
 &lt;a href=&#34;https://colab.research.google.com/gist/somnathrakshit/88a4684a1eb97b782b07a2f758ad3e3c/pandas_sort.ipynb&#34; target=&#34;_parent&#34;&gt;&lt;img src=&#34;https://colab.research.google.com/assets/colab-badge.svg&#34; alt=&#34;Open In Colab&#34;/&gt;&lt;/a&gt;&lt;/p&gt;
-
 &lt;p&gt;Let us create our &lt;code&gt;DataFrame&lt;/code&gt; (df) in pandas&lt;/p&gt;
-
 &lt;pre&gt;&lt;code&gt;from pandas import DataFrame
- 
 Cars = {&#39;Brand&#39;: [&#39;Honda Civic&#39;,&#39;Toyota Corolla&#39;,&#39;Ford Focus&#39;,&#39;Audi A4&#39;],
-        &#39;Price&#39;: [22000, 25000, 27000, 35000],
-        &#39;Year&#39;: [2015, 2013, 2018, 2018]
-        }
- 
+&#39;Price&#39;: [22000, 25000, 27000, 35000],
+&#39;Year&#39;: [2015, 2013, 2018, 2018]
+}
 df = DataFrame(Cars, columns= [&#39;Brand&#39;, &#39;Price&#39;,&#39;Year&#39;])
-
 df
 &lt;/code&gt;&lt;/pre&gt;
-
 &lt;div&gt;
 &lt;style scoped&gt;
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
+.dataframe tbody tr th:only-of-type {
+vertical-align: middle;
+}
+.dataframe tbody tr th {
+vertical-align: top;
+}
+.dataframe thead th {
+text-align: right;
+}
 &lt;/style&gt;
 &lt;table border=&#34;1&#34; class=&#34;dataframe&#34;&gt;
-  &lt;thead&gt;
-    &lt;tr style=&#34;text-align: right;&#34;&gt;
-      &lt;th&gt;&lt;/th&gt;
-      &lt;th&gt;Brand&lt;/th&gt;
-      &lt;th&gt;Price&lt;/th&gt;
-      &lt;th&gt;Year&lt;/th&gt;
-    &lt;/tr&gt;
-  &lt;/thead&gt;
-  &lt;tbody&gt;
-    &lt;tr&gt;
-      &lt;th&gt;0&lt;/th&gt;
-      &lt;td&gt;Honda Civic&lt;/td&gt;
-      &lt;td&gt;22000&lt;/td&gt;
-      &lt;td&gt;2015&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;th&gt;1&lt;/th&gt;
-      &lt;td&gt;Toyota Corolla&lt;/td&gt;
-      &lt;td&gt;25000&lt;/td&gt;
-      &lt;td&gt;2013&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;th&gt;2&lt;/th&gt;
-      &lt;td&gt;Ford Focus&lt;/td&gt;
-      &lt;td&gt;27000&lt;/td&gt;
-      &lt;td&gt;2018&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;th&gt;3&lt;/th&gt;
-      &lt;td&gt;Audi A4&lt;/td&gt;
-      &lt;td&gt;35000&lt;/td&gt;
-      &lt;td&gt;2018&lt;/td&gt;
-    &lt;/tr&gt;
-  &lt;/tbody&gt;
+&lt;thead&gt;
+&lt;tr style=&#34;text-align: right;&#34;&gt;
+&lt;th&gt;&lt;/th&gt;
+&lt;th&gt;Brand&lt;/th&gt;
+&lt;th&gt;Price&lt;/th&gt;
+&lt;th&gt;Year&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;th&gt;0&lt;/th&gt;
+&lt;td&gt;Honda Civic&lt;/td&gt;
+&lt;td&gt;22000&lt;/td&gt;
+&lt;td&gt;2015&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;th&gt;1&lt;/th&gt;
+&lt;td&gt;Toyota Corolla&lt;/td&gt;
+&lt;td&gt;25000&lt;/td&gt;
+&lt;td&gt;2013&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;th&gt;2&lt;/th&gt;
+&lt;td&gt;Ford Focus&lt;/td&gt;
+&lt;td&gt;27000&lt;/td&gt;
+&lt;td&gt;2018&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;th&gt;3&lt;/th&gt;
+&lt;td&gt;Audi A4&lt;/td&gt;
+&lt;td&gt;35000&lt;/td&gt;
+&lt;td&gt;2018&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
 &lt;/table&gt;
 &lt;/div&gt;
-
 &lt;h2 id=&#34;column-in-an-ascending-order&#34;&gt;Column in an ascending order&lt;/h2&gt;
-
 &lt;p&gt;To sort this df based on the column &lt;code&gt;Brand&lt;/code&gt;, we can use the &lt;code&gt;sort_values()&lt;/code&gt; function in this manner. Here, &lt;code&gt;inplace=True&lt;/code&gt; means that the df will be sorted in-memory. Also, by default, the &lt;code&gt;df&lt;/code&gt; is sorted in ascending order. But we can change it easily, as will be shown later.&lt;/p&gt;
-
 &lt;pre&gt;&lt;code&gt;df.sort_values(by=[&#39;Brand&#39;], inplace=True)
 &lt;/code&gt;&lt;/pre&gt;
-
 &lt;pre&gt;&lt;code&gt;df
 &lt;/code&gt;&lt;/pre&gt;
-
 &lt;div&gt;
 &lt;style scoped&gt;
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
+.dataframe tbody tr th:only-of-type {
+vertical-align: middle;
+}
+.dataframe tbody tr th {
+vertical-align: top;
+}
+.dataframe thead th {
+text-align: right;
+}
 &lt;/style&gt;
 &lt;table border=&#34;1&#34; class=&#34;dataframe&#34;&gt;
-  &lt;thead&gt;
-    &lt;tr style=&#34;text-align: right;&#34;&gt;
-      &lt;th&gt;&lt;/th&gt;
-      &lt;th&gt;Brand&lt;/th&gt;
-      &lt;th&gt;Price&lt;/th&gt;
-      &lt;th&gt;Year&lt;/th&gt;
-    &lt;/tr&gt;
-  &lt;/thead&gt;
-  &lt;tbody&gt;
-    &lt;tr&gt;
-      &lt;th&gt;3&lt;/th&gt;
-      &lt;td&gt;Audi A4&lt;/td&gt;
-      &lt;td&gt;35000&lt;/td&gt;
-      &lt;td&gt;2018&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;th&gt;2&lt;/th&gt;
-      &lt;td&gt;Ford Focus&lt;/td&gt;
-      &lt;td&gt;27000&lt;/td&gt;
-      &lt;td&gt;2018&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;th&gt;0&lt;/th&gt;
-      &lt;td&gt;Honda Civic&lt;/td&gt;
-      &lt;td&gt;22000&lt;/td&gt;
-      &lt;td&gt;2015&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;th&gt;1&lt;/th&gt;
-      &lt;td&gt;Toyota Corolla&lt;/td&gt;
-      &lt;td&gt;25000&lt;/td&gt;
-      &lt;td&gt;2013&lt;/td&gt;
-    &lt;/tr&gt;
-  &lt;/tbody&gt;
+&lt;thead&gt;
+&lt;tr style=&#34;text-align: right;&#34;&gt;
+&lt;th&gt;&lt;/th&gt;
+&lt;th&gt;Brand&lt;/th&gt;
+&lt;th&gt;Price&lt;/th&gt;
+&lt;th&gt;Year&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;th&gt;3&lt;/th&gt;
+&lt;td&gt;Audi A4&lt;/td&gt;
+&lt;td&gt;35000&lt;/td&gt;
+&lt;td&gt;2018&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;th&gt;2&lt;/th&gt;
+&lt;td&gt;Ford Focus&lt;/td&gt;
+&lt;td&gt;27000&lt;/td&gt;
+&lt;td&gt;2018&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;th&gt;0&lt;/th&gt;
+&lt;td&gt;Honda Civic&lt;/td&gt;
+&lt;td&gt;22000&lt;/td&gt;
+&lt;td&gt;2015&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;th&gt;1&lt;/th&gt;
+&lt;td&gt;Toyota Corolla&lt;/td&gt;
+&lt;td&gt;25000&lt;/td&gt;
+&lt;td&gt;2013&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
 &lt;/table&gt;
 &lt;/div&gt;
-
 &lt;p&gt;The complete code to perform the task above is shown below.&lt;/p&gt;
-
 &lt;pre&gt;&lt;code&gt;from pandas import DataFrame
- 
 Cars = {&#39;Brand&#39;: [&#39;Honda Civic&#39;,&#39;Toyota Corolla&#39;,&#39;Ford Focus&#39;,&#39;Audi A4&#39;],
-        &#39;Price&#39;: [22000,25000,27000,35000],
-        &#39;Year&#39;: [2015,2013,2018,2018]
-        }
- 
+&#39;Price&#39;: [22000,25000,27000,35000],
+&#39;Year&#39;: [2015,2013,2018,2018]
+}
 df = DataFrame(Cars, columns= [&#39;Brand&#39;, &#39;Price&#39;,&#39;Year&#39;])
-
 # sort Brand - ascending order
 df.sort_values(by=[&#39;Brand&#39;], inplace=True)
-
 df
 &lt;/code&gt;&lt;/pre&gt;
-
 &lt;div&gt;
 &lt;style scoped&gt;
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
+.dataframe tbody tr th:only-of-type {
+vertical-align: middle;
+}
+.dataframe tbody tr th {
+vertical-align: top;
+}
+.dataframe thead th {
+text-align: right;
+}
 &lt;/style&gt;
 &lt;table border=&#34;1&#34; class=&#34;dataframe&#34;&gt;
-  &lt;thead&gt;
-    &lt;tr style=&#34;text-align: right;&#34;&gt;
-      &lt;th&gt;&lt;/th&gt;
-      &lt;th&gt;Brand&lt;/th&gt;
-      &lt;th&gt;Price&lt;/th&gt;
-      &lt;th&gt;Year&lt;/th&gt;
-    &lt;/tr&gt;
-  &lt;/thead&gt;
-  &lt;tbody&gt;
-    &lt;tr&gt;
-      &lt;th&gt;3&lt;/th&gt;
-      &lt;td&gt;Audi A4&lt;/td&gt;
-      &lt;td&gt;35000&lt;/td&gt;
-      &lt;td&gt;2018&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;th&gt;2&lt;/th&gt;
-      &lt;td&gt;Ford Focus&lt;/td&gt;
-      &lt;td&gt;27000&lt;/td&gt;
-      &lt;td&gt;2018&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;th&gt;0&lt;/th&gt;
-      &lt;td&gt;Honda Civic&lt;/td&gt;
-      &lt;td&gt;22000&lt;/td&gt;
-      &lt;td&gt;2015&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;th&gt;1&lt;/th&gt;
-      &lt;td&gt;Toyota Corolla&lt;/td&gt;
-      &lt;td&gt;25000&lt;/td&gt;
-      &lt;td&gt;2013&lt;/td&gt;
-    &lt;/tr&gt;
-  &lt;/tbody&gt;
+&lt;thead&gt;
+&lt;tr style=&#34;text-align: right;&#34;&gt;
+&lt;th&gt;&lt;/th&gt;
+&lt;th&gt;Brand&lt;/th&gt;
+&lt;th&gt;Price&lt;/th&gt;
+&lt;th&gt;Year&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;th&gt;3&lt;/th&gt;
+&lt;td&gt;Audi A4&lt;/td&gt;
+&lt;td&gt;35000&lt;/td&gt;
+&lt;td&gt;2018&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;th&gt;2&lt;/th&gt;
+&lt;td&gt;Ford Focus&lt;/td&gt;
+&lt;td&gt;27000&lt;/td&gt;
+&lt;td&gt;2018&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;th&gt;0&lt;/th&gt;
+&lt;td&gt;Honda Civic&lt;/td&gt;
+&lt;td&gt;22000&lt;/td&gt;
+&lt;td&gt;2015&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;th&gt;1&lt;/th&gt;
+&lt;td&gt;Toyota Corolla&lt;/td&gt;
+&lt;td&gt;25000&lt;/td&gt;
+&lt;td&gt;2013&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
 &lt;/table&gt;
 &lt;/div&gt;
-
 &lt;h2 id=&#34;column-in-an-descending-order&#34;&gt;Column in an descending order&lt;/h2&gt;
-
 &lt;p&gt;Now, suppose we would like to sort df in descending order. Well, &lt;code&gt;sort_values()&lt;/code&gt; accepts a paramter named &lt;code&gt;ascending&lt;/code&gt;. By passing &lt;code&gt;ascending=True&lt;/code&gt;, you can sort the df in descending order. The code is given below.&lt;/p&gt;
-
 &lt;pre&gt;&lt;code&gt;df.sort_values(by=[&#39;Brand&#39;], inplace=True, ascending=False)
-
 &lt;/code&gt;&lt;/pre&gt;
-
 &lt;pre&gt;&lt;code&gt;# sort - descending order
 from pandas import DataFrame
- 
 Cars = {&#39;Brand&#39;: [&#39;Honda Civic&#39;,&#39;Toyota Corolla&#39;,&#39;Ford Focus&#39;,&#39;Audi A4&#39;],
-        &#39;Price&#39;: [22000,25000,27000,35000],
-        &#39;Year&#39;: [2015,2013,2018,2018]
-        }
- 
+&#39;Price&#39;: [22000,25000,27000,35000],
+&#39;Year&#39;: [2015,2013,2018,2018]
+}
 df = DataFrame(Cars, columns= [&#39;Brand&#39;, &#39;Price&#39;,&#39;Year&#39;])
-
 # sort Brand - descending order
 df.sort_values(by=[&#39;Brand&#39;], inplace=True, ascending=False)
-
 df
 &lt;/code&gt;&lt;/pre&gt;
-
 &lt;div&gt;
 &lt;style scoped&gt;
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
+.dataframe tbody tr th:only-of-type {
+vertical-align: middle;
+}
+.dataframe tbody tr th {
+vertical-align: top;
+}
+.dataframe thead th {
+text-align: right;
+}
 &lt;/style&gt;
 &lt;table border=&#34;1&#34; class=&#34;dataframe&#34;&gt;
-  &lt;thead&gt;
-    &lt;tr style=&#34;text-align: right;&#34;&gt;
-      &lt;th&gt;&lt;/th&gt;
-      &lt;th&gt;Brand&lt;/th&gt;
-      &lt;th&gt;Price&lt;/th&gt;
-      &lt;th&gt;Year&lt;/th&gt;
-    &lt;/tr&gt;
-  &lt;/thead&gt;
-  &lt;tbody&gt;
-    &lt;tr&gt;
-      &lt;th&gt;1&lt;/th&gt;
-      &lt;td&gt;Toyota Corolla&lt;/td&gt;
-      &lt;td&gt;25000&lt;/td&gt;
-      &lt;td&gt;2013&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;th&gt;0&lt;/th&gt;
-      &lt;td&gt;Honda Civic&lt;/td&gt;
-      &lt;td&gt;22000&lt;/td&gt;
-      &lt;td&gt;2015&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;th&gt;2&lt;/th&gt;
-      &lt;td&gt;Ford Focus&lt;/td&gt;
-      &lt;td&gt;27000&lt;/td&gt;
-      &lt;td&gt;2018&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;th&gt;3&lt;/th&gt;
-      &lt;td&gt;Audi A4&lt;/td&gt;
-      &lt;td&gt;35000&lt;/td&gt;
-      &lt;td&gt;2018&lt;/td&gt;
-    &lt;/tr&gt;
-  &lt;/tbody&gt;
+&lt;thead&gt;
+&lt;tr style=&#34;text-align: right;&#34;&gt;
+&lt;th&gt;&lt;/th&gt;
+&lt;th&gt;Brand&lt;/th&gt;
+&lt;th&gt;Price&lt;/th&gt;
+&lt;th&gt;Year&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;th&gt;1&lt;/th&gt;
+&lt;td&gt;Toyota Corolla&lt;/td&gt;
+&lt;td&gt;25000&lt;/td&gt;
+&lt;td&gt;2013&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;th&gt;0&lt;/th&gt;
+&lt;td&gt;Honda Civic&lt;/td&gt;
+&lt;td&gt;22000&lt;/td&gt;
+&lt;td&gt;2015&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;th&gt;2&lt;/th&gt;
+&lt;td&gt;Ford Focus&lt;/td&gt;
+&lt;td&gt;27000&lt;/td&gt;
+&lt;td&gt;2018&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;th&gt;3&lt;/th&gt;
+&lt;td&gt;Audi A4&lt;/td&gt;
+&lt;td&gt;35000&lt;/td&gt;
+&lt;td&gt;2018&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
 &lt;/table&gt;
 &lt;/div&gt;
-
 &lt;h2 id=&#34;by-multiple-columns-same-data-type&#34;&gt;By multiple columns - Same data type&lt;/h2&gt;
-
 &lt;p&gt;In the next step, we would like to sort based on two columns. So, here, we first sort by &lt;code&gt;Year&lt;/code&gt; and then by the &lt;code&gt;Price&lt;/code&gt; of the car. &lt;code&gt;sort_values()&lt;/code&gt; accepts a parameter called by. The by paramters can accept a string literal or it can accept a list. We simply need to pass the list containing the columns by which we want the df to be sorted. This is shown below.&lt;/p&gt;
-
 &lt;pre&gt;&lt;code&gt; df.sort_values(by=[&#39;Year&#39;,&#39;Price&#39;], inplace=True)
 &lt;/code&gt;&lt;/pre&gt;
-
 &lt;pre&gt;&lt;code&gt;# sort by multiple columns
 from pandas import DataFrame
- 
 Cars = {&#39;Brand&#39;: [&#39;Honda Civic&#39;,&#39;Toyota Corolla&#39;,&#39;Ford Focus&#39;,&#39;Audi A4&#39;],
-        &#39;Price&#39;: [22000,25000,27000,35000],
-        &#39;Year&#39;: [2015,2013,2018,2018]
-        }
- 
+&#39;Price&#39;: [22000,25000,27000,35000],
+&#39;Year&#39;: [2015,2013,2018,2018]
+}
 df = DataFrame(Cars, columns= [&#39;Brand&#39;, &#39;Price&#39;,&#39;Year&#39;])
-
 # sort by multiple columns: Year and Price
 df.sort_values(by=[&#39;Year&#39;,&#39;Price&#39;], inplace=True)
-
 df
 &lt;/code&gt;&lt;/pre&gt;
-
 &lt;div&gt;
 &lt;style scoped&gt;
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
+.dataframe tbody tr th:only-of-type {
+vertical-align: middle;
+}
+.dataframe tbody tr th {
+vertical-align: top;
+}
+.dataframe thead th {
+text-align: right;
+}
 &lt;/style&gt;
 &lt;table border=&#34;1&#34; class=&#34;dataframe&#34;&gt;
-  &lt;thead&gt;
-    &lt;tr style=&#34;text-align: right;&#34;&gt;
-      &lt;th&gt;&lt;/th&gt;
-      &lt;th&gt;Brand&lt;/th&gt;
-      &lt;th&gt;Price&lt;/th&gt;
-      &lt;th&gt;Year&lt;/th&gt;
-    &lt;/tr&gt;
-  &lt;/thead&gt;
-  &lt;tbody&gt;
-    &lt;tr&gt;
-      &lt;th&gt;1&lt;/th&gt;
-      &lt;td&gt;Toyota Corolla&lt;/td&gt;
-      &lt;td&gt;25000&lt;/td&gt;
-      &lt;td&gt;2013&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;th&gt;0&lt;/th&gt;
-      &lt;td&gt;Honda Civic&lt;/td&gt;
-      &lt;td&gt;22000&lt;/td&gt;
-      &lt;td&gt;2015&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;th&gt;2&lt;/th&gt;
-      &lt;td&gt;Ford Focus&lt;/td&gt;
-      &lt;td&gt;27000&lt;/td&gt;
-      &lt;td&gt;2018&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;th&gt;3&lt;/th&gt;
-      &lt;td&gt;Audi A4&lt;/td&gt;
-      &lt;td&gt;35000&lt;/td&gt;
-      &lt;td&gt;2018&lt;/td&gt;
-    &lt;/tr&gt;
-  &lt;/tbody&gt;
+&lt;thead&gt;
+&lt;tr style=&#34;text-align: right;&#34;&gt;
+&lt;th&gt;&lt;/th&gt;
+&lt;th&gt;Brand&lt;/th&gt;
+&lt;th&gt;Price&lt;/th&gt;
+&lt;th&gt;Year&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;th&gt;1&lt;/th&gt;
+&lt;td&gt;Toyota Corolla&lt;/td&gt;
+&lt;td&gt;25000&lt;/td&gt;
+&lt;td&gt;2013&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;th&gt;0&lt;/th&gt;
+&lt;td&gt;Honda Civic&lt;/td&gt;
+&lt;td&gt;22000&lt;/td&gt;
+&lt;td&gt;2015&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;th&gt;2&lt;/th&gt;
+&lt;td&gt;Ford Focus&lt;/td&gt;
+&lt;td&gt;27000&lt;/td&gt;
+&lt;td&gt;2018&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;th&gt;3&lt;/th&gt;
+&lt;td&gt;Audi A4&lt;/td&gt;
+&lt;td&gt;35000&lt;/td&gt;
+&lt;td&gt;2018&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
 &lt;/table&gt;
 &lt;/div&gt;
-
 &lt;h2 id=&#34;by-multiple-columns-mixed-data-type&#34;&gt;By multiple columns - Mixed data type&lt;/h2&gt;
-
 &lt;p&gt;It is also possible to pass mixed type of columns to be sorted. For example, we can pass the &lt;code&gt;Year&lt;/code&gt; column (integer) and the &lt;code&gt;Brand&lt;/code&gt; column (string). Pandas accepts this without any problem.&lt;/p&gt;
-
 &lt;pre&gt;&lt;code&gt;df.sort_values(by=[&#39;Year&#39;,&#39;Brand&#39;], inplace=True)
 &lt;/code&gt;&lt;/pre&gt;
-
 &lt;pre&gt;&lt;code&gt;# sort by multiple columns
 from pandas import DataFrame
- 
 Cars = {&#39;Brand&#39;: [&#39;Honda Civic&#39;,&#39;Toyota Corolla&#39;,&#39;Ford Focus&#39;,&#39;Audi A4&#39;],
-        &#39;Price&#39;: [22000,25000,27000,35000],
-        &#39;Year&#39;: [2015,2013,2018,2018]
-        }
- 
+&#39;Price&#39;: [22000,25000,27000,35000],
+&#39;Year&#39;: [2015,2013,2018,2018]
+}
 df = DataFrame(Cars, columns= [&#39;Brand&#39;, &#39;Price&#39;,&#39;Year&#39;])
-
 # sort by multiple columns: Year and Brand
 df.sort_values(by=[&#39;Year&#39;,&#39;Brand&#39;], inplace=True)
-
 df
 &lt;/code&gt;&lt;/pre&gt;
-
 &lt;div&gt;
 &lt;style scoped&gt;
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
+.dataframe tbody tr th:only-of-type {
+vertical-align: middle;
+}
+.dataframe tbody tr th {
+vertical-align: top;
+}
+.dataframe thead th {
+text-align: right;
+}
 &lt;/style&gt;
 &lt;table border=&#34;1&#34; class=&#34;dataframe&#34;&gt;
-  &lt;thead&gt;
-    &lt;tr style=&#34;text-align: right;&#34;&gt;
-      &lt;th&gt;&lt;/th&gt;
-      &lt;th&gt;Brand&lt;/th&gt;
-      &lt;th&gt;Price&lt;/th&gt;
-      &lt;th&gt;Year&lt;/th&gt;
-    &lt;/tr&gt;
-  &lt;/thead&gt;
-  &lt;tbody&gt;
-    &lt;tr&gt;
-      &lt;th&gt;1&lt;/th&gt;
-      &lt;td&gt;Toyota Corolla&lt;/td&gt;
-      &lt;td&gt;25000&lt;/td&gt;
-      &lt;td&gt;2013&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;th&gt;0&lt;/th&gt;
-      &lt;td&gt;Honda Civic&lt;/td&gt;
-      &lt;td&gt;22000&lt;/td&gt;
-      &lt;td&gt;2015&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;th&gt;3&lt;/th&gt;
-      &lt;td&gt;Audi A4&lt;/td&gt;
-      &lt;td&gt;35000&lt;/td&gt;
-      &lt;td&gt;2018&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;th&gt;2&lt;/th&gt;
-      &lt;td&gt;Ford Focus&lt;/td&gt;
-      &lt;td&gt;27000&lt;/td&gt;
-      &lt;td&gt;2018&lt;/td&gt;
-    &lt;/tr&gt;
-  &lt;/tbody&gt;
+&lt;thead&gt;
+&lt;tr style=&#34;text-align: right;&#34;&gt;
+&lt;th&gt;&lt;/th&gt;
+&lt;th&gt;Brand&lt;/th&gt;
+&lt;th&gt;Price&lt;/th&gt;
+&lt;th&gt;Year&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;th&gt;1&lt;/th&gt;
+&lt;td&gt;Toyota Corolla&lt;/td&gt;
+&lt;td&gt;25000&lt;/td&gt;
+&lt;td&gt;2013&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;th&gt;0&lt;/th&gt;
+&lt;td&gt;Honda Civic&lt;/td&gt;
+&lt;td&gt;22000&lt;/td&gt;
+&lt;td&gt;2015&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;th&gt;3&lt;/th&gt;
+&lt;td&gt;Audi A4&lt;/td&gt;
+&lt;td&gt;35000&lt;/td&gt;
+&lt;td&gt;2018&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;th&gt;2&lt;/th&gt;
+&lt;td&gt;Ford Focus&lt;/td&gt;
+&lt;td&gt;27000&lt;/td&gt;
+&lt;td&gt;2018&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
 &lt;/table&gt;
 &lt;/div&gt;
-
 &lt;h2 id=&#34;by-multiple-columns-and-mixed-order&#34;&gt;By multiple columns and mixed order&lt;/h2&gt;
-
 &lt;p&gt;Last but not the least, it is also possible to sort multiple columns in mixed order. For example, we may want to sort by &lt;code&gt;Year&lt;/code&gt; and &lt;code&gt;Brand&lt;/code&gt; where the &lt;code&gt;Year&lt;/code&gt; column needs to be sorted in descending order whereas the &lt;code&gt;Brand&lt;/code&gt; column needs to be sorted in ascening order. Pandas performs this by accepting list in addition to a boolean variable to the &lt;code&gt;ascending&lt;/code&gt; parameter. The correct intuitive way of doing this is shown below.&lt;/p&gt;
-
 &lt;pre&gt;&lt;code&gt;df.sort_values(by=[&#39;Year&#39;,&#39;Brand&#39;], ascending=[False, True], inplace=True)
 &lt;/code&gt;&lt;/pre&gt;
-
 &lt;pre&gt;&lt;code&gt;# sort by multiple columns but different order
 from pandas import DataFrame
- 
 Cars = {&#39;Brand&#39;: [&#39;Honda Civic&#39;,&#39;Toyota Corolla&#39;,&#39;Ford Focus&#39;,&#39;Audi A4&#39;],
-        &#39;Price&#39;: [22000,25000,27000,35000],
-        &#39;Year&#39;: [2015,2013,2018,2018]
-        }
- 
+&#39;Price&#39;: [22000,25000,27000,35000],
+&#39;Year&#39;: [2015,2013,2018,2018]
+}
 df = DataFrame(Cars, columns= [&#39;Brand&#39;, &#39;Price&#39;,&#39;Year&#39;])
-
 # sort by multiple columns: Year and Brand
 df.sort_values(by=[&#39;Year&#39;,&#39;Brand&#39;], ascending=[False, True], inplace=True)
-
 df
 &lt;/code&gt;&lt;/pre&gt;
-
 &lt;div&gt;
 &lt;style scoped&gt;
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
+.dataframe tbody tr th:only-of-type {
+vertical-align: middle;
+}
+.dataframe tbody tr th {
+vertical-align: top;
+}
+.dataframe thead th {
+text-align: right;
+}
 &lt;/style&gt;
 &lt;table border=&#34;1&#34; class=&#34;dataframe&#34;&gt;
-  &lt;thead&gt;
-    &lt;tr style=&#34;text-align: right;&#34;&gt;
-      &lt;th&gt;&lt;/th&gt;
-      &lt;th&gt;Brand&lt;/th&gt;
-      &lt;th&gt;Price&lt;/th&gt;
-      &lt;th&gt;Year&lt;/th&gt;
-    &lt;/tr&gt;
-  &lt;/thead&gt;
-  &lt;tbody&gt;
-    &lt;tr&gt;
-      &lt;th&gt;3&lt;/th&gt;
-      &lt;td&gt;Audi A4&lt;/td&gt;
-      &lt;td&gt;35000&lt;/td&gt;
-      &lt;td&gt;2018&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;th&gt;2&lt;/th&gt;
-      &lt;td&gt;Ford Focus&lt;/td&gt;
-      &lt;td&gt;27000&lt;/td&gt;
-      &lt;td&gt;2018&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;th&gt;0&lt;/th&gt;
-      &lt;td&gt;Honda Civic&lt;/td&gt;
-      &lt;td&gt;22000&lt;/td&gt;
-      &lt;td&gt;2015&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;th&gt;1&lt;/th&gt;
-      &lt;td&gt;Toyota Corolla&lt;/td&gt;
-      &lt;td&gt;25000&lt;/td&gt;
-      &lt;td&gt;2013&lt;/td&gt;
-    &lt;/tr&gt;
-  &lt;/tbody&gt;
+&lt;thead&gt;
+&lt;tr style=&#34;text-align: right;&#34;&gt;
+&lt;th&gt;&lt;/th&gt;
+&lt;th&gt;Brand&lt;/th&gt;
+&lt;th&gt;Price&lt;/th&gt;
+&lt;th&gt;Year&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;th&gt;3&lt;/th&gt;
+&lt;td&gt;Audi A4&lt;/td&gt;
+&lt;td&gt;35000&lt;/td&gt;
+&lt;td&gt;2018&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;th&gt;2&lt;/th&gt;
+&lt;td&gt;Ford Focus&lt;/td&gt;
+&lt;td&gt;27000&lt;/td&gt;
+&lt;td&gt;2018&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;th&gt;0&lt;/th&gt;
+&lt;td&gt;Honda Civic&lt;/td&gt;
+&lt;td&gt;22000&lt;/td&gt;
+&lt;td&gt;2015&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;th&gt;1&lt;/th&gt;
+&lt;td&gt;Toyota Corolla&lt;/td&gt;
+&lt;td&gt;25000&lt;/td&gt;
+&lt;td&gt;2013&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
 &lt;/table&gt;
 &lt;/div&gt;
-
-&lt;p&gt;You can know more about sorting in Pandas by visiting the &lt;a href=&#34;https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.sort_values.html&#34; target=&#34;_blank&#34;&gt;official documentation&lt;/a&gt;.&lt;/p&gt;
-</description>
-    </item>
-    
-  </channel>
-</rss>
+&lt;p&gt;You can know more about sorting in Pandas by visiting the &lt;a href=&#34;https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.sort_values.html&#34; target=&#34;_blank&#34;&gt;official documentation&lt;/a&gt;.&lt;/p&gt;</description></item></channel></rss>
