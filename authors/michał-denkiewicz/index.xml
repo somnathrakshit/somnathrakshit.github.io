@@ -1,1 +1,24 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Michał Denkiewicz | Somnath Rakshit</title><link>https://somnathrakshit.github.io/authors/micha%C5%82-denkiewicz/</link><atom:link href="https://somnathrakshit.github.io/authors/micha%C5%82-denkiewicz/index.xml" rel="self" type="application/rss+xml"/><description>Michał Denkiewicz</description><generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>© Somnath Rakshit, 2019</copyright><lastBuildDate>Mon, 30 Sep 2019 23:54:41 -0500</lastBuildDate><image><url>https://somnathrakshit.github.io/img/icon-192.png</url><title>Michał Denkiewicz</title><link>https://somnathrakshit.github.io/authors/micha%C5%82-denkiewicz/</link></image><item><title>Identification of Breast Cancer subtype specific MicroRNAs using Survival Analysis to find their role in transcriptomic regulation</title><link>https://somnathrakshit.github.io/publication/mirna-breast-cancer-subtypes/</link><pubDate>Mon, 30 Sep 2019 23:54:41 -0500</pubDate><guid>https://somnathrakshit.github.io/publication/mirna-breast-cancer-subtypes/</guid><description/></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Michał Denkiewicz | Somnath Rakshit</title>
+    <link>https://somnathrakshit.github.io/authors/micha%C5%82-denkiewicz/</link>
+      <atom:link href="https://somnathrakshit.github.io/authors/micha%C5%82-denkiewicz/index.xml" rel="self" type="application/rss+xml" />
+    <description>Michał Denkiewicz</description>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>© Somnath Rakshit, 2019</copyright><lastBuildDate>Mon, 30 Sep 2019 23:54:41 -0500</lastBuildDate>
+    <image>
+      <url>https://somnathrakshit.github.io/img/icon-192.png</url>
+      <title>Michał Denkiewicz</title>
+      <link>https://somnathrakshit.github.io/authors/micha%C5%82-denkiewicz/</link>
+    </image>
+    
+    <item>
+      <title>Identification of Breast Cancer subtype specific MicroRNAs using Survival Analysis to find their role in transcriptomic regulation </title>
+      <link>https://somnathrakshit.github.io/publication/mirna-breast-cancer-subtypes/</link>
+      <pubDate>Mon, 30 Sep 2019 23:54:41 -0500</pubDate>
+      <guid>https://somnathrakshit.github.io/publication/mirna-breast-cancer-subtypes/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>

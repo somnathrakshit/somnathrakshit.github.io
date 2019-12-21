@@ -1,1 +1,24 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Subha Shankar Chakraborty | Somnath Rakshit</title><link>https://somnathrakshit.github.io/authors/subha-shankar-chakraborty/</link><atom:link href="https://somnathrakshit.github.io/authors/subha-shankar-chakraborty/index.xml" rel="self" type="application/rss+xml"/><description>Subha Shankar Chakraborty</description><generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>© Somnath Rakshit, 2019</copyright><lastBuildDate>Wed, 31 Oct 2018 01:23:15 +0200</lastBuildDate><image><url>https://somnathrakshit.github.io/img/icon-192.png</url><title>Subha Shankar Chakraborty</title><link>https://somnathrakshit.github.io/authors/subha-shankar-chakraborty/</link></image><item><title>Deep Learning for Integrated Analysis of Breast Cancer Subtype Specific Multi-omics Data</title><link>https://somnathrakshit.github.io/publication/breast-cancer-integrated-sae/</link><pubDate>Wed, 31 Oct 2018 01:23:15 +0200</pubDate><guid>https://somnathrakshit.github.io/publication/breast-cancer-integrated-sae/</guid><description/></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Subha Shankar Chakraborty | Somnath Rakshit</title>
+    <link>https://somnathrakshit.github.io/authors/subha-shankar-chakraborty/</link>
+      <atom:link href="https://somnathrakshit.github.io/authors/subha-shankar-chakraborty/index.xml" rel="self" type="application/rss+xml" />
+    <description>Subha Shankar Chakraborty</description>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>© Somnath Rakshit, 2019</copyright><lastBuildDate>Wed, 31 Oct 2018 01:23:15 +0200</lastBuildDate>
+    <image>
+      <url>https://somnathrakshit.github.io/img/icon-192.png</url>
+      <title>Subha Shankar Chakraborty</title>
+      <link>https://somnathrakshit.github.io/authors/subha-shankar-chakraborty/</link>
+    </image>
+    
+    <item>
+      <title>Deep Learning for Integrated Analysis of Breast Cancer Subtype Specific Multi-omics Data</title>
+      <link>https://somnathrakshit.github.io/publication/breast-cancer-integrated-sae/</link>
+      <pubDate>Wed, 31 Oct 2018 01:23:15 +0200</pubDate>
+      <guid>https://somnathrakshit.github.io/publication/breast-cancer-integrated-sae/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>

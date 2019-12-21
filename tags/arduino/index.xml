@@ -1,2 +1,27 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>arduino | Somnath Rakshit</title><link>https://somnathrakshit.github.io/tags/arduino/</link><atom:link href="https://somnathrakshit.github.io/tags/arduino/index.xml" rel="self" type="application/rss+xml"/><description>arduino</description><generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>© Somnath Rakshit, 2019</copyright><lastBuildDate>Mon, 19 Mar 2018 03:19:01 +0530</lastBuildDate><image><url>https://somnathrakshit.github.io/img/icon-192.png</url><title>arduino</title><link>https://somnathrakshit.github.io/tags/arduino/</link></image><item><title>Piezoelectric Transducer and Arduino Based Wirelessly Controlled Energy Saving Scheme for Street Lights</title><link>https://somnathrakshit.github.io/project/energy-saving-scheme-street-lights/</link><pubDate>Mon, 19 Mar 2018 03:19:01 +0530</pubDate><guid>https://somnathrakshit.github.io/project/energy-saving-scheme-street-lights/</guid><description>&lt;p&gt;Today, a large amount of energy is wasted on continuously lighting street lights. In this paper, a scheme has been proposed to automatically control street lights using Arduino microcontroller and switch on lights only when an activity is observed in the road. Also, a scheme has been discussed to generate power and run our automated model using Piezoelectric transducers. Additionally, it is shown how this system can be used for other purposes like traffic monitoring, weather monitoring and fault checking.&lt;/p&gt;
-&lt;p&gt;From the proposed system, the developing countries can be more efficient with their electrical energy as well as the maintenance cost of power lines for street lights. It also reduces the manual work to zero. Automatic Smart Light System is a very user friendly approach and the usage of this smart light system will help in saving large amount of power in the world.&lt;/p&gt;</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>arduino | Somnath Rakshit</title>
+    <link>https://somnathrakshit.github.io/tags/arduino/</link>
+      <atom:link href="https://somnathrakshit.github.io/tags/arduino/index.xml" rel="self" type="application/rss+xml" />
+    <description>arduino</description>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>© Somnath Rakshit, 2019</copyright><lastBuildDate>Mon, 19 Mar 2018 03:19:01 +0530</lastBuildDate>
+    <image>
+      <url>https://somnathrakshit.github.io/img/icon-192.png</url>
+      <title>arduino</title>
+      <link>https://somnathrakshit.github.io/tags/arduino/</link>
+    </image>
+    
+    <item>
+      <title>Piezoelectric Transducer and Arduino Based Wirelessly Controlled Energy Saving Scheme for Street Lights</title>
+      <link>https://somnathrakshit.github.io/project/energy-saving-scheme-street-lights/</link>
+      <pubDate>Mon, 19 Mar 2018 03:19:01 +0530</pubDate>
+      <guid>https://somnathrakshit.github.io/project/energy-saving-scheme-street-lights/</guid>
+      <description>&lt;p&gt;Today, a large amount of energy is wasted on continuously lighting street lights. In this paper, a scheme has been proposed to automatically control street lights using Arduino microcontroller and switch on lights only when an activity is observed in the road. Also, a scheme has been discussed to generate power and run our automated model using Piezoelectric transducers. Additionally, it is shown how this system can be used for other purposes like traffic monitoring, weather monitoring and fault checking.&lt;/p&gt;
+
+&lt;p&gt;From the proposed system, the developing countries can be more efficient with their electrical energy as well as the maintenance cost of power lines for street lights. It also reduces the manual work to zero. Automatic Smart Light System is a very user friendly approach and the usage of this smart light system will help in saving large amount of power in the world.&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>
