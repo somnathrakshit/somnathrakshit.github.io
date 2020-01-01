@@ -1,1 +1,49 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Somnath Rakshit</title><link>https://somnathrakshit.github.io/</link><atom:link href="https://somnathrakshit.github.io/index.xml" rel="self" type="application/rss+xml"/><description>Somnath Rakshit</description><generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>© Somnath Rakshit, 2019</copyright><lastBuildDate>Tue, 24 Dec 2019 18:41:08 -0600</lastBuildDate><image><url>https://somnathrakshit.github.io/img/icon-192.png</url><title>Somnath Rakshit</title><link>https://somnathrakshit.github.io/</link></image><item><title>Blog</title><link>https://somnathrakshit.github.io/post/</link><pubDate>Tue, 24 Dec 2019 18:41:08 -0600</pubDate><guid>https://somnathrakshit.github.io/post/</guid><description>&lt;p&gt;&lt;a href=&#34;http://eepurl.com/gs8ts1&#34; target=&#34;_blank&#34;&gt;Subscribe via Email&lt;/a&gt;&lt;/p&gt;</description></item><item><title>All Publications</title><link>https://somnathrakshit.github.io/publication/</link><pubDate>Tue, 10 Dec 2019 16:16:12 -0600</pubDate><guid>https://somnathrakshit.github.io/publication/</guid><description/></item><item><title>Projects</title><link>https://somnathrakshit.github.io/project/</link><pubDate>Wed, 03 Oct 2018 02:32:45 +0530</pubDate><guid>https://somnathrakshit.github.io/project/</guid><description/></item><item><title/><link/><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid/><description/></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Somnath Rakshit</title>
+    <link>https://somnathrakshit.github.io/</link>
+      <atom:link href="https://somnathrakshit.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <description>Somnath Rakshit</description>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>© Somnath Rakshit, 2020</copyright><lastBuildDate>Tue, 24 Dec 2019 18:41:08 -0600</lastBuildDate>
+    <image>
+      <url>https://somnathrakshit.github.io/img/icon-192.png</url>
+      <title>Somnath Rakshit</title>
+      <link>https://somnathrakshit.github.io/</link>
+    </image>
+    
+    <item>
+      <title>Blog</title>
+      <link>https://somnathrakshit.github.io/post/</link>
+      <pubDate>Tue, 24 Dec 2019 18:41:08 -0600</pubDate>
+      <guid>https://somnathrakshit.github.io/post/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;http://eepurl.com/gs8ts1&#34; target=&#34;_blank&#34;&gt;Subscribe via Email&lt;/a&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>All Publications</title>
+      <link>https://somnathrakshit.github.io/publication/</link>
+      <pubDate>Tue, 10 Dec 2019 16:16:12 -0600</pubDate>
+      <guid>https://somnathrakshit.github.io/publication/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Projects</title>
+      <link>https://somnathrakshit.github.io/project/</link>
+      <pubDate>Wed, 03 Oct 2018 02:32:45 +0530</pubDate>
+      <guid>https://somnathrakshit.github.io/project/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link></link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid></guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>

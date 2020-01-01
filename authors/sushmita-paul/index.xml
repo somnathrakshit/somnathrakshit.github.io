@@ -1,1 +1,32 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Sushmita Paul | Somnath Rakshit</title><link>https://somnathrakshit.github.io/authors/sushmita-paul/</link><atom:link href="https://somnathrakshit.github.io/authors/sushmita-paul/index.xml" rel="self" type="application/rss+xml"/><description>Sushmita Paul</description><generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>© Somnath Rakshit, 2019</copyright><lastBuildDate>Thu, 25 Jul 2019 20:40:46 +0530</lastBuildDate><image><url>https://somnathrakshit.github.io/img/icon-192.png</url><title>Sushmita Paul</title><link>https://somnathrakshit.github.io/authors/sushmita-paul/</link></image><item><title>Genome-wide Analysis of Multi-View Data of miRNA-seq to Identify miRNA Biomarkers for Stomach Cancer</title><link>https://somnathrakshit.github.io/publication/multi-view-mirna-stad/</link><pubDate>Thu, 25 Jul 2019 20:40:46 +0530</pubDate><guid>https://somnathrakshit.github.io/publication/multi-view-mirna-stad/</guid><description/></item><item><title>Identification of Four miRNAs by Analysing Multi-View miRNA-seq Data of Stomach Cancer</title><link>https://somnathrakshit.github.io/publication/identify-four-mirnas-stad-tensymp-2019/</link><pubDate>Sat, 20 Apr 2019 11:01:12 +0200</pubDate><guid>https://somnathrakshit.github.io/publication/identify-four-mirnas-stad-tensymp-2019/</guid><description/></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Sushmita Paul | Somnath Rakshit</title>
+    <link>https://somnathrakshit.github.io/authors/sushmita-paul/</link>
+      <atom:link href="https://somnathrakshit.github.io/authors/sushmita-paul/index.xml" rel="self" type="application/rss+xml" />
+    <description>Sushmita Paul</description>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>© Somnath Rakshit, 2020</copyright><lastBuildDate>Thu, 25 Jul 2019 20:40:46 +0530</lastBuildDate>
+    <image>
+      <url>https://somnathrakshit.github.io/img/icon-192.png</url>
+      <title>Sushmita Paul</title>
+      <link>https://somnathrakshit.github.io/authors/sushmita-paul/</link>
+    </image>
+    
+    <item>
+      <title>Genome-wide Analysis of Multi-View Data of miRNA-seq to Identify miRNA Biomarkers for Stomach Cancer</title>
+      <link>https://somnathrakshit.github.io/publication/multi-view-mirna-stad/</link>
+      <pubDate>Thu, 25 Jul 2019 20:40:46 +0530</pubDate>
+      <guid>https://somnathrakshit.github.io/publication/multi-view-mirna-stad/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Identification of Four miRNAs by Analysing Multi-View miRNA-seq Data of Stomach Cancer</title>
+      <link>https://somnathrakshit.github.io/publication/identify-four-mirnas-stad-tensymp-2019/</link>
+      <pubDate>Sat, 20 Apr 2019 11:01:12 +0200</pubDate>
+      <guid>https://somnathrakshit.github.io/publication/identify-four-mirnas-stad-tensymp-2019/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>
