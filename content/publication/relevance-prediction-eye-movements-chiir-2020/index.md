@@ -2,7 +2,7 @@
 # Documentation: https://sourcethemes.com/academic/docs/managing-content/
 
 title: "Relevance Prediction from Eye-movements Using Semi-interpretable Convolutional Neural Networks"
-authors: ["Nilavra Bhattacharya", "admin", "Jacek Gwizdka"]
+authors: ["Nilavra Bhattacharya", "admin", "Jacek Gwizdka", "Paul Kogut"]
 date: 2019-12-10T16:16:12-06:00
 doi: ""
 
