@@ -1,178 +1,98 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-  <channel>
-    <title>deep learning | Somnath Rakshit</title>
-    <link>https://somnathrakshit.github.io/tags/deep-learning/</link>
-      <atom:link href="https://somnathrakshit.github.io/tags/deep-learning/index.xml" rel="self" type="application/rss+xml" />
-    <description>deep learning</description>
-    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>© Somnath Rakshit, 2020</copyright><lastBuildDate>Tue, 24 Dec 2019 18:41:08 -0600</lastBuildDate>
-    <image>
-      <url>https://somnathrakshit.github.io/img/icon-192.png</url>
-      <title>deep learning</title>
-      <link>https://somnathrakshit.github.io/tags/deep-learning/</link>
-    </image>
-    
-    <item>
-      <title>Relevance Prediction from Eye-movements Using Semi-interpretable Convolutional Neural Networks</title>
-      <link>https://somnathrakshit.github.io/post/relevance-prediction-eye-movement-cnn/</link>
-      <pubDate>Tue, 24 Dec 2019 18:41:08 -0600</pubDate>
-      <guid>https://somnathrakshit.github.io/post/relevance-prediction-eye-movement-cnn/</guid>
-      <description>
-
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>deep learning | Somnath Rakshit</title><link>https://somnathrakshit.github.io/tags/deep-learning/</link><atom:link href="https://somnathrakshit.github.io/tags/deep-learning/index.xml" rel="self" type="application/rss+xml"/><description>deep learning</description><generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>© Somnath Rakshit, 2020</copyright><lastBuildDate>Tue, 24 Dec 2019 18:41:08 -0600</lastBuildDate><image><url>https://somnathrakshit.github.io/img/icon-192.png</url><title>deep learning</title><link>https://somnathrakshit.github.io/tags/deep-learning/</link></image><item><title>Relevance Prediction from Eye-movements Using Semi-interpretable Convolutional Neural Networks</title><link>https://somnathrakshit.github.io/post/relevance-prediction-eye-movement-cnn/</link><pubDate>Tue, 24 Dec 2019 18:41:08 -0600</pubDate><guid>https://somnathrakshit.github.io/post/relevance-prediction-eye-movement-cnn/</guid><description>
 &lt;p&gt;We propose an image-classification method to predict user&amp;rsquo;s perceived-relevance from their eye-movement patterns. Our method is free from many of the inherent problems associated with analyzing eye-tracking data, as shown in existing literature. Specifically, we convert participant&amp;rsquo;s eye-movement scanpaths into images, and then transform the relevance-prediction problem into an image-classification problem. For this purpose, we use state-of-the art image classifiers based on convolutional neural networks. Our method gives promising results, and outperforms many previously reported performances in similar studies by appreciable margins. We also attempt to interpret how the classifier possibly differentiates between user-reading-patterns on relevant and irrelevant documents. Finally, we discuss the limitations of our approach, and propose future directions of research.
 &lt;h2&gt;Table of Contents&lt;/h2&gt;
-HAHAHUGOSHORTCODE-TOC0-HBHB&lt;/p&gt;
-
+&lt;/p&gt;
 &lt;h1 id=&#34;user-study&#34;&gt;User Study&lt;/h1&gt;
-
 &lt;h2 id=&#34;experimental-design-and-procedure&#34;&gt;Experimental Design and Procedure&lt;/h2&gt;
-
 &lt;p&gt;A controlled lab experiment was conducted in the Department of Kinesiology, University of Maryland, College Park. Participants ($N=25$, college-age students) judged the relevance of short news articles for answering a trigger question. Eye-tracking and EEG signals were recorded.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&#34;img/procedure.png&#34; alt=&#34;Experimental procedure. The &amp;quot;+&amp;quot; represents a fixation screen. The order of Relevant, Irrelevant and Topical articles were permuted in each trial&#34;&gt;
-&lt;figcaption&gt;Experimental procedure. The &amp;quot;+&amp;quot; represents a fixation screen. The order of Relevant, Irrelevant and Topical articles were permuted in each trial&lt;/figcaption&gt;&lt;/p&gt;
-
+&lt;figure&gt;
+&lt;a data-fancybox=&#34;&#34; href=&#34;img/procedure.png&#34; &gt;
+&lt;img src=&#34;img/procedure.png&#34; alt=&#34;&#34; &gt;
+&lt;/a&gt;
+&lt;figcaption data-pre=&#34;Figure &#34; data-post=&#34;:&#34; class=&#34;numbered&#34;&gt;
+&lt;h4&gt;Experimental procedure. The &amp;quot;+&amp;quot; represents a fixation screen. The order of Relevant, Irrelevant and Topical articles were permuted in each trial&lt;/h4&gt;
+&lt;/figcaption&gt;
+&lt;/figure&gt;
 &lt;p&gt;The main element of the experimental procedure was a trial. In each trial, a trigger question was shown first. The trigger questions was a short, one-sentence question, informing participants what to look for in the subsequently presented documents (e.g. &amp;quot;What is the birth name of Jesse Ventura?&amp;quot;). After the trigger question, a short news article was displayed, then a text relevance response (Y/N) screen appeared, then a list of words for further assessment was shown. Participants progressed between stimuli by pressing a space bar, with an exception of moving from a news article to the text-relevance response screen, which occurred by participants fixating their eyes for two seconds or longer in the lower-right screen-corner to indicate their readiness for relevance judgement. Finally, a fixation screen was shown for one second between trials. The list of words for further assessment are not analysed in this paper. The news articles were chosen to have three levels of relevance with respect to the trigger question:&lt;/p&gt;
-
 &lt;ol&gt;
 &lt;li&gt;&lt;strong&gt;Relevant &lt;code&gt;(R)&lt;/code&gt;&lt;/strong&gt;: the article explicitly contained the exact answer asked in the question.&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;Topical &lt;code&gt;(T)&lt;/code&gt;&lt;/strong&gt;: partially relevant – the article did not contain the exact answer to the question, but was on the topic of the information asked in the question.&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;Irrelevant &lt;code&gt;(I)&lt;/code&gt;&lt;/strong&gt;: did not contain the answer to the question&lt;/li&gt;
 &lt;/ol&gt;
-
 &lt;h2 id=&#34;stimuli-dataset&#34;&gt;Stimuli Dataset&lt;/h2&gt;
-
 &lt;p&gt;The set of 40 trigger questions were selected from the &lt;code&gt;TREC 2005 Question Answering Task&lt;/code&gt;. The collection of 120 short news articles and their document-relevance labels came from the &lt;code&gt;AQUAINT Corpus of English News Text&lt;/code&gt; (the same collection used in &lt;code&gt;TREC 2005 Q\&amp;amp;A Task&lt;/code&gt;. The news articles were carefully selected to have nearly similar text-length (&lt;code&gt;mean length&lt;/code&gt;: 178 words, &lt;code&gt;SD&lt;/code&gt;: 30 words.&lt;/p&gt;
-
 &lt;h1 id=&#34;data-analysis&#34;&gt;Data Analysis&lt;/h1&gt;
-
 &lt;h2 id=&#34;generating-scanpath-images&#34;&gt;Generating Scanpath Images&lt;/h2&gt;
-
 &lt;p&gt;We generated scanpath images from eye-tracking data of user-document pairs, using only three attributes of eye-fixations: screen-coordinates (in pixels), fixation duration (in ms), and start time of the fixation relative to stimulus-onset. We used Python Matplotlib library to generate the scanpath images. CNNs have been shown to be good at detecting local patterns within images. Since we were preparing the images for training a CNN classifier, we made the following design choices:&lt;/p&gt;
-
 &lt;h3 id=&#34;fixations&#34;&gt;Fixations&lt;/h3&gt;
-
 &lt;p&gt;Eye-fixations were encoded as marker points having varying shapes, sizes, and colours. These were controlled by the fixation duration as follows:&lt;/p&gt;
-
 &lt;ol&gt;
 &lt;li&gt;110 - 250 ms: Level 1 fixations, encoded as red circle&lt;/li&gt;
 &lt;li&gt;250 - 400 ms: Level 2 fixations, encoded as pink star&lt;/li&gt;
 &lt;li&gt;400 - 550 ms: Level 3 fixations, encoded as yellow pentagon&lt;/li&gt;
 &lt;li&gt;&amp;gt; 550 ms: Level 4 fixations, encoded as white cross&lt;/li&gt;
 &lt;/ol&gt;
-
-&lt;p&gt;These levels were identified empirically. We examined the distribution of fixation durations in our data, and roughly divided the range into three equal partitions. Fixations having durations less than 110 ms were discarded. The marker-size was made to increase with the Level number. The fixation markers were chosen to be grossly different from each other (instead of, say, only circles), so that the CNN could possibly identify spatial patterns of similar-duration fixations.
-&lt;img src=&#34;img/fixn_dur_hist.png&#34; alt=&#34;Distribution of fixation-durations recorded in our study, and the corresponding encoding marker for representing fixations belonging to different levels, according to their duration&#34;&gt;
-&lt;figcaption&gt;Distribution of fixation-durations recorded in our study, and the corresponding encoding marker for representing fixations belonging to different levels, according to their duration&lt;/figcaption&gt;&lt;/p&gt;
-
+&lt;p&gt;These levels were identified empirically. We examined the distribution of fixation durations in our data, and roughly divided the range into three equal partitions. Fixations having durations less than 110 ms were discarded. The marker-size was made to increase with the Level number. The fixation markers were chosen to be grossly different from each other (instead of, say, only circles), so that the CNN could possibly identify spatial patterns of similar-duration fixations.&lt;/p&gt;
+&lt;figure&gt;
+&lt;a data-fancybox=&#34;&#34; href=&#34;img/fixn_dur_hist.png&#34; &gt;
+&lt;img src=&#34;img/fixn_dur_hist.png&#34; alt=&#34;&#34; &gt;
+&lt;/a&gt;
+&lt;figcaption data-pre=&#34;Figure &#34; data-post=&#34;:&#34; class=&#34;numbered&#34;&gt;
+&lt;h4&gt;Distribution of fixation-durations recorded in our study, and the corresponding encoding marker for representing fixations belonging to different levels, according to their duration&lt;/h4&gt;
+&lt;/figcaption&gt;
+&lt;/figure&gt;
 &lt;h3 id=&#34;linearized-saccades&#34;&gt;Linearized Saccades&lt;/h3&gt;
-
 &lt;p&gt;Saccades are rapid eye-movements between two fixation points. We controlled the colour of the saccade lines to follow a linear colour scale, based on their temporal occurrence &lt;a href=&#34;https://matplotlib.org/3.1.1/gallery/color/colormap_reference.html&#34; target=&#34;_blank&#34;&gt;(&amp;quot;Winter&amp;quot; colourmap in Matplotlib)&lt;/a&gt;
 The colour of the saccades changed linearly from blue (first saccade) to green (final saccade).
 Each individual saccade had a solid colour.&lt;/p&gt;
-
 &lt;p&gt;We also tested controlling the width of the saccade lines using saccade velocity (ratio of screen-distance covered to time taken). However, doing so made the scanpath-image too crowded, especially for scanpaths having more than 50 fixations. So we kept the width of the saccade lines constant at 2 pixels.&lt;/p&gt;
-
 &lt;h3 id=&#34;colours&#34;&gt;Colours&lt;/h3&gt;
-
-&lt;p&gt;Care was taken to select the colours of the fixations and the saccades. Using a colour wheel, the colours of the different fixation markers were chosen to be far apart, from each other, as well as from the range of colours used to draw the saccades. We hypothesized that these colour choices would enable the CNN classifier to easily distinguish between fixations and saccades, and identify necessary patterns. Examples of typical eye-movement patterns on three types of documents, and their corresponding generated scanpath images are shown in Figure given below.
-&lt;img src=&#34;img/scanpath_encoding.png&#34; alt=&#34;Top: Typical eye-movement patterns when reading relevant, irrelevant, and topical documents. Bottom: Examples of generated scanpath images, which are used to train CNN classifiers for predicting the user’s perceived-relevance of the
-documents.&#34;&gt;
-&lt;figcaption&gt;Top: Typical eye-movement patterns when reading relevant, irrelevant, and topical documents. Bottom: Examples of generated scanpath images, which are used to train CNN classifiers for predicting the user’s perceived-relevance of the
-documents.&lt;/figcaption&gt;&lt;/p&gt;
-
+&lt;p&gt;Care was taken to select the colours of the fixations and the saccades. Using a colour wheel, the colours of the different fixation markers were chosen to be far apart, from each other, as well as from the range of colours used to draw the saccades. We hypothesized that these colour choices would enable the CNN classifier to easily distinguish between fixations and saccades, and identify necessary patterns. Examples of typical eye-movement patterns on three types of documents, and their corresponding generated scanpath images are shown in Figure given below.&lt;/p&gt;
+&lt;figure&gt;
+&lt;a data-fancybox=&#34;&#34; href=&#34;img/scanpath_encoding.png&#34; &gt;
+&lt;img src=&#34;img/scanpath_encoding.png&#34; alt=&#34;&#34; &gt;
+&lt;/a&gt;
+&lt;figcaption data-pre=&#34;Figure &#34; data-post=&#34;:&#34; class=&#34;numbered&#34;&gt;
+&lt;h4&gt;Top: Typical eye-movement patterns when reading relevant, irrelevant, and topical documents. Bottom: Examples of generated scanpath images, which are used to train CNN classifiers for predicting the user’s perceived-relevance of the documents.&lt;/h4&gt;
+&lt;/figcaption&gt;
+&lt;/figure&gt;
 &lt;h2 id=&#34;machine-learning-setup&#34;&gt;Machine Learning Setup&lt;/h2&gt;
-
 &lt;p&gt;ata was available for 24 participants, where each participant judged the binary relevance of 120 news articles. In total we had eye-tracking data for 2,880 user-document pairs, or 2,880 scanpaths. After data cleaning, we decided to use scanpaths having 10 or more fixations. We assumed that at least 10 fixations, or a minimum eye dwell-time of 1 second on the document (at 100 ms / fixation) is required to make a relevance assessment. This left us with 2,579 scanpath images.&lt;/p&gt;
-
 &lt;h3 id=&#34;train-validation-test-partition&#34;&gt;Train / Validation / Test Partition&lt;/h3&gt;
-
 &lt;p&gt;We used the participants&amp;rsquo; perceived-relevance labels as the ground-truth for our classification task (and not the document-relevance obtained from TREC dataset). Out of the 2,579 scanpath images, only 806 (31.2%) were for documents marked relevant. Thus, there was almost a 1:2 class imbalance. Since this is an initial attempt to apply image classification on scanpath images, we decided to use a balanced dataset. So we randomly sampled 806 images from the pool of irrelevant scanpath images, and created a perfectly balanced dataset of 1,612 images. We used an approximate 60-20-20 split to randomly place 966 images in the training set, 314 images in the validation set, and 332 images in the test set. The relevant/irrelevant class balance was preserved in each set. All random selections were performed using the MySQL &lt;code&gt;rand()&lt;/code&gt; function.&lt;/p&gt;
-
 &lt;h2 id=&#34;analysis-procedure&#34;&gt;Analysis Procedure&lt;/h2&gt;
-
 &lt;h3 id=&#34;image-classification-setup&#34;&gt;Image Classification Setup&lt;/h3&gt;
-
 &lt;p&gt;We posed our binary classification problem as follows:
 Given &lt;strong&gt;only&lt;/strong&gt; the scanpath image of a user&amp;rsquo;s eye movements on a short news article, did the user perceive the article to be relevant for answering a trigger question?&lt;/p&gt;
-
 &lt;p&gt;For this binary classification problem, we analysed the performance of six popular CNN based architectures: VGG16 and VGG19, DenseNet121 and DenseNet201, ResNet50, and InceptionResNet (version 2). All architectures had benchmark performances in the ImageNet challenge.&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>Relevance Prediction from Eye-movements Using Semi-interpretable Convolutional Neural Networks</title>
-      <link>https://somnathrakshit.github.io/publication/relevance-prediction-eye-movements-chiir-2020/</link>
-      <pubDate>Tue, 10 Dec 2019 16:16:12 -0600</pubDate>
-      <guid>https://somnathrakshit.github.io/publication/relevance-prediction-eye-movements-chiir-2020/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Deep Learning for Detection and Localization of Thoracic Diseases using Chest X-Ray Imagery</title>
-      <link>https://somnathrakshit.github.io/publication/chexray/</link>
-      <pubDate>Sat, 16 Mar 2019 01:59:10 +0200</pubDate>
-      <guid>https://somnathrakshit.github.io/publication/chexray/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Detection of Diseases in Potato Leaves using Transfer Learning</title>
-      <link>https://somnathrakshit.github.io/publication/potato-leaves-transfer-learning/</link>
-      <pubDate>Sun, 20 Jan 2019 14:21:24 +0530</pubDate>
-      <guid>https://somnathrakshit.github.io/publication/potato-leaves-transfer-learning/</guid>
-      <description>&lt;script type=&#34;application/javascript&#34; src=&#34;https://gist.github.com/somnathrakshit/22fcb7736e24254940b4216621781681.js&#34;&gt;&lt;/script&gt;
-
-</description>
-    </item>
-    
-    <item>
-      <title>Deep Learning for Integrated Analysis of Breast Cancer Subtype Specific Multi-omics Data</title>
-      <link>https://somnathrakshit.github.io/publication/breast-cancer-integrated-sae/</link>
-      <pubDate>Wed, 31 Oct 2018 01:23:15 +0200</pubDate>
-      <guid>https://somnathrakshit.github.io/publication/breast-cancer-integrated-sae/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Neural Style Transfer</title>
-      <link>https://somnathrakshit.github.io/project/neural-style-transfer/</link>
-      <pubDate>Wed, 03 Oct 2018 02:32:45 +0530</pubDate>
-      <guid>https://somnathrakshit.github.io/project/neural-style-transfer/</guid>
-      <description>&lt;p&gt;Google Photos album containing the images is present &lt;a href=&#34;https://photos.app.goo.gl/GmeSraqqvKPxu7Zb6&#34; target=&#34;_blank&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p&gt;Implemented the neural style transfer algortihm implemented by Gatys et al. (2016) in PyTorch. This technique allows us to take an input image and perform its reproduction in a new artistic style. This algorithm takes two images as inputs. One is the style image that contains the artistic style whereas the other image contains the content which is to be modified in the given artistic style.&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>Detection and Localisation of Diabetic Retinopathy</title>
-      <link>https://somnathrakshit.github.io/project/fundus-image-localization/</link>
-      <pubDate>Tue, 15 May 2018 01:21:26 +0530</pubDate>
-      <guid>https://somnathrakshit.github.io/project/fundus-image-localization/</guid>
-      <description>&lt;p&gt;&lt;a href=&#34;https://docs.google.com/presentation/d/e/2PACX-1vQpi7z7g1swVv-bcG2GeYggnhCjL1zXOq3BJYMXnqGtJC6pVg7Iq7qr-4bODfVGEcngX9PGiuJ5P8Qs/pub?start=false&amp;amp;loop=false&amp;amp;delayms=15000&#34; target=&#34;_blank&#34;&gt;Slides&lt;/a&gt;, &lt;a href=&#34;https://somnathrakshit.github.io/files/download/project_report_jgec.pdf&#34;&gt;Report&lt;/a&gt;&lt;/p&gt;
-
+&lt;p&gt;To examine whether the obtained results were reproducible in different environments and software versions, we ran the analyses independently on two popular Python deep-learning frameworks: &lt;a href=&#34;https://www.tensorflow.org/guide/keras&#34; target=&#34;_blank&#34;&gt;TensorFlow-Keras&lt;/a&gt;, and &lt;a href=&#34;https://docs.fast.ai/&#34; target=&#34;_blank&#34;&gt;PyTorch-fastai&lt;/a&gt;.&lt;/p&gt;
+&lt;!-- https://mermaid-js.github.io/mermaid-live-editor/#/edit/eyJjb2RlIjoiZ3JhcGggVERcbkFbXCJDTk4gbW9kZWwgPGJyLz4oaW5pdGlhbGl6ZWQgd2l0aCA8YnIvPnByZS10cmFpbmVkIEltYWdlTmV0IHdlaWdodHMpXCJdIC0tPkJbXCJGdWxseSBDb25uZWN0ZWQgTGF5ZXIgPGJyLz4oMjU2IG5vZGVzLCBSZUxVIGFjdGl2YXRpb24sPGJyLz4gd2l0aC93aXRob3V0IEwxL0wyIHJlZ3VsYXJpemF0aW9uKVwiXVxuQiAtLT4gQ1tcIkRyb3BvdXQgKHByb2JhYmlsaXR5PTAuMilcIl1cbkMgLS0-IERbXCJGdWxseSBDb25uZWN0ZWQgTGF5ZXIgPGJyLz4oMSBub2RlLCBTaWdtb2lkIGFjdGl2YXRpb24pXCJdXG4iLCJtZXJtYWlkIjp7InRoZW1lIjoiZGVmYXVsdCJ9fQ --&gt;
+&lt;figure&gt;
+&lt;a data-fancybox=&#34;&#34; href=&#34;img/flowchart.jpeg&#34; &gt;
+&lt;img src=&#34;img/flowchart.jpeg&#34; alt=&#34;&#34; &gt;
+&lt;/a&gt;
+&lt;figcaption data-pre=&#34;Figure &#34; data-post=&#34;:&#34; class=&#34;numbered&#34;&gt;
+&lt;h4&gt;Architecture of the TensorFlow-Keras implementation. Optimizer: Stochastic Gradient Descent (SGD)&lt;/h4&gt;
+&lt;/figcaption&gt;
+&lt;/figure&gt;
+&lt;p&gt;In PyTorch-fastai, we built the classifier using the &lt;code&gt;cnn_learner&lt;/code&gt; module, which initializes the model with random weights, and trains from scratch.&lt;/p&gt;
+&lt;p&gt;We trained the models on the training set, and used the validation set for very basic hyper-parameter tuning (learning rate, number of epochs, optimizer momentum, etc.). Since our intention was to see whether the method works, and not to obtain the best benchmark performance, we performed minimal hyper-parameter tuning. Finally, we took the best set of models obtained after tuning the hyper-parameters (&lt;code&gt;epochs&lt;/code&gt;: &lt;code&gt;6&lt;/code&gt;, &lt;code&gt;batch-size&lt;/code&gt;: &lt;code&gt;16&lt;/code&gt;, &lt;code&gt;momentum&lt;/code&gt;: &lt;code&gt;0.9&lt;/code&gt;)**, and used them to predict the labels of the test set. The top portion of Table reports the results from the TensorFlow-Keras implementation.&lt;/p&gt;
+&lt;figure&gt;
+&lt;a data-fancybox=&#34;&#34; href=&#34;img/results_table.png&#34; &gt;
+&lt;img src=&#34;img/results_table.png&#34; alt=&#34;&#34; &gt;
+&lt;/a&gt;
+&lt;figcaption data-pre=&#34;Figure &#34; data-post=&#34;:&#34; class=&#34;numbered&#34;&gt;
+&lt;h4&gt;Performances of two different methods to predict perceived-relevance from eye-movements, ordered by decreasing F1 score for the Test Set. Top: CNN classifiers on scanpath images. Bottom: traditional classifiers on aggregate features.&lt;/h4&gt;
+&lt;/figcaption&gt;
+&lt;/figure&gt;
+&lt;h3 id=&#34;comparison-to-existing-standard&#34;&gt;Comparison to Existing Standard&lt;/h3&gt;
+&lt;p&gt;We also compared our method to existing approaches for inferring relevance using eye-movements, where the data is collapsed into a set of handcrafted features. Perceived-relevance of documents are predicted from these features using popular classifiers like Random Forests and Support Vector Machines (SVM). We computed 20 such hand-engineered features, aggregated at the user-doc level, and classified them using Random Forest and SVM. This analysis was done using Python Scikit-learn library. Similar to our approach with the CNN classifiers, we started with the default hyperparameter values of the Random Forest and the SVM classifier from the Scikit-learn library, and then performed basic parameter tuning. Finally, we selected the best performing models. The bottom portion of Table given above reports these results.&lt;/p&gt;
+&lt;h1 id=&#34;results-and-discussion&#34;&gt;Results and Discussion&lt;/h1&gt;
+&lt;h2 id=&#34;scanpath-image-classification&#34;&gt;Scanpath Image Classification&lt;/h2&gt;
+&lt;p&gt;We report the performance of our proposed scanpath image classification method, by testing six different CNN classifier architectures. To easily compare our results to those reported in previous papers, we report five different metrics: percentages of correct predictions for both relevant and irrelevant documents, as True Positive Rate (TPR %) and True Negative Rate (TNR %); accuracy (Acc %); area under the ROC curve (ROC AUC); and F1-score (F1). TPR and TNR are also known as sensitivity and specificity, respectively. We have ranked the image classifiers according to their F1 scores on the Test Set. We have taken care to report all range of performances &amp;ndash; best, average, and worst &amp;ndash; to provide realistic expectations of using this method. Using latest CNN classifiers, comparatively less training data, and leveraging the power of transfer-learning, it is possible to predict the perceived-relevance of documents from scanpath images with F1 score up to 0.81, and up to 80% accuracy.&lt;/p&gt;</description></item><item><title>Relevance Prediction from Eye-movements Using Semi-interpretable Convolutional Neural Networks</title><link>https://somnathrakshit.github.io/publication/relevance-prediction-eye-movements-chiir-2020/</link><pubDate>Tue, 10 Dec 2019 16:16:12 -0600</pubDate><guid>https://somnathrakshit.github.io/publication/relevance-prediction-eye-movements-chiir-2020/</guid><description/></item><item><title>Deep Learning for Detection and Localization of Thoracic Diseases using Chest X-Ray Imagery</title><link>https://somnathrakshit.github.io/publication/chexray/</link><pubDate>Sat, 16 Mar 2019 01:59:10 +0200</pubDate><guid>https://somnathrakshit.github.io/publication/chexray/</guid><description/></item><item><title>Detection of Diseases in Potato Leaves using Transfer Learning</title><link>https://somnathrakshit.github.io/publication/potato-leaves-transfer-learning/</link><pubDate>Sun, 20 Jan 2019 14:21:24 +0530</pubDate><guid>https://somnathrakshit.github.io/publication/potato-leaves-transfer-learning/</guid><description>&lt;script type=&#34;application/javascript&#34; src=&#34;https://gist.github.com/somnathrakshit/22fcb7736e24254940b4216621781681.js&#34;&gt;&lt;/script&gt;</description></item><item><title>Deep Learning for Integrated Analysis of Breast Cancer Subtype Specific Multi-omics Data</title><link>https://somnathrakshit.github.io/publication/breast-cancer-integrated-sae/</link><pubDate>Wed, 31 Oct 2018 01:23:15 +0200</pubDate><guid>https://somnathrakshit.github.io/publication/breast-cancer-integrated-sae/</guid><description/></item><item><title>Neural Style Transfer</title><link>https://somnathrakshit.github.io/project/neural-style-transfer/</link><pubDate>Wed, 03 Oct 2018 02:32:45 +0530</pubDate><guid>https://somnathrakshit.github.io/project/neural-style-transfer/</guid><description>&lt;p&gt;Google Photos album containing the images is present &lt;a href=&#34;https://photos.app.goo.gl/GmeSraqqvKPxu7Zb6&#34; target=&#34;_blank&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Implemented the neural style transfer algortihm implemented by Gatys et al. (2016) in PyTorch. This technique allows us to take an input image and perform its reproduction in a new artistic style. This algorithm takes two images as inputs. One is the style image that contains the artistic style whereas the other image contains the content which is to be modified in the given artistic style.&lt;/p&gt;</description></item><item><title>Detection and Localisation of Diabetic Retinopathy</title><link>https://somnathrakshit.github.io/project/fundus-image-localization/</link><pubDate>Tue, 15 May 2018 01:21:26 +0530</pubDate><guid>https://somnathrakshit.github.io/project/fundus-image-localization/</guid><description>&lt;p&gt;&lt;a href=&#34;https://docs.google.com/presentation/d/e/2PACX-1vQpi7z7g1swVv-bcG2GeYggnhCjL1zXOq3BJYMXnqGtJC6pVg7Iq7qr-4bODfVGEcngX9PGiuJ5P8Qs/pub?start=false&amp;amp;loop=false&amp;amp;delayms=15000&#34; target=&#34;_blank&#34;&gt;Slides&lt;/a&gt;, &lt;a href=&#34;https://somnathrakshit.github.io/files/download/project_report_jgec.pdf&#34;&gt;Report&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;Diabetic retinopathy occurs when the retina is damaged because fluids leak from blood vessels into the retina. The presence of hemorrhage is one of the earliest signs to indicate the severity of the disease. In this paper we review techniques, algorithms and methodologies used for the detection of hemorrhage from diabetic retinopathy retinal images. The retina is a transparent layer of vascularized neural tissue lining the inner layer of the back wall of the eye, between the retinal pigment epithelium on the outer and the vitreous on the inner side. The retina captures photons and converts these two photochemical and electrical energy integrates the Signals and transmits the resultant signal to the visual cortex of the brain via the optic nerve tracts and radiations. The retinal architecture is lamellar. Within this there are major types performing sensory nutritional regulatory immunomodulatory and structure and functions. The retina is uniquely partitioned from the vascular system by the blood retinal barrier and blood aqueous barrier. The blood supply is dual to the inner retina it is by the retinal circulation lying within the in a retina and to the outer retina it is by the choroidal circulation, Hrithik vascular layer lying outside of the retinal pigment epithelium. The retinal pigment epithelium and the choroid are critical to retinal function. Is the eye is imagined to be a camera in the retina is the film. Just like a picture cannot be developed if the camera has defective film, vision is not possible in an eye with a defective retina.&lt;/p&gt;
-
 &lt;p&gt;If caught early then diabetic retinopathy can be treated, otherwise it can lead to irreversible blindness. Unluckily, medical specialists capable of detecting the disease are not available in many parts of the world where diabetes is prevalent. Deep neural networks have helped in solving many such problems in the recent past. Medical image classification has been done accurately using deep neural networks and thus, we will be using this in our project. The aim of this project is to use deep learning to help doctors identify the patients in need, particularly among underserved populations.&lt;/p&gt;
-
-&lt;p&gt;Prolonged diabetes leads to DR, where the retina is damaged due to fluid leaking from the blood vessels. Usually, the stage of DR is judged based on blood vessels, exudes, hemorrhages, microaneurysms and texture. In this paper, we have discussed different methods for features extraction and automatic DR stage detection. An ophthalmologist uses an ophthalmoscope to visualize the blood vessels and his or her brain to detect the DR stages. Recently digital imaging became available as a tool for DR screening. It provides high quality permanent records of the retinal appearance, which can be used for monitoring of progression or response to treatment, and which can be reviewed by an ophthalmologist, digital images have the potential to be processed by automatic analysis systems. A combination of both accurate and early diagnosis as well as correct application of treatment can prevent blindness caused by DR in more than 50% of all cases. Therefore, regular screenings for DR of patients with diabetes is important. The grading of the resultant fundus images is an important cost factor. Automated DR detection can reduce the grading cost and thereby make the whole screening process less expensive. Some of the algorithms and systems reviewed in this paper are close to achieve DR identification in clinical practice.&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>Identifying Land Patterns from Satellite Imagery in Amazon Rainforest using Deep Learning</title>
-      <link>https://somnathrakshit.github.io/project/identify-land-pattern-keras/</link>
-      <pubDate>Tue, 27 Feb 2018 23:52:39 +0530</pubDate>
-      <guid>https://somnathrakshit.github.io/project/identify-land-pattern-keras/</guid>
-      <description>&lt;p&gt;The Amazon rainforests have been suffering widespread damage, both via natural and artificial means. Every minute, it is estimated that the world loses forest cover the size of 48 football fields. Deforestation in the Amazon rainforest has led to drastically reduced biodiversity, loss of habitat, climate change and other biological losses. In this respect, it has become essential to track how the nature of these forests change over time. Image classification using deep learning can help speed up this process by removing the manual task of classifying each image. Here, it is shown how convolutional neural networks can be used to track changes in land patterns in the Amazon rainforests. In this work, a testing accuracy of 96.71% was obtained. This can help governments and other agencies to track changes in land patterns more effectively and accurately.&lt;/p&gt;
-
+&lt;p&gt;Prolonged diabetes leads to DR, where the retina is damaged due to fluid leaking from the blood vessels. Usually, the stage of DR is judged based on blood vessels, exudes, hemorrhages, microaneurysms and texture. In this paper, we have discussed different methods for features extraction and automatic DR stage detection. An ophthalmologist uses an ophthalmoscope to visualize the blood vessels and his or her brain to detect the DR stages. Recently digital imaging became available as a tool for DR screening. It provides high quality permanent records of the retinal appearance, which can be used for monitoring of progression or response to treatment, and which can be reviewed by an ophthalmologist, digital images have the potential to be processed by automatic analysis systems. A combination of both accurate and early diagnosis as well as correct application of treatment can prevent blindness caused by DR in more than 50% of all cases. Therefore, regular screenings for DR of patients with diabetes is important. The grading of the resultant fundus images is an important cost factor. Automated DR detection can reduce the grading cost and thereby make the whole screening process less expensive. Some of the algorithms and systems reviewed in this paper are close to achieve DR identification in clinical practice.&lt;/p&gt;</description></item><item><title>Identifying Land Patterns from Satellite Imagery in Amazon Rainforest using Deep Learning</title><link>https://somnathrakshit.github.io/project/identify-land-pattern-keras/</link><pubDate>Tue, 27 Feb 2018 23:52:39 +0530</pubDate><guid>https://somnathrakshit.github.io/project/identify-land-pattern-keras/</guid><description>&lt;p&gt;The Amazon rainforests have been suffering widespread damage, both via natural and artificial means. Every minute, it is estimated that the world loses forest cover the size of 48 football fields. Deforestation in the Amazon rainforest has led to drastically reduced biodiversity, loss of habitat, climate change and other biological losses. In this respect, it has become essential to track how the nature of these forests change over time. Image classification using deep learning can help speed up this process by removing the manual task of classifying each image. Here, it is shown how convolutional neural networks can be used to track changes in land patterns in the Amazon rainforests. In this work, a testing accuracy of 96.71% was obtained. This can help governments and other agencies to track changes in land patterns more effectively and accurately.&lt;/p&gt;
 &lt;p&gt;&lt;a href=&#34;https://gist.github.com/somnathrakshit/334297f8ab77aa6739d97284d16addd9&#34; target=&#34;_blank&#34;&gt;Code,&lt;/a&gt; &lt;a href=&#34;https://somnathrakshit.github.io/files/download/ICNDE.pdf&#34;&gt;Poster&lt;/a&gt;.&lt;/p&gt;
-
-&lt;script type=&#34;application/javascript&#34; src=&#34;https://gist.github.com/somnathrakshit/334297f8ab77aa6739d97284d16addd9.js&#34;&gt;&lt;/script&gt;
-
-</description>
-    </item>
-    
-  </channel>
-</rss>
+&lt;script type=&#34;application/javascript&#34; src=&#34;https://gist.github.com/somnathrakshit/334297f8ab77aa6739d97284d16addd9.js&#34;&gt;&lt;/script&gt;</description></item></channel></rss>

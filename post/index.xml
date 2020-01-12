@@ -1,898 +1,592 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-  <channel>
-    <title>Blog | Somnath Rakshit</title>
-    <link>https://somnathrakshit.github.io/post/</link>
-      <atom:link href="https://somnathrakshit.github.io/post/index.xml" rel="self" type="application/rss+xml" />
-    <description>Blog</description>
-    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>© Somnath Rakshit, 2020</copyright><lastBuildDate>Tue, 24 Dec 2019 18:41:08 -0600</lastBuildDate>
-    <image>
-      <url>https://somnathrakshit.github.io/img/icon-192.png</url>
-      <title>Blog</title>
-      <link>https://somnathrakshit.github.io/post/</link>
-    </image>
-    
-    <item>
-      <title>Relevance Prediction from Eye-movements Using Semi-interpretable Convolutional Neural Networks</title>
-      <link>https://somnathrakshit.github.io/post/relevance-prediction-eye-movement-cnn/</link>
-      <pubDate>Tue, 24 Dec 2019 18:41:08 -0600</pubDate>
-      <guid>https://somnathrakshit.github.io/post/relevance-prediction-eye-movement-cnn/</guid>
-      <description>
-
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Blog | Somnath Rakshit</title><link>https://somnathrakshit.github.io/post/</link><atom:link href="https://somnathrakshit.github.io/post/index.xml" rel="self" type="application/rss+xml"/><description>Blog</description><generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>© Somnath Rakshit, 2020</copyright><lastBuildDate>Tue, 24 Dec 2019 18:41:08 -0600</lastBuildDate><image><url>https://somnathrakshit.github.io/img/icon-192.png</url><title>Blog</title><link>https://somnathrakshit.github.io/post/</link></image><item><title>Relevance Prediction from Eye-movements Using Semi-interpretable Convolutional Neural Networks</title><link>https://somnathrakshit.github.io/post/relevance-prediction-eye-movement-cnn/</link><pubDate>Tue, 24 Dec 2019 18:41:08 -0600</pubDate><guid>https://somnathrakshit.github.io/post/relevance-prediction-eye-movement-cnn/</guid><description>
 &lt;p&gt;We propose an image-classification method to predict user&amp;rsquo;s perceived-relevance from their eye-movement patterns. Our method is free from many of the inherent problems associated with analyzing eye-tracking data, as shown in existing literature. Specifically, we convert participant&amp;rsquo;s eye-movement scanpaths into images, and then transform the relevance-prediction problem into an image-classification problem. For this purpose, we use state-of-the art image classifiers based on convolutional neural networks. Our method gives promising results, and outperforms many previously reported performances in similar studies by appreciable margins. We also attempt to interpret how the classifier possibly differentiates between user-reading-patterns on relevant and irrelevant documents. Finally, we discuss the limitations of our approach, and propose future directions of research.
 &lt;h2&gt;Table of Contents&lt;/h2&gt;
-HAHAHUGOSHORTCODE-TOC0-HBHB&lt;/p&gt;
-
+&lt;/p&gt;
 &lt;h1 id=&#34;user-study&#34;&gt;User Study&lt;/h1&gt;
-
 &lt;h2 id=&#34;experimental-design-and-procedure&#34;&gt;Experimental Design and Procedure&lt;/h2&gt;
-
 &lt;p&gt;A controlled lab experiment was conducted in the Department of Kinesiology, University of Maryland, College Park. Participants ($N=25$, college-age students) judged the relevance of short news articles for answering a trigger question. Eye-tracking and EEG signals were recorded.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&#34;img/procedure.png&#34; alt=&#34;Experimental procedure. The &amp;quot;+&amp;quot; represents a fixation screen. The order of Relevant, Irrelevant and Topical articles were permuted in each trial&#34;&gt;
-&lt;figcaption&gt;Experimental procedure. The &amp;quot;+&amp;quot; represents a fixation screen. The order of Relevant, Irrelevant and Topical articles were permuted in each trial&lt;/figcaption&gt;&lt;/p&gt;
-
+&lt;figure&gt;
+&lt;a data-fancybox=&#34;&#34; href=&#34;img/procedure.png&#34; &gt;
+&lt;img src=&#34;img/procedure.png&#34; alt=&#34;&#34; &gt;
+&lt;/a&gt;
+&lt;figcaption data-pre=&#34;Figure &#34; data-post=&#34;:&#34; class=&#34;numbered&#34;&gt;
+&lt;h4&gt;Experimental procedure. The &amp;quot;+&amp;quot; represents a fixation screen. The order of Relevant, Irrelevant and Topical articles were permuted in each trial&lt;/h4&gt;
+&lt;/figcaption&gt;
+&lt;/figure&gt;
 &lt;p&gt;The main element of the experimental procedure was a trial. In each trial, a trigger question was shown first. The trigger questions was a short, one-sentence question, informing participants what to look for in the subsequently presented documents (e.g. &amp;quot;What is the birth name of Jesse Ventura?&amp;quot;). After the trigger question, a short news article was displayed, then a text relevance response (Y/N) screen appeared, then a list of words for further assessment was shown. Participants progressed between stimuli by pressing a space bar, with an exception of moving from a news article to the text-relevance response screen, which occurred by participants fixating their eyes for two seconds or longer in the lower-right screen-corner to indicate their readiness for relevance judgement. Finally, a fixation screen was shown for one second between trials. The list of words for further assessment are not analysed in this paper. The news articles were chosen to have three levels of relevance with respect to the trigger question:&lt;/p&gt;
-
 &lt;ol&gt;
 &lt;li&gt;&lt;strong&gt;Relevant &lt;code&gt;(R)&lt;/code&gt;&lt;/strong&gt;: the article explicitly contained the exact answer asked in the question.&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;Topical &lt;code&gt;(T)&lt;/code&gt;&lt;/strong&gt;: partially relevant – the article did not contain the exact answer to the question, but was on the topic of the information asked in the question.&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;Irrelevant &lt;code&gt;(I)&lt;/code&gt;&lt;/strong&gt;: did not contain the answer to the question&lt;/li&gt;
 &lt;/ol&gt;
-
 &lt;h2 id=&#34;stimuli-dataset&#34;&gt;Stimuli Dataset&lt;/h2&gt;
-
 &lt;p&gt;The set of 40 trigger questions were selected from the &lt;code&gt;TREC 2005 Question Answering Task&lt;/code&gt;. The collection of 120 short news articles and their document-relevance labels came from the &lt;code&gt;AQUAINT Corpus of English News Text&lt;/code&gt; (the same collection used in &lt;code&gt;TREC 2005 Q\&amp;amp;A Task&lt;/code&gt;. The news articles were carefully selected to have nearly similar text-length (&lt;code&gt;mean length&lt;/code&gt;: 178 words, &lt;code&gt;SD&lt;/code&gt;: 30 words.&lt;/p&gt;
-
 &lt;h1 id=&#34;data-analysis&#34;&gt;Data Analysis&lt;/h1&gt;
-
 &lt;h2 id=&#34;generating-scanpath-images&#34;&gt;Generating Scanpath Images&lt;/h2&gt;
-
 &lt;p&gt;We generated scanpath images from eye-tracking data of user-document pairs, using only three attributes of eye-fixations: screen-coordinates (in pixels), fixation duration (in ms), and start time of the fixation relative to stimulus-onset. We used Python Matplotlib library to generate the scanpath images. CNNs have been shown to be good at detecting local patterns within images. Since we were preparing the images for training a CNN classifier, we made the following design choices:&lt;/p&gt;
-
 &lt;h3 id=&#34;fixations&#34;&gt;Fixations&lt;/h3&gt;
-
 &lt;p&gt;Eye-fixations were encoded as marker points having varying shapes, sizes, and colours. These were controlled by the fixation duration as follows:&lt;/p&gt;
-
 &lt;ol&gt;
 &lt;li&gt;110 - 250 ms: Level 1 fixations, encoded as red circle&lt;/li&gt;
 &lt;li&gt;250 - 400 ms: Level 2 fixations, encoded as pink star&lt;/li&gt;
 &lt;li&gt;400 - 550 ms: Level 3 fixations, encoded as yellow pentagon&lt;/li&gt;
 &lt;li&gt;&amp;gt; 550 ms: Level 4 fixations, encoded as white cross&lt;/li&gt;
 &lt;/ol&gt;
-
-&lt;p&gt;These levels were identified empirically. We examined the distribution of fixation durations in our data, and roughly divided the range into three equal partitions. Fixations having durations less than 110 ms were discarded. The marker-size was made to increase with the Level number. The fixation markers were chosen to be grossly different from each other (instead of, say, only circles), so that the CNN could possibly identify spatial patterns of similar-duration fixations.
-&lt;img src=&#34;img/fixn_dur_hist.png&#34; alt=&#34;Distribution of fixation-durations recorded in our study, and the corresponding encoding marker for representing fixations belonging to different levels, according to their duration&#34;&gt;
-&lt;figcaption&gt;Distribution of fixation-durations recorded in our study, and the corresponding encoding marker for representing fixations belonging to different levels, according to their duration&lt;/figcaption&gt;&lt;/p&gt;
-
+&lt;p&gt;These levels were identified empirically. We examined the distribution of fixation durations in our data, and roughly divided the range into three equal partitions. Fixations having durations less than 110 ms were discarded. The marker-size was made to increase with the Level number. The fixation markers were chosen to be grossly different from each other (instead of, say, only circles), so that the CNN could possibly identify spatial patterns of similar-duration fixations.&lt;/p&gt;
+&lt;figure&gt;
+&lt;a data-fancybox=&#34;&#34; href=&#34;img/fixn_dur_hist.png&#34; &gt;
+&lt;img src=&#34;img/fixn_dur_hist.png&#34; alt=&#34;&#34; &gt;
+&lt;/a&gt;
+&lt;figcaption data-pre=&#34;Figure &#34; data-post=&#34;:&#34; class=&#34;numbered&#34;&gt;
+&lt;h4&gt;Distribution of fixation-durations recorded in our study, and the corresponding encoding marker for representing fixations belonging to different levels, according to their duration&lt;/h4&gt;
+&lt;/figcaption&gt;
+&lt;/figure&gt;
 &lt;h3 id=&#34;linearized-saccades&#34;&gt;Linearized Saccades&lt;/h3&gt;
-
 &lt;p&gt;Saccades are rapid eye-movements between two fixation points. We controlled the colour of the saccade lines to follow a linear colour scale, based on their temporal occurrence &lt;a href=&#34;https://matplotlib.org/3.1.1/gallery/color/colormap_reference.html&#34; target=&#34;_blank&#34;&gt;(&amp;quot;Winter&amp;quot; colourmap in Matplotlib)&lt;/a&gt;
 The colour of the saccades changed linearly from blue (first saccade) to green (final saccade).
 Each individual saccade had a solid colour.&lt;/p&gt;
-
 &lt;p&gt;We also tested controlling the width of the saccade lines using saccade velocity (ratio of screen-distance covered to time taken). However, doing so made the scanpath-image too crowded, especially for scanpaths having more than 50 fixations. So we kept the width of the saccade lines constant at 2 pixels.&lt;/p&gt;
-
 &lt;h3 id=&#34;colours&#34;&gt;Colours&lt;/h3&gt;
-
-&lt;p&gt;Care was taken to select the colours of the fixations and the saccades. Using a colour wheel, the colours of the different fixation markers were chosen to be far apart, from each other, as well as from the range of colours used to draw the saccades. We hypothesized that these colour choices would enable the CNN classifier to easily distinguish between fixations and saccades, and identify necessary patterns. Examples of typical eye-movement patterns on three types of documents, and their corresponding generated scanpath images are shown in Figure given below.
-&lt;img src=&#34;img/scanpath_encoding.png&#34; alt=&#34;Top: Typical eye-movement patterns when reading relevant, irrelevant, and topical documents. Bottom: Examples of generated scanpath images, which are used to train CNN classifiers for predicting the user’s perceived-relevance of the
-documents.&#34;&gt;
-&lt;figcaption&gt;Top: Typical eye-movement patterns when reading relevant, irrelevant, and topical documents. Bottom: Examples of generated scanpath images, which are used to train CNN classifiers for predicting the user’s perceived-relevance of the
-documents.&lt;/figcaption&gt;&lt;/p&gt;
-
+&lt;p&gt;Care was taken to select the colours of the fixations and the saccades. Using a colour wheel, the colours of the different fixation markers were chosen to be far apart, from each other, as well as from the range of colours used to draw the saccades. We hypothesized that these colour choices would enable the CNN classifier to easily distinguish between fixations and saccades, and identify necessary patterns. Examples of typical eye-movement patterns on three types of documents, and their corresponding generated scanpath images are shown in Figure given below.&lt;/p&gt;
+&lt;figure&gt;
+&lt;a data-fancybox=&#34;&#34; href=&#34;img/scanpath_encoding.png&#34; &gt;
+&lt;img src=&#34;img/scanpath_encoding.png&#34; alt=&#34;&#34; &gt;
+&lt;/a&gt;
+&lt;figcaption data-pre=&#34;Figure &#34; data-post=&#34;:&#34; class=&#34;numbered&#34;&gt;
+&lt;h4&gt;Top: Typical eye-movement patterns when reading relevant, irrelevant, and topical documents. Bottom: Examples of generated scanpath images, which are used to train CNN classifiers for predicting the user’s perceived-relevance of the documents.&lt;/h4&gt;
+&lt;/figcaption&gt;
+&lt;/figure&gt;
 &lt;h2 id=&#34;machine-learning-setup&#34;&gt;Machine Learning Setup&lt;/h2&gt;
-
 &lt;p&gt;ata was available for 24 participants, where each participant judged the binary relevance of 120 news articles. In total we had eye-tracking data for 2,880 user-document pairs, or 2,880 scanpaths. After data cleaning, we decided to use scanpaths having 10 or more fixations. We assumed that at least 10 fixations, or a minimum eye dwell-time of 1 second on the document (at 100 ms / fixation) is required to make a relevance assessment. This left us with 2,579 scanpath images.&lt;/p&gt;
-
 &lt;h3 id=&#34;train-validation-test-partition&#34;&gt;Train / Validation / Test Partition&lt;/h3&gt;
-
 &lt;p&gt;We used the participants&amp;rsquo; perceived-relevance labels as the ground-truth for our classification task (and not the document-relevance obtained from TREC dataset). Out of the 2,579 scanpath images, only 806 (31.2%) were for documents marked relevant. Thus, there was almost a 1:2 class imbalance. Since this is an initial attempt to apply image classification on scanpath images, we decided to use a balanced dataset. So we randomly sampled 806 images from the pool of irrelevant scanpath images, and created a perfectly balanced dataset of 1,612 images. We used an approximate 60-20-20 split to randomly place 966 images in the training set, 314 images in the validation set, and 332 images in the test set. The relevant/irrelevant class balance was preserved in each set. All random selections were performed using the MySQL &lt;code&gt;rand()&lt;/code&gt; function.&lt;/p&gt;
-
 &lt;h2 id=&#34;analysis-procedure&#34;&gt;Analysis Procedure&lt;/h2&gt;
-
 &lt;h3 id=&#34;image-classification-setup&#34;&gt;Image Classification Setup&lt;/h3&gt;
-
 &lt;p&gt;We posed our binary classification problem as follows:
 Given &lt;strong&gt;only&lt;/strong&gt; the scanpath image of a user&amp;rsquo;s eye movements on a short news article, did the user perceive the article to be relevant for answering a trigger question?&lt;/p&gt;
-
 &lt;p&gt;For this binary classification problem, we analysed the performance of six popular CNN based architectures: VGG16 and VGG19, DenseNet121 and DenseNet201, ResNet50, and InceptionResNet (version 2). All architectures had benchmark performances in the ImageNet challenge.&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>A Comprehensive Guide to Sorting in Pandas</title>
-      <link>https://somnathrakshit.github.io/post/sorting_in_pandas/</link>
-      <pubDate>Sat, 01 Jun 2019 12:52:56 +0200</pubDate>
-      <guid>https://somnathrakshit.github.io/post/sorting_in_pandas/</guid>
-      <description>
-
+&lt;p&gt;To examine whether the obtained results were reproducible in different environments and software versions, we ran the analyses independently on two popular Python deep-learning frameworks: &lt;a href=&#34;https://www.tensorflow.org/guide/keras&#34; target=&#34;_blank&#34;&gt;TensorFlow-Keras&lt;/a&gt;, and &lt;a href=&#34;https://docs.fast.ai/&#34; target=&#34;_blank&#34;&gt;PyTorch-fastai&lt;/a&gt;.&lt;/p&gt;
+&lt;!-- https://mermaid-js.github.io/mermaid-live-editor/#/edit/eyJjb2RlIjoiZ3JhcGggVERcbkFbXCJDTk4gbW9kZWwgPGJyLz4oaW5pdGlhbGl6ZWQgd2l0aCA8YnIvPnByZS10cmFpbmVkIEltYWdlTmV0IHdlaWdodHMpXCJdIC0tPkJbXCJGdWxseSBDb25uZWN0ZWQgTGF5ZXIgPGJyLz4oMjU2IG5vZGVzLCBSZUxVIGFjdGl2YXRpb24sPGJyLz4gd2l0aC93aXRob3V0IEwxL0wyIHJlZ3VsYXJpemF0aW9uKVwiXVxuQiAtLT4gQ1tcIkRyb3BvdXQgKHByb2JhYmlsaXR5PTAuMilcIl1cbkMgLS0-IERbXCJGdWxseSBDb25uZWN0ZWQgTGF5ZXIgPGJyLz4oMSBub2RlLCBTaWdtb2lkIGFjdGl2YXRpb24pXCJdXG4iLCJtZXJtYWlkIjp7InRoZW1lIjoiZGVmYXVsdCJ9fQ --&gt;
+&lt;figure&gt;
+&lt;a data-fancybox=&#34;&#34; href=&#34;img/flowchart.jpeg&#34; &gt;
+&lt;img src=&#34;img/flowchart.jpeg&#34; alt=&#34;&#34; &gt;
+&lt;/a&gt;
+&lt;figcaption data-pre=&#34;Figure &#34; data-post=&#34;:&#34; class=&#34;numbered&#34;&gt;
+&lt;h4&gt;Architecture of the TensorFlow-Keras implementation. Optimizer: Stochastic Gradient Descent (SGD)&lt;/h4&gt;
+&lt;/figcaption&gt;
+&lt;/figure&gt;
+&lt;p&gt;In PyTorch-fastai, we built the classifier using the &lt;code&gt;cnn_learner&lt;/code&gt; module, which initializes the model with random weights, and trains from scratch.&lt;/p&gt;
+&lt;p&gt;We trained the models on the training set, and used the validation set for very basic hyper-parameter tuning (learning rate, number of epochs, optimizer momentum, etc.). Since our intention was to see whether the method works, and not to obtain the best benchmark performance, we performed minimal hyper-parameter tuning. Finally, we took the best set of models obtained after tuning the hyper-parameters (&lt;code&gt;epochs&lt;/code&gt;: &lt;code&gt;6&lt;/code&gt;, &lt;code&gt;batch-size&lt;/code&gt;: &lt;code&gt;16&lt;/code&gt;, &lt;code&gt;momentum&lt;/code&gt;: &lt;code&gt;0.9&lt;/code&gt;)**, and used them to predict the labels of the test set. The top portion of Table reports the results from the TensorFlow-Keras implementation.&lt;/p&gt;
+&lt;figure&gt;
+&lt;a data-fancybox=&#34;&#34; href=&#34;img/results_table.png&#34; &gt;
+&lt;img src=&#34;img/results_table.png&#34; alt=&#34;&#34; &gt;
+&lt;/a&gt;
+&lt;figcaption data-pre=&#34;Figure &#34; data-post=&#34;:&#34; class=&#34;numbered&#34;&gt;
+&lt;h4&gt;Performances of two different methods to predict perceived-relevance from eye-movements, ordered by decreasing F1 score for the Test Set. Top: CNN classifiers on scanpath images. Bottom: traditional classifiers on aggregate features.&lt;/h4&gt;
+&lt;/figcaption&gt;
+&lt;/figure&gt;
+&lt;h3 id=&#34;comparison-to-existing-standard&#34;&gt;Comparison to Existing Standard&lt;/h3&gt;
+&lt;p&gt;We also compared our method to existing approaches for inferring relevance using eye-movements, where the data is collapsed into a set of handcrafted features. Perceived-relevance of documents are predicted from these features using popular classifiers like Random Forests and Support Vector Machines (SVM). We computed 20 such hand-engineered features, aggregated at the user-doc level, and classified them using Random Forest and SVM. This analysis was done using Python Scikit-learn library. Similar to our approach with the CNN classifiers, we started with the default hyperparameter values of the Random Forest and the SVM classifier from the Scikit-learn library, and then performed basic parameter tuning. Finally, we selected the best performing models. The bottom portion of Table given above reports these results.&lt;/p&gt;
+&lt;h1 id=&#34;results-and-discussion&#34;&gt;Results and Discussion&lt;/h1&gt;
+&lt;h2 id=&#34;scanpath-image-classification&#34;&gt;Scanpath Image Classification&lt;/h2&gt;
+&lt;p&gt;We report the performance of our proposed scanpath image classification method, by testing six different CNN classifier architectures. To easily compare our results to those reported in previous papers, we report five different metrics: percentages of correct predictions for both relevant and irrelevant documents, as True Positive Rate (TPR %) and True Negative Rate (TNR %); accuracy (Acc %); area under the ROC curve (ROC AUC); and F1-score (F1). TPR and TNR are also known as sensitivity and specificity, respectively. We have ranked the image classifiers according to their F1 scores on the Test Set. We have taken care to report all range of performances &amp;ndash; best, average, and worst &amp;ndash; to provide realistic expectations of using this method. Using latest CNN classifiers, comparatively less training data, and leveraging the power of transfer-learning, it is possible to predict the perceived-relevance of documents from scanpath images with F1 score up to 0.81, and up to 80% accuracy.&lt;/p&gt;</description></item><item><title>A Comprehensive Guide to Sorting in Pandas</title><link>https://somnathrakshit.github.io/post/sorting_in_pandas/</link><pubDate>Sat, 01 Jun 2019 12:52:56 +0200</pubDate><guid>https://somnathrakshit.github.io/post/sorting_in_pandas/</guid><description>
 &lt;p&gt;In order to sort rows in &lt;code&gt;Pandas&lt;/code&gt;, you can use the &lt;code&gt;sort_values()&lt;/code&gt; function. I have taken examples from this excellant &lt;a href=&#34;https://datatofish.com/sort-pandas-dataframe/&#34; target=&#34;_blank&#34;&gt;blog&lt;/a&gt;. Although it shows a lot of the use cases covered here, the last case is absent pretty much everywhere.&lt;/p&gt;
-
 &lt;p&gt;In this tutorial, I will be showing how to use &lt;code&gt;Pandas&lt;/code&gt; to sort rows based on different criterion.&lt;/p&gt;
-
 &lt;p&gt;&lt;h2&gt;Table of Contents&lt;/h2&gt;
 HAHAHUGOSHORTCODE-TOC0-HBHB&lt;/p&gt;
-
 &lt;p&gt;You can run a colab notebook containing all code present in this post by clicking here.
 &lt;a href=&#34;https://colab.research.google.com/gist/somnathrakshit/88a4684a1eb97b782b07a2f758ad3e3c/pandas_sort.ipynb&#34; target=&#34;_parent&#34;&gt;&lt;img src=&#34;https://colab.research.google.com/assets/colab-badge.svg&#34; alt=&#34;Open In Colab&#34;/&gt;&lt;/a&gt;&lt;/p&gt;
-
 &lt;p&gt;Let us create our &lt;code&gt;DataFrame&lt;/code&gt; (df) in pandas&lt;/p&gt;
-
 &lt;pre&gt;&lt;code&gt;from pandas import DataFrame
- 
 Cars = {&#39;Brand&#39;: [&#39;Honda Civic&#39;,&#39;Toyota Corolla&#39;,&#39;Ford Focus&#39;,&#39;Audi A4&#39;],
-        &#39;Price&#39;: [22000, 25000, 27000, 35000],
-        &#39;Year&#39;: [2015, 2013, 2018, 2018]
-        }
- 
+&#39;Price&#39;: [22000, 25000, 27000, 35000],
+&#39;Year&#39;: [2015, 2013, 2018, 2018]
+}
 df = DataFrame(Cars, columns= [&#39;Brand&#39;, &#39;Price&#39;,&#39;Year&#39;])
-
 df
 &lt;/code&gt;&lt;/pre&gt;
-
 &lt;div&gt;
 &lt;style scoped&gt;
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
+.dataframe tbody tr th:only-of-type {
+vertical-align: middle;
+}
+.dataframe tbody tr th {
+vertical-align: top;
+}
+.dataframe thead th {
+text-align: right;
+}
 &lt;/style&gt;
 &lt;table border=&#34;1&#34; class=&#34;dataframe&#34;&gt;
-  &lt;thead&gt;
-    &lt;tr style=&#34;text-align: right;&#34;&gt;
-      &lt;th&gt;&lt;/th&gt;
-      &lt;th&gt;Brand&lt;/th&gt;
-      &lt;th&gt;Price&lt;/th&gt;
-      &lt;th&gt;Year&lt;/th&gt;
-    &lt;/tr&gt;
-  &lt;/thead&gt;
-  &lt;tbody&gt;
-    &lt;tr&gt;
-      &lt;th&gt;0&lt;/th&gt;
-      &lt;td&gt;Honda Civic&lt;/td&gt;
-      &lt;td&gt;22000&lt;/td&gt;
-      &lt;td&gt;2015&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;th&gt;1&lt;/th&gt;
-      &lt;td&gt;Toyota Corolla&lt;/td&gt;
-      &lt;td&gt;25000&lt;/td&gt;
-      &lt;td&gt;2013&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;th&gt;2&lt;/th&gt;
-      &lt;td&gt;Ford Focus&lt;/td&gt;
-      &lt;td&gt;27000&lt;/td&gt;
-      &lt;td&gt;2018&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;th&gt;3&lt;/th&gt;
-      &lt;td&gt;Audi A4&lt;/td&gt;
-      &lt;td&gt;35000&lt;/td&gt;
-      &lt;td&gt;2018&lt;/td&gt;
-    &lt;/tr&gt;
-  &lt;/tbody&gt;
+&lt;thead&gt;
+&lt;tr style=&#34;text-align: right;&#34;&gt;
+&lt;th&gt;&lt;/th&gt;
+&lt;th&gt;Brand&lt;/th&gt;
+&lt;th&gt;Price&lt;/th&gt;
+&lt;th&gt;Year&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;th&gt;0&lt;/th&gt;
+&lt;td&gt;Honda Civic&lt;/td&gt;
+&lt;td&gt;22000&lt;/td&gt;
+&lt;td&gt;2015&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;th&gt;1&lt;/th&gt;
+&lt;td&gt;Toyota Corolla&lt;/td&gt;
+&lt;td&gt;25000&lt;/td&gt;
+&lt;td&gt;2013&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;th&gt;2&lt;/th&gt;
+&lt;td&gt;Ford Focus&lt;/td&gt;
+&lt;td&gt;27000&lt;/td&gt;
+&lt;td&gt;2018&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;th&gt;3&lt;/th&gt;
+&lt;td&gt;Audi A4&lt;/td&gt;
+&lt;td&gt;35000&lt;/td&gt;
+&lt;td&gt;2018&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
 &lt;/table&gt;
 &lt;/div&gt;
-
 &lt;h2 id=&#34;column-in-an-ascending-order&#34;&gt;Column in an ascending order&lt;/h2&gt;
-
 &lt;p&gt;To sort this df based on the column &lt;code&gt;Brand&lt;/code&gt;, we can use the &lt;code&gt;sort_values()&lt;/code&gt; function in this manner. Here, &lt;code&gt;inplace=True&lt;/code&gt; means that the df will be sorted in-memory. Also, by default, the &lt;code&gt;df&lt;/code&gt; is sorted in ascending order. But we can change it easily, as will be shown later.&lt;/p&gt;
-
 &lt;pre&gt;&lt;code&gt;df.sort_values(by=[&#39;Brand&#39;], inplace=True)
 &lt;/code&gt;&lt;/pre&gt;
-
 &lt;pre&gt;&lt;code&gt;df
 &lt;/code&gt;&lt;/pre&gt;
-
 &lt;div&gt;
 &lt;style scoped&gt;
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
+.dataframe tbody tr th:only-of-type {
+vertical-align: middle;
+}
+.dataframe tbody tr th {
+vertical-align: top;
+}
+.dataframe thead th {
+text-align: right;
+}
 &lt;/style&gt;
 &lt;table border=&#34;1&#34; class=&#34;dataframe&#34;&gt;
-  &lt;thead&gt;
-    &lt;tr style=&#34;text-align: right;&#34;&gt;
-      &lt;th&gt;&lt;/th&gt;
-      &lt;th&gt;Brand&lt;/th&gt;
-      &lt;th&gt;Price&lt;/th&gt;
-      &lt;th&gt;Year&lt;/th&gt;
-    &lt;/tr&gt;
-  &lt;/thead&gt;
-  &lt;tbody&gt;
-    &lt;tr&gt;
-      &lt;th&gt;3&lt;/th&gt;
-      &lt;td&gt;Audi A4&lt;/td&gt;
-      &lt;td&gt;35000&lt;/td&gt;
-      &lt;td&gt;2018&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;th&gt;2&lt;/th&gt;
-      &lt;td&gt;Ford Focus&lt;/td&gt;
-      &lt;td&gt;27000&lt;/td&gt;
-      &lt;td&gt;2018&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;th&gt;0&lt;/th&gt;
-      &lt;td&gt;Honda Civic&lt;/td&gt;
-      &lt;td&gt;22000&lt;/td&gt;
-      &lt;td&gt;2015&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;th&gt;1&lt;/th&gt;
-      &lt;td&gt;Toyota Corolla&lt;/td&gt;
-      &lt;td&gt;25000&lt;/td&gt;
-      &lt;td&gt;2013&lt;/td&gt;
-    &lt;/tr&gt;
-  &lt;/tbody&gt;
+&lt;thead&gt;
+&lt;tr style=&#34;text-align: right;&#34;&gt;
+&lt;th&gt;&lt;/th&gt;
+&lt;th&gt;Brand&lt;/th&gt;
+&lt;th&gt;Price&lt;/th&gt;
+&lt;th&gt;Year&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;th&gt;3&lt;/th&gt;
+&lt;td&gt;Audi A4&lt;/td&gt;
+&lt;td&gt;35000&lt;/td&gt;
+&lt;td&gt;2018&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;th&gt;2&lt;/th&gt;
+&lt;td&gt;Ford Focus&lt;/td&gt;
+&lt;td&gt;27000&lt;/td&gt;
+&lt;td&gt;2018&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;th&gt;0&lt;/th&gt;
+&lt;td&gt;Honda Civic&lt;/td&gt;
+&lt;td&gt;22000&lt;/td&gt;
+&lt;td&gt;2015&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;th&gt;1&lt;/th&gt;
+&lt;td&gt;Toyota Corolla&lt;/td&gt;
+&lt;td&gt;25000&lt;/td&gt;
+&lt;td&gt;2013&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
 &lt;/table&gt;
 &lt;/div&gt;
-
 &lt;p&gt;The complete code to perform the task above is shown below.&lt;/p&gt;
-
 &lt;pre&gt;&lt;code&gt;from pandas import DataFrame
- 
 Cars = {&#39;Brand&#39;: [&#39;Honda Civic&#39;,&#39;Toyota Corolla&#39;,&#39;Ford Focus&#39;,&#39;Audi A4&#39;],
-        &#39;Price&#39;: [22000,25000,27000,35000],
-        &#39;Year&#39;: [2015,2013,2018,2018]
-        }
- 
+&#39;Price&#39;: [22000,25000,27000,35000],
+&#39;Year&#39;: [2015,2013,2018,2018]
+}
 df = DataFrame(Cars, columns= [&#39;Brand&#39;, &#39;Price&#39;,&#39;Year&#39;])
-
 # sort Brand - ascending order
 df.sort_values(by=[&#39;Brand&#39;], inplace=True)
-
 df
 &lt;/code&gt;&lt;/pre&gt;
-
 &lt;div&gt;
 &lt;style scoped&gt;
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
+.dataframe tbody tr th:only-of-type {
+vertical-align: middle;
+}
+.dataframe tbody tr th {
+vertical-align: top;
+}
+.dataframe thead th {
+text-align: right;
+}
 &lt;/style&gt;
 &lt;table border=&#34;1&#34; class=&#34;dataframe&#34;&gt;
-  &lt;thead&gt;
-    &lt;tr style=&#34;text-align: right;&#34;&gt;
-      &lt;th&gt;&lt;/th&gt;
-      &lt;th&gt;Brand&lt;/th&gt;
-      &lt;th&gt;Price&lt;/th&gt;
-      &lt;th&gt;Year&lt;/th&gt;
-    &lt;/tr&gt;
-  &lt;/thead&gt;
-  &lt;tbody&gt;
-    &lt;tr&gt;
-      &lt;th&gt;3&lt;/th&gt;
-      &lt;td&gt;Audi A4&lt;/td&gt;
-      &lt;td&gt;35000&lt;/td&gt;
-      &lt;td&gt;2018&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;th&gt;2&lt;/th&gt;
-      &lt;td&gt;Ford Focus&lt;/td&gt;
-      &lt;td&gt;27000&lt;/td&gt;
-      &lt;td&gt;2018&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;th&gt;0&lt;/th&gt;
-      &lt;td&gt;Honda Civic&lt;/td&gt;
-      &lt;td&gt;22000&lt;/td&gt;
-      &lt;td&gt;2015&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;th&gt;1&lt;/th&gt;
-      &lt;td&gt;Toyota Corolla&lt;/td&gt;
-      &lt;td&gt;25000&lt;/td&gt;
-      &lt;td&gt;2013&lt;/td&gt;
-    &lt;/tr&gt;
-  &lt;/tbody&gt;
+&lt;thead&gt;
+&lt;tr style=&#34;text-align: right;&#34;&gt;
+&lt;th&gt;&lt;/th&gt;
+&lt;th&gt;Brand&lt;/th&gt;
+&lt;th&gt;Price&lt;/th&gt;
+&lt;th&gt;Year&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;th&gt;3&lt;/th&gt;
+&lt;td&gt;Audi A4&lt;/td&gt;
+&lt;td&gt;35000&lt;/td&gt;
+&lt;td&gt;2018&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;th&gt;2&lt;/th&gt;
+&lt;td&gt;Ford Focus&lt;/td&gt;
+&lt;td&gt;27000&lt;/td&gt;
+&lt;td&gt;2018&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;th&gt;0&lt;/th&gt;
+&lt;td&gt;Honda Civic&lt;/td&gt;
+&lt;td&gt;22000&lt;/td&gt;
+&lt;td&gt;2015&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;th&gt;1&lt;/th&gt;
+&lt;td&gt;Toyota Corolla&lt;/td&gt;
+&lt;td&gt;25000&lt;/td&gt;
+&lt;td&gt;2013&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
 &lt;/table&gt;
 &lt;/div&gt;
-
 &lt;h2 id=&#34;column-in-an-descending-order&#34;&gt;Column in an descending order&lt;/h2&gt;
-
 &lt;p&gt;Now, suppose we would like to sort df in descending order. Well, &lt;code&gt;sort_values()&lt;/code&gt; accepts a paramter named &lt;code&gt;ascending&lt;/code&gt;. By passing &lt;code&gt;ascending=True&lt;/code&gt;, you can sort the df in descending order. The code is given below.&lt;/p&gt;
-
 &lt;pre&gt;&lt;code&gt;df.sort_values(by=[&#39;Brand&#39;], inplace=True, ascending=False)
-
 &lt;/code&gt;&lt;/pre&gt;
-
 &lt;pre&gt;&lt;code&gt;# sort - descending order
 from pandas import DataFrame
- 
 Cars = {&#39;Brand&#39;: [&#39;Honda Civic&#39;,&#39;Toyota Corolla&#39;,&#39;Ford Focus&#39;,&#39;Audi A4&#39;],
-        &#39;Price&#39;: [22000,25000,27000,35000],
-        &#39;Year&#39;: [2015,2013,2018,2018]
-        }
- 
+&#39;Price&#39;: [22000,25000,27000,35000],
+&#39;Year&#39;: [2015,2013,2018,2018]
+}
 df = DataFrame(Cars, columns= [&#39;Brand&#39;, &#39;Price&#39;,&#39;Year&#39;])
-
 # sort Brand - descending order
 df.sort_values(by=[&#39;Brand&#39;], inplace=True, ascending=False)
-
 df
 &lt;/code&gt;&lt;/pre&gt;
-
 &lt;div&gt;
 &lt;style scoped&gt;
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
+.dataframe tbody tr th:only-of-type {
+vertical-align: middle;
+}
+.dataframe tbody tr th {
+vertical-align: top;
+}
+.dataframe thead th {
+text-align: right;
+}
 &lt;/style&gt;
 &lt;table border=&#34;1&#34; class=&#34;dataframe&#34;&gt;
-  &lt;thead&gt;
-    &lt;tr style=&#34;text-align: right;&#34;&gt;
-      &lt;th&gt;&lt;/th&gt;
-      &lt;th&gt;Brand&lt;/th&gt;
-      &lt;th&gt;Price&lt;/th&gt;
-      &lt;th&gt;Year&lt;/th&gt;
-    &lt;/tr&gt;
-  &lt;/thead&gt;
-  &lt;tbody&gt;
-    &lt;tr&gt;
-      &lt;th&gt;1&lt;/th&gt;
-      &lt;td&gt;Toyota Corolla&lt;/td&gt;
-      &lt;td&gt;25000&lt;/td&gt;
-      &lt;td&gt;2013&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;th&gt;0&lt;/th&gt;
-      &lt;td&gt;Honda Civic&lt;/td&gt;
-      &lt;td&gt;22000&lt;/td&gt;
-      &lt;td&gt;2015&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;th&gt;2&lt;/th&gt;
-      &lt;td&gt;Ford Focus&lt;/td&gt;
-      &lt;td&gt;27000&lt;/td&gt;
-      &lt;td&gt;2018&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;th&gt;3&lt;/th&gt;
-      &lt;td&gt;Audi A4&lt;/td&gt;
-      &lt;td&gt;35000&lt;/td&gt;
-      &lt;td&gt;2018&lt;/td&gt;
-    &lt;/tr&gt;
-  &lt;/tbody&gt;
+&lt;thead&gt;
+&lt;tr style=&#34;text-align: right;&#34;&gt;
+&lt;th&gt;&lt;/th&gt;
+&lt;th&gt;Brand&lt;/th&gt;
+&lt;th&gt;Price&lt;/th&gt;
+&lt;th&gt;Year&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;th&gt;1&lt;/th&gt;
+&lt;td&gt;Toyota Corolla&lt;/td&gt;
+&lt;td&gt;25000&lt;/td&gt;
+&lt;td&gt;2013&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;th&gt;0&lt;/th&gt;
+&lt;td&gt;Honda Civic&lt;/td&gt;
+&lt;td&gt;22000&lt;/td&gt;
+&lt;td&gt;2015&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;th&gt;2&lt;/th&gt;
+&lt;td&gt;Ford Focus&lt;/td&gt;
+&lt;td&gt;27000&lt;/td&gt;
+&lt;td&gt;2018&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;th&gt;3&lt;/th&gt;
+&lt;td&gt;Audi A4&lt;/td&gt;
+&lt;td&gt;35000&lt;/td&gt;
+&lt;td&gt;2018&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
 &lt;/table&gt;
 &lt;/div&gt;
-
 &lt;h2 id=&#34;by-multiple-columns-same-data-type&#34;&gt;By multiple columns - Same data type&lt;/h2&gt;
-
 &lt;p&gt;In the next step, we would like to sort based on two columns. So, here, we first sort by &lt;code&gt;Year&lt;/code&gt; and then by the &lt;code&gt;Price&lt;/code&gt; of the car. &lt;code&gt;sort_values()&lt;/code&gt; accepts a parameter called by. The by paramters can accept a string literal or it can accept a list. We simply need to pass the list containing the columns by which we want the df to be sorted. This is shown below.&lt;/p&gt;
-
 &lt;pre&gt;&lt;code&gt; df.sort_values(by=[&#39;Year&#39;,&#39;Price&#39;], inplace=True)
 &lt;/code&gt;&lt;/pre&gt;
-
 &lt;pre&gt;&lt;code&gt;# sort by multiple columns
 from pandas import DataFrame
- 
 Cars = {&#39;Brand&#39;: [&#39;Honda Civic&#39;,&#39;Toyota Corolla&#39;,&#39;Ford Focus&#39;,&#39;Audi A4&#39;],
-        &#39;Price&#39;: [22000,25000,27000,35000],
-        &#39;Year&#39;: [2015,2013,2018,2018]
-        }
- 
+&#39;Price&#39;: [22000,25000,27000,35000],
+&#39;Year&#39;: [2015,2013,2018,2018]
+}
 df = DataFrame(Cars, columns= [&#39;Brand&#39;, &#39;Price&#39;,&#39;Year&#39;])
-
 # sort by multiple columns: Year and Price
 df.sort_values(by=[&#39;Year&#39;,&#39;Price&#39;], inplace=True)
-
 df
 &lt;/code&gt;&lt;/pre&gt;
-
 &lt;div&gt;
 &lt;style scoped&gt;
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
+.dataframe tbody tr th:only-of-type {
+vertical-align: middle;
+}
+.dataframe tbody tr th {
+vertical-align: top;
+}
+.dataframe thead th {
+text-align: right;
+}
 &lt;/style&gt;
 &lt;table border=&#34;1&#34; class=&#34;dataframe&#34;&gt;
-  &lt;thead&gt;
-    &lt;tr style=&#34;text-align: right;&#34;&gt;
-      &lt;th&gt;&lt;/th&gt;
-      &lt;th&gt;Brand&lt;/th&gt;
-      &lt;th&gt;Price&lt;/th&gt;
-      &lt;th&gt;Year&lt;/th&gt;
-    &lt;/tr&gt;
-  &lt;/thead&gt;
-  &lt;tbody&gt;
-    &lt;tr&gt;
-      &lt;th&gt;1&lt;/th&gt;
-      &lt;td&gt;Toyota Corolla&lt;/td&gt;
-      &lt;td&gt;25000&lt;/td&gt;
-      &lt;td&gt;2013&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;th&gt;0&lt;/th&gt;
-      &lt;td&gt;Honda Civic&lt;/td&gt;
-      &lt;td&gt;22000&lt;/td&gt;
-      &lt;td&gt;2015&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;th&gt;2&lt;/th&gt;
-      &lt;td&gt;Ford Focus&lt;/td&gt;
-      &lt;td&gt;27000&lt;/td&gt;
-      &lt;td&gt;2018&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;th&gt;3&lt;/th&gt;
-      &lt;td&gt;Audi A4&lt;/td&gt;
-      &lt;td&gt;35000&lt;/td&gt;
-      &lt;td&gt;2018&lt;/td&gt;
-    &lt;/tr&gt;
-  &lt;/tbody&gt;
+&lt;thead&gt;
+&lt;tr style=&#34;text-align: right;&#34;&gt;
+&lt;th&gt;&lt;/th&gt;
+&lt;th&gt;Brand&lt;/th&gt;
+&lt;th&gt;Price&lt;/th&gt;
+&lt;th&gt;Year&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;th&gt;1&lt;/th&gt;
+&lt;td&gt;Toyota Corolla&lt;/td&gt;
+&lt;td&gt;25000&lt;/td&gt;
+&lt;td&gt;2013&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;th&gt;0&lt;/th&gt;
+&lt;td&gt;Honda Civic&lt;/td&gt;
+&lt;td&gt;22000&lt;/td&gt;
+&lt;td&gt;2015&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;th&gt;2&lt;/th&gt;
+&lt;td&gt;Ford Focus&lt;/td&gt;
+&lt;td&gt;27000&lt;/td&gt;
+&lt;td&gt;2018&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;th&gt;3&lt;/th&gt;
+&lt;td&gt;Audi A4&lt;/td&gt;
+&lt;td&gt;35000&lt;/td&gt;
+&lt;td&gt;2018&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
 &lt;/table&gt;
 &lt;/div&gt;
-
 &lt;h2 id=&#34;by-multiple-columns-mixed-data-type&#34;&gt;By multiple columns - Mixed data type&lt;/h2&gt;
-
 &lt;p&gt;It is also possible to pass mixed type of columns to be sorted. For example, we can pass the &lt;code&gt;Year&lt;/code&gt; column (integer) and the &lt;code&gt;Brand&lt;/code&gt; column (string). Pandas accepts this without any problem.&lt;/p&gt;
-
 &lt;pre&gt;&lt;code&gt;df.sort_values(by=[&#39;Year&#39;,&#39;Brand&#39;], inplace=True)
 &lt;/code&gt;&lt;/pre&gt;
-
 &lt;pre&gt;&lt;code&gt;# sort by multiple columns
 from pandas import DataFrame
- 
 Cars = {&#39;Brand&#39;: [&#39;Honda Civic&#39;,&#39;Toyota Corolla&#39;,&#39;Ford Focus&#39;,&#39;Audi A4&#39;],
-        &#39;Price&#39;: [22000,25000,27000,35000],
-        &#39;Year&#39;: [2015,2013,2018,2018]
-        }
- 
+&#39;Price&#39;: [22000,25000,27000,35000],
+&#39;Year&#39;: [2015,2013,2018,2018]
+}
 df = DataFrame(Cars, columns= [&#39;Brand&#39;, &#39;Price&#39;,&#39;Year&#39;])
-
 # sort by multiple columns: Year and Brand
 df.sort_values(by=[&#39;Year&#39;,&#39;Brand&#39;], inplace=True)
-
 df
 &lt;/code&gt;&lt;/pre&gt;
-
 &lt;div&gt;
 &lt;style scoped&gt;
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
+.dataframe tbody tr th:only-of-type {
+vertical-align: middle;
+}
+.dataframe tbody tr th {
+vertical-align: top;
+}
+.dataframe thead th {
+text-align: right;
+}
 &lt;/style&gt;
 &lt;table border=&#34;1&#34; class=&#34;dataframe&#34;&gt;
-  &lt;thead&gt;
-    &lt;tr style=&#34;text-align: right;&#34;&gt;
-      &lt;th&gt;&lt;/th&gt;
-      &lt;th&gt;Brand&lt;/th&gt;
-      &lt;th&gt;Price&lt;/th&gt;
-      &lt;th&gt;Year&lt;/th&gt;
-    &lt;/tr&gt;
-  &lt;/thead&gt;
-  &lt;tbody&gt;
-    &lt;tr&gt;
-      &lt;th&gt;1&lt;/th&gt;
-      &lt;td&gt;Toyota Corolla&lt;/td&gt;
-      &lt;td&gt;25000&lt;/td&gt;
-      &lt;td&gt;2013&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;th&gt;0&lt;/th&gt;
-      &lt;td&gt;Honda Civic&lt;/td&gt;
-      &lt;td&gt;22000&lt;/td&gt;
-      &lt;td&gt;2015&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;th&gt;3&lt;/th&gt;
-      &lt;td&gt;Audi A4&lt;/td&gt;
-      &lt;td&gt;35000&lt;/td&gt;
-      &lt;td&gt;2018&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;th&gt;2&lt;/th&gt;
-      &lt;td&gt;Ford Focus&lt;/td&gt;
-      &lt;td&gt;27000&lt;/td&gt;
-      &lt;td&gt;2018&lt;/td&gt;
-    &lt;/tr&gt;
-  &lt;/tbody&gt;
+&lt;thead&gt;
+&lt;tr style=&#34;text-align: right;&#34;&gt;
+&lt;th&gt;&lt;/th&gt;
+&lt;th&gt;Brand&lt;/th&gt;
+&lt;th&gt;Price&lt;/th&gt;
+&lt;th&gt;Year&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;th&gt;1&lt;/th&gt;
+&lt;td&gt;Toyota Corolla&lt;/td&gt;
+&lt;td&gt;25000&lt;/td&gt;
+&lt;td&gt;2013&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;th&gt;0&lt;/th&gt;
+&lt;td&gt;Honda Civic&lt;/td&gt;
+&lt;td&gt;22000&lt;/td&gt;
+&lt;td&gt;2015&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;th&gt;3&lt;/th&gt;
+&lt;td&gt;Audi A4&lt;/td&gt;
+&lt;td&gt;35000&lt;/td&gt;
+&lt;td&gt;2018&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;th&gt;2&lt;/th&gt;
+&lt;td&gt;Ford Focus&lt;/td&gt;
+&lt;td&gt;27000&lt;/td&gt;
+&lt;td&gt;2018&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
 &lt;/table&gt;
 &lt;/div&gt;
-
 &lt;h2 id=&#34;by-multiple-columns-and-mixed-order&#34;&gt;By multiple columns and mixed order&lt;/h2&gt;
-
 &lt;p&gt;Last but not the least, it is also possible to sort multiple columns in mixed order. For example, we may want to sort by &lt;code&gt;Year&lt;/code&gt; and &lt;code&gt;Brand&lt;/code&gt; where the &lt;code&gt;Year&lt;/code&gt; column needs to be sorted in descending order whereas the &lt;code&gt;Brand&lt;/code&gt; column needs to be sorted in ascening order. Pandas performs this by accepting list in addition to a boolean variable to the &lt;code&gt;ascending&lt;/code&gt; parameter. The correct intuitive way of doing this is shown below.&lt;/p&gt;
-
 &lt;pre&gt;&lt;code&gt;df.sort_values(by=[&#39;Year&#39;,&#39;Brand&#39;], ascending=[False, True], inplace=True)
 &lt;/code&gt;&lt;/pre&gt;
-
 &lt;pre&gt;&lt;code&gt;# sort by multiple columns but different order
 from pandas import DataFrame
- 
 Cars = {&#39;Brand&#39;: [&#39;Honda Civic&#39;,&#39;Toyota Corolla&#39;,&#39;Ford Focus&#39;,&#39;Audi A4&#39;],
-        &#39;Price&#39;: [22000,25000,27000,35000],
-        &#39;Year&#39;: [2015,2013,2018,2018]
-        }
- 
+&#39;Price&#39;: [22000,25000,27000,35000],
+&#39;Year&#39;: [2015,2013,2018,2018]
+}
 df = DataFrame(Cars, columns= [&#39;Brand&#39;, &#39;Price&#39;,&#39;Year&#39;])
-
 # sort by multiple columns: Year and Brand
 df.sort_values(by=[&#39;Year&#39;,&#39;Brand&#39;], ascending=[False, True], inplace=True)
-
 df
 &lt;/code&gt;&lt;/pre&gt;
-
 &lt;div&gt;
 &lt;style scoped&gt;
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
+.dataframe tbody tr th:only-of-type {
+vertical-align: middle;
+}
+.dataframe tbody tr th {
+vertical-align: top;
+}
+.dataframe thead th {
+text-align: right;
+}
 &lt;/style&gt;
 &lt;table border=&#34;1&#34; class=&#34;dataframe&#34;&gt;
-  &lt;thead&gt;
-    &lt;tr style=&#34;text-align: right;&#34;&gt;
-      &lt;th&gt;&lt;/th&gt;
-      &lt;th&gt;Brand&lt;/th&gt;
-      &lt;th&gt;Price&lt;/th&gt;
-      &lt;th&gt;Year&lt;/th&gt;
-    &lt;/tr&gt;
-  &lt;/thead&gt;
-  &lt;tbody&gt;
-    &lt;tr&gt;
-      &lt;th&gt;3&lt;/th&gt;
-      &lt;td&gt;Audi A4&lt;/td&gt;
-      &lt;td&gt;35000&lt;/td&gt;
-      &lt;td&gt;2018&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;th&gt;2&lt;/th&gt;
-      &lt;td&gt;Ford Focus&lt;/td&gt;
-      &lt;td&gt;27000&lt;/td&gt;
-      &lt;td&gt;2018&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;th&gt;0&lt;/th&gt;
-      &lt;td&gt;Honda Civic&lt;/td&gt;
-      &lt;td&gt;22000&lt;/td&gt;
-      &lt;td&gt;2015&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;th&gt;1&lt;/th&gt;
-      &lt;td&gt;Toyota Corolla&lt;/td&gt;
-      &lt;td&gt;25000&lt;/td&gt;
-      &lt;td&gt;2013&lt;/td&gt;
-    &lt;/tr&gt;
-  &lt;/tbody&gt;
+&lt;thead&gt;
+&lt;tr style=&#34;text-align: right;&#34;&gt;
+&lt;th&gt;&lt;/th&gt;
+&lt;th&gt;Brand&lt;/th&gt;
+&lt;th&gt;Price&lt;/th&gt;
+&lt;th&gt;Year&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;th&gt;3&lt;/th&gt;
+&lt;td&gt;Audi A4&lt;/td&gt;
+&lt;td&gt;35000&lt;/td&gt;
+&lt;td&gt;2018&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;th&gt;2&lt;/th&gt;
+&lt;td&gt;Ford Focus&lt;/td&gt;
+&lt;td&gt;27000&lt;/td&gt;
+&lt;td&gt;2018&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;th&gt;0&lt;/th&gt;
+&lt;td&gt;Honda Civic&lt;/td&gt;
+&lt;td&gt;22000&lt;/td&gt;
+&lt;td&gt;2015&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;th&gt;1&lt;/th&gt;
+&lt;td&gt;Toyota Corolla&lt;/td&gt;
+&lt;td&gt;25000&lt;/td&gt;
+&lt;td&gt;2013&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
 &lt;/table&gt;
 &lt;/div&gt;
-
-&lt;p&gt;You can know more about sorting in Pandas by visiting the &lt;a href=&#34;https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.sort_values.html&#34; target=&#34;_blank&#34;&gt;official documentation&lt;/a&gt;.&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>Some perspectives on living in Warsaw for 4 months</title>
-      <link>https://somnathrakshit.github.io/post/warsaw-perspectives/</link>
-      <pubDate>Sat, 01 Jun 2019 02:46:52 +0200</pubDate>
-      <guid>https://somnathrakshit.github.io/post/warsaw-perspectives/</guid>
-      <description>
-
+&lt;p&gt;You can know more about sorting in Pandas by visiting the &lt;a href=&#34;https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.sort_values.html&#34; target=&#34;_blank&#34;&gt;official documentation&lt;/a&gt;.&lt;/p&gt;</description></item><item><title>Some perspectives on living in Warsaw for 4 months</title><link>https://somnathrakshit.github.io/post/warsaw-perspectives/</link><pubDate>Sat, 01 Jun 2019 02:46:52 +0200</pubDate><guid>https://somnathrakshit.github.io/post/warsaw-perspectives/</guid><description>
 &lt;h2 id=&#34;city&#34;&gt;City&lt;/h2&gt;
-
 &lt;p&gt;I have been living in Warsaw since 15th February of this year. During these past few months, I have been able to gain some insight into this city and its people. Firstly, this was my first experience of an European city. Frankly, this was an welcoming change from the huge cities that we are accustomed to in India. I came to know from many people here that most European cities are walk-able, something which we can only dream of in the big Indian cities. Apart from this, I have noticed that people honk rarely. During my stay here since the past three and a half months, I have heard the sound of horn less than ten times. I am sure that in Kolkata, it would take me ten minutes on a busy day to cross that number.&lt;/p&gt;
-
 &lt;h2 id=&#34;food&#34;&gt;Food&lt;/h2&gt;
-
 &lt;p&gt;Talking of food, potato is the staple food here. To imagine the scale of this, consider replacing rice from your daily meal with boiled potatoes. This is exactly what happens here. However, rice is available at almost all shops. Indian spices are tougher to get but there are a few South Asian shops who sell them. All said, Polish food is usually good with less oil and salt, making it generally healthy.&lt;/p&gt;
-
 &lt;h2 id=&#34;language&#34;&gt;Language&lt;/h2&gt;
-
 &lt;p&gt;Language is a real barrier in Poland. Polish is one of the toughest languages to learn for a beginner. The struggle is real because very few people speak English here. However, the younger generation, in general, can communicate in English. It is almost imperative to learn a few of the most used Polish words in order to navigate day-to-day life here. But the Polish people are helpful and kind. It makes them happy to see foreigners being able to speak their language.&lt;/p&gt;
-
 &lt;h2 id=&#34;transportation&#34;&gt;Transportation&lt;/h2&gt;
-
 &lt;p&gt;Publis transport is highly efficient in Warsaw. The entire city is well-connected by means of buses, metro and trams. All of these forms of transport are run by a single company and hence, you only need to buy a single ticket to access any of these throughout the city. Apart from the 20 and 40 minute passes, long-term passes like daily, weekly, monthly and quarterly passes are available which offer unlimited rides during their valid period. Public transportation is extremely punctual here. There is an Android as well as a Web app named Jakdojade which shows timings of all three forms of transport here. Roads have dedicated bus-lanes for convenience of the public. Cycling lanes are aplenty and cycling is highly encouraged here.&lt;/p&gt;
-
 &lt;h2 id=&#34;places-to-visit&#34;&gt;Places to visit&lt;/h2&gt;
-
 &lt;p&gt;Warsaw is a tourist hostpot. It&amp;rsquo;s Old Town, which was destroyed after the World War II, has been reconstructed to depict the earlier times. This is now a UNESCO World Heritage Site. Apart from this, there are old churches, musueums and palaces to visit. The Palace of Culture and Science is present at the heart of the city. It was a gift from Stalin to the people of this city. Apart from these, Warsaw is a city of parks. There are numerous parks that act as the lungs of this city. Lazienki Park, Pole Mokotowski, etc. are the most well-known. Many activities take place in the parks during spring and summer seasons.&lt;/p&gt;
-
 &lt;h2 id=&#34;final-words&#34;&gt;Final words&lt;/h2&gt;
-
 &lt;p&gt;Warsaw is a city that is young in nature as compared to other European cities. It is modern and has all facilities of a developed city. Warsaw is slowly starting to become a tech hub. Currently, it has offices of Google, Facebook and Amazon here. The University of Warsaw is well-known in mathematics and helps in attracting the tech jobs to this city.&lt;/p&gt;
-
 &lt;p&gt;At the time of writing, I have less than two weeks before returning to Kolkata. The past few months have been a wonderful learning experience for me. I have been able to meet people of diverse cultures from various parts of the world. I am sure that this experience will be invaluable to me in the upcoming future.
-
-
-
-
-
-
-
-
-  
-  
-
-
 &lt;div class=&#34;gallery&#34;&gt;
-
-  
-  
-  
-  
-    
-    
-    
-    
-    
-      
-        
-      
-    
-  &lt;a data-fancybox=&#34;gallery-warsaw&#34; href=&#34;https://somnathrakshit.github.io/post/warsaw-perspectives/warsaw/IMG_20190217_141200.jpg&#34; data-caption=&#34;Old Town in Warsaw&#34;&gt;
-  &lt;img src=&#34;https://somnathrakshit.github.io/post/warsaw-perspectives/warsaw/IMG_20190217_141200_huf7f0f31711eae501a3f617f23a3c8a9b_90429_0x190_resize_q90_lanczos.jpg&#34; alt=&#34;&#34;&gt;
-  &lt;/a&gt;
-  
-    
-    
-    
-    
-    
-      
-        
-      
-    
-  &lt;a data-fancybox=&#34;gallery-warsaw&#34; href=&#34;https://somnathrakshit.github.io/post/warsaw-perspectives/warsaw/IMG_20190217_142040.jpg&#34; data-caption=&#34;Old Town in Warsaw&#34;&gt;
-  &lt;img src=&#34;https://somnathrakshit.github.io/post/warsaw-perspectives/warsaw/IMG_20190217_142040_hu85e67afd591fb9c36865fb308c9055c2_100670_0x190_resize_q90_lanczos.jpg&#34; alt=&#34;&#34;&gt;
-  &lt;/a&gt;
-  
-    
-    
-    
-    
-    
-      
-        
-      
-    
-  &lt;a data-fancybox=&#34;gallery-warsaw&#34; href=&#34;https://somnathrakshit.github.io/post/warsaw-perspectives/warsaw/IMG_20190217_145558.jpg&#34; data-caption=&#34;Warsaw Uprising Monument&#34;&gt;
-  &lt;img src=&#34;https://somnathrakshit.github.io/post/warsaw-perspectives/warsaw/IMG_20190217_145558_hu84d9b193943ddf2095293ebd07c00918_348045_0x190_resize_q90_lanczos.jpg&#34; alt=&#34;&#34;&gt;
-  &lt;/a&gt;
-  
-    
-    
-    
-    
-    
-      
-        
-      
-    
-  &lt;a data-fancybox=&#34;gallery-warsaw&#34; href=&#34;https://somnathrakshit.github.io/post/warsaw-perspectives/warsaw/IMG_20190322_095343.jpg&#34; data-caption=&#34;I Love Warsaw signboard near the Warsaw Spire building&#34;&gt;
-  &lt;img src=&#34;https://somnathrakshit.github.io/post/warsaw-perspectives/warsaw/IMG_20190322_095343_hub139f875b8132f8e51b1ad18f78d0bd5_155039_0x190_resize_q90_lanczos.jpg&#34; alt=&#34;&#34;&gt;
-  &lt;/a&gt;
-  
-    
-    
-    
-    
-    
-      
-        
-      
-    
-  &lt;a data-fancybox=&#34;gallery-warsaw&#34; href=&#34;https://somnathrakshit.github.io/post/warsaw-perspectives/warsaw/IMG_20190326_170012.jpg&#34; data-caption=&#34;Snowfall in Warsaw&#34;&gt;
-  &lt;img src=&#34;https://somnathrakshit.github.io/post/warsaw-perspectives/warsaw/IMG_20190326_170012_hubc0e6ed9f624218fe1dcaf2916614ab8_220636_0x190_resize_q90_lanczos.jpg&#34; alt=&#34;&#34;&gt;
-  &lt;/a&gt;
-  
-    
-    
-    
-    
-    
-      
-        
-      
-    
-  &lt;a data-fancybox=&#34;gallery-warsaw&#34; href=&#34;https://somnathrakshit.github.io/post/warsaw-perspectives/warsaw/IMG_20190410_162741.jpg&#34; data-caption=&#34;Early Spring near CeNT&#34;&gt;
-  &lt;img src=&#34;https://somnathrakshit.github.io/post/warsaw-perspectives/warsaw/IMG_20190410_162741_hub58eb33d31e111610101bd671800993d_237559_0x190_resize_q90_lanczos.jpg&#34; alt=&#34;&#34;&gt;
-  &lt;/a&gt;
-  
-    
-    
-    
-    
-    
-      
-        
-      
-    
-  &lt;a data-fancybox=&#34;gallery-warsaw&#34; href=&#34;https://somnathrakshit.github.io/post/warsaw-perspectives/warsaw/IMG_20190420_154732.jpg&#34; data-caption=&#34;Flowers near the Central Railway Station&#34;&gt;
-  &lt;img src=&#34;https://somnathrakshit.github.io/post/warsaw-perspectives/warsaw/IMG_20190420_154732_hub89e9c9f52e0af2f20f05efc6016e77a_298510_0x190_resize_q90_lanczos.jpg&#34; alt=&#34;&#34;&gt;
-  &lt;/a&gt;
-  
-    
-    
-    
-    
-    
-      
-        
-      
-    
-  &lt;a data-fancybox=&#34;gallery-warsaw&#34; href=&#34;https://somnathrakshit.github.io/post/warsaw-perspectives/warsaw/IMG_20190420_165609.jpg&#34; data-caption=&#34;Wilanow Palace&#34;&gt;
-  &lt;img src=&#34;https://somnathrakshit.github.io/post/warsaw-perspectives/warsaw/IMG_20190420_165609_huc267405e1e1ca6a78429367d30c6c3ad_157304_0x190_resize_q90_lanczos.jpg&#34; alt=&#34;&#34;&gt;
-  &lt;/a&gt;
-  
-    
-    
-    
-    
-    
-      
-        
-      
-    
-  &lt;a data-fancybox=&#34;gallery-warsaw&#34; href=&#34;https://somnathrakshit.github.io/post/warsaw-perspectives/warsaw/IMG_20190420_170209.jpg&#34; data-caption=&#34;Wilanow Palace again&#34;&gt;
-  &lt;img src=&#34;https://somnathrakshit.github.io/post/warsaw-perspectives/warsaw/IMG_20190420_170209_hu0ef56cce9585abce899bddc33fa66e8f_181258_0x190_resize_q90_lanczos.jpg&#34; alt=&#34;&#34;&gt;
-  &lt;/a&gt;
-  
-    
-    
-    
-    
-    
-      
-        
-      
-    
-  &lt;a data-fancybox=&#34;gallery-warsaw&#34; href=&#34;https://somnathrakshit.github.io/post/warsaw-perspectives/warsaw/IMG_20190501_130053.jpg&#34; data-caption=&#34;Lazienki Park&#34;&gt;
-  &lt;img src=&#34;https://somnathrakshit.github.io/post/warsaw-perspectives/warsaw/IMG_20190501_130053_hu65cec139e6573e7f28dfb2517bbcd6b6_305727_0x190_resize_q90_lanczos.jpg&#34; alt=&#34;&#34;&gt;
-  &lt;/a&gt;
-  
-    
-    
-    
-    
-    
-      
-        
-      
-    
-  &lt;a data-fancybox=&#34;gallery-warsaw&#34; href=&#34;https://somnathrakshit.github.io/post/warsaw-perspectives/warsaw/IMG_20190503_123910.jpg&#34; data-caption=&#34;Solar Clock in the Lazienki Park&#34;&gt;
-  &lt;img src=&#34;https://somnathrakshit.github.io/post/warsaw-perspectives/warsaw/IMG_20190503_123910_hu0a8a7f269329615f2ad178c6d5a96fee_160650_0x190_resize_q90_lanczos.jpg&#34; alt=&#34;&#34;&gt;
-  &lt;/a&gt;
-  
-    
-    
-    
-    
-    
-      
-        
-      
-    
-  &lt;a data-fancybox=&#34;gallery-warsaw&#34; href=&#34;https://somnathrakshit.github.io/post/warsaw-perspectives/warsaw/IMG_20190503_124243.jpg&#34; data-caption=&#34;Royal Bath in the Lazienki Park&#34;&gt;
-  &lt;img src=&#34;https://somnathrakshit.github.io/post/warsaw-perspectives/warsaw/IMG_20190503_124243_hub2ec64e8982635ed6faa1d5d85cb01e2_224151_0x190_resize_q90_lanczos.jpg&#34; alt=&#34;&#34;&gt;
-  &lt;/a&gt;
-  
-    
-    
-    
-    
-    
-      
-        
-      
-    
-  &lt;a data-fancybox=&#34;gallery-warsaw&#34; href=&#34;https://somnathrakshit.github.io/post/warsaw-perspectives/warsaw/IMG_20190503_124800.jpg&#34; data-caption=&#34;Lazienki Park&#34;&gt;
-  &lt;img src=&#34;https://somnathrakshit.github.io/post/warsaw-perspectives/warsaw/IMG_20190503_124800_hu6389821eaa52d4537c7668cbbb5c4797_316276_0x190_resize_q90_lanczos.jpg&#34; alt=&#34;&#34;&gt;
-  &lt;/a&gt;
-  
-    
-    
-    
-    
-    
-      
-        
-      
-    
-  &lt;a data-fancybox=&#34;gallery-warsaw&#34; href=&#34;https://somnathrakshit.github.io/post/warsaw-perspectives/warsaw/IMG_20190503_125259.jpg&#34; data-caption=&#34;Flowers planted everywhere during Spring&#34;&gt;
-  &lt;img src=&#34;https://somnathrakshit.github.io/post/warsaw-perspectives/warsaw/IMG_20190503_125259_hub9c9d2a6879df64d5e70eb3171eb7e21_327282_0x190_resize_q90_lanczos.jpg&#34; alt=&#34;&#34;&gt;
-  &lt;/a&gt;
-  
-    
-    
-    
-    
-    
-      
-        
-      
-    
-  &lt;a data-fancybox=&#34;gallery-warsaw&#34; href=&#34;https://somnathrakshit.github.io/post/warsaw-perspectives/warsaw/IMG_20190503_130907.jpg&#34; data-caption=&#34;One of my clicks inside the Lazienki Park&#34;&gt;
-  &lt;img src=&#34;https://somnathrakshit.github.io/post/warsaw-perspectives/warsaw/IMG_20190503_130907_hu0c1d9e13625b72875701310b9a435446_321242_0x190_resize_q90_lanczos.jpg&#34; alt=&#34;&#34;&gt;
-  &lt;/a&gt;
-  
-    
-    
-    
-    
-    
-      
-        
-      
-    
-  &lt;a data-fancybox=&#34;gallery-warsaw&#34; href=&#34;https://somnathrakshit.github.io/post/warsaw-perspectives/warsaw/IMG_20190503_135636.jpg&#34; data-caption=&#34;With the National Bird of India in Poland&#34;&gt;
-  &lt;img src=&#34;https://somnathrakshit.github.io/post/warsaw-perspectives/warsaw/IMG_20190503_135636_hua6c17b5af4d2c3370ff62a0b65378921_333015_0x190_resize_q90_lanczos.jpg&#34; alt=&#34;&#34;&gt;
-  &lt;/a&gt;
-  
-
-  
-&lt;/div&gt;&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>Hello World</title>
-      <link>https://somnathrakshit.github.io/post/hello-world/</link>
-      <pubDate>Tue, 28 May 2019 02:43:00 +0200</pubDate>
-      <guid>https://somnathrakshit.github.io/post/hello-world/</guid>
-      <description>&lt;p&gt;I spent a lot of time today thinking about what to write here. After some time, I decided it wasn’t worthwhile to think beforehand about it. Maybe, the best way to go about it is to write about something new that I learned. So, this will blog will have no fixed topic. I will write about anything interesting that I learn. Be it technology, general knowledge or whatever, I will write about it if I find it to be interesting (and of course, I get some free time as well :P).&lt;/p&gt;
-
-&lt;p&gt;So, here’s to this blog. May it succeed.&lt;/p&gt;
-</description>
-    </item>
-    
-  </channel>
-</rss>
+&lt;a data-fancybox=&#34;gallery-warsaw&#34; href=&#34;https://somnathrakshit.github.io/post/warsaw-perspectives/warsaw/IMG_20190217_141200.jpg&#34; data-caption=&#34;Old Town in Warsaw&#34;&gt;
+&lt;img src=&#34;https://somnathrakshit.github.io/post/warsaw-perspectives/warsaw/IMG_20190217_141200_huf7f0f31711eae501a3f617f23a3c8a9b_90429_0x190_resize_q90_lanczos.jpg&#34; alt=&#34;&#34;&gt;
+&lt;/a&gt;
+&lt;a data-fancybox=&#34;gallery-warsaw&#34; href=&#34;https://somnathrakshit.github.io/post/warsaw-perspectives/warsaw/IMG_20190217_142040.jpg&#34; data-caption=&#34;Old Town in Warsaw&#34;&gt;
+&lt;img src=&#34;https://somnathrakshit.github.io/post/warsaw-perspectives/warsaw/IMG_20190217_142040_hu85e67afd591fb9c36865fb308c9055c2_100670_0x190_resize_q90_lanczos.jpg&#34; alt=&#34;&#34;&gt;
+&lt;/a&gt;
+&lt;a data-fancybox=&#34;gallery-warsaw&#34; href=&#34;https://somnathrakshit.github.io/post/warsaw-perspectives/warsaw/IMG_20190217_145558.jpg&#34; data-caption=&#34;Warsaw Uprising Monument&#34;&gt;
+&lt;img src=&#34;https://somnathrakshit.github.io/post/warsaw-perspectives/warsaw/IMG_20190217_145558_hu84d9b193943ddf2095293ebd07c00918_348045_0x190_resize_q90_lanczos.jpg&#34; alt=&#34;&#34;&gt;
+&lt;/a&gt;
+&lt;a data-fancybox=&#34;gallery-warsaw&#34; href=&#34;https://somnathrakshit.github.io/post/warsaw-perspectives/warsaw/IMG_20190322_095343.jpg&#34; data-caption=&#34;I Love Warsaw signboard near the Warsaw Spire building&#34;&gt;
+&lt;img src=&#34;https://somnathrakshit.github.io/post/warsaw-perspectives/warsaw/IMG_20190322_095343_hub139f875b8132f8e51b1ad18f78d0bd5_155039_0x190_resize_q90_lanczos.jpg&#34; alt=&#34;&#34;&gt;
+&lt;/a&gt;
+&lt;a data-fancybox=&#34;gallery-warsaw&#34; href=&#34;https://somnathrakshit.github.io/post/warsaw-perspectives/warsaw/IMG_20190326_170012.jpg&#34; data-caption=&#34;Snowfall in Warsaw&#34;&gt;
+&lt;img src=&#34;https://somnathrakshit.github.io/post/warsaw-perspectives/warsaw/IMG_20190326_170012_hubc0e6ed9f624218fe1dcaf2916614ab8_220636_0x190_resize_q90_lanczos.jpg&#34; alt=&#34;&#34;&gt;
+&lt;/a&gt;
+&lt;a data-fancybox=&#34;gallery-warsaw&#34; href=&#34;https://somnathrakshit.github.io/post/warsaw-perspectives/warsaw/IMG_20190410_162741.jpg&#34; data-caption=&#34;Early Spring near CeNT&#34;&gt;
+&lt;img src=&#34;https://somnathrakshit.github.io/post/warsaw-perspectives/warsaw/IMG_20190410_162741_hub58eb33d31e111610101bd671800993d_237559_0x190_resize_q90_lanczos.jpg&#34; alt=&#34;&#34;&gt;
+&lt;/a&gt;
+&lt;a data-fancybox=&#34;gallery-warsaw&#34; href=&#34;https://somnathrakshit.github.io/post/warsaw-perspectives/warsaw/IMG_20190420_154732.jpg&#34; data-caption=&#34;Flowers near the Central Railway Station&#34;&gt;
+&lt;img src=&#34;https://somnathrakshit.github.io/post/warsaw-perspectives/warsaw/IMG_20190420_154732_hub89e9c9f52e0af2f20f05efc6016e77a_298510_0x190_resize_q90_lanczos.jpg&#34; alt=&#34;&#34;&gt;
+&lt;/a&gt;
+&lt;a data-fancybox=&#34;gallery-warsaw&#34; href=&#34;https://somnathrakshit.github.io/post/warsaw-perspectives/warsaw/IMG_20190420_165609.jpg&#34; data-caption=&#34;Wilanow Palace&#34;&gt;
+&lt;img src=&#34;https://somnathrakshit.github.io/post/warsaw-perspectives/warsaw/IMG_20190420_165609_huc267405e1e1ca6a78429367d30c6c3ad_157304_0x190_resize_q90_lanczos.jpg&#34; alt=&#34;&#34;&gt;
+&lt;/a&gt;
+&lt;a data-fancybox=&#34;gallery-warsaw&#34; href=&#34;https://somnathrakshit.github.io/post/warsaw-perspectives/warsaw/IMG_20190420_170209.jpg&#34; data-caption=&#34;Wilanow Palace again&#34;&gt;
+&lt;img src=&#34;https://somnathrakshit.github.io/post/warsaw-perspectives/warsaw/IMG_20190420_170209_hu0ef56cce9585abce899bddc33fa66e8f_181258_0x190_resize_q90_lanczos.jpg&#34; alt=&#34;&#34;&gt;
+&lt;/a&gt;
+&lt;a data-fancybox=&#34;gallery-warsaw&#34; href=&#34;https://somnathrakshit.github.io/post/warsaw-perspectives/warsaw/IMG_20190501_130053.jpg&#34; data-caption=&#34;Lazienki Park&#34;&gt;
+&lt;img src=&#34;https://somnathrakshit.github.io/post/warsaw-perspectives/warsaw/IMG_20190501_130053_hu65cec139e6573e7f28dfb2517bbcd6b6_305727_0x190_resize_q90_lanczos.jpg&#34; alt=&#34;&#34;&gt;
+&lt;/a&gt;
+&lt;a data-fancybox=&#34;gallery-warsaw&#34; href=&#34;https://somnathrakshit.github.io/post/warsaw-perspectives/warsaw/IMG_20190503_123910.jpg&#34; data-caption=&#34;Solar Clock in the Lazienki Park&#34;&gt;
+&lt;img src=&#34;https://somnathrakshit.github.io/post/warsaw-perspectives/warsaw/IMG_20190503_123910_hu0a8a7f269329615f2ad178c6d5a96fee_160650_0x190_resize_q90_lanczos.jpg&#34; alt=&#34;&#34;&gt;
+&lt;/a&gt;
+&lt;a data-fancybox=&#34;gallery-warsaw&#34; href=&#34;https://somnathrakshit.github.io/post/warsaw-perspectives/warsaw/IMG_20190503_124243.jpg&#34; data-caption=&#34;Royal Bath in the Lazienki Park&#34;&gt;
+&lt;img src=&#34;https://somnathrakshit.github.io/post/warsaw-perspectives/warsaw/IMG_20190503_124243_hub2ec64e8982635ed6faa1d5d85cb01e2_224151_0x190_resize_q90_lanczos.jpg&#34; alt=&#34;&#34;&gt;
+&lt;/a&gt;
+&lt;a data-fancybox=&#34;gallery-warsaw&#34; href=&#34;https://somnathrakshit.github.io/post/warsaw-perspectives/warsaw/IMG_20190503_124800.jpg&#34; data-caption=&#34;Lazienki Park&#34;&gt;
+&lt;img src=&#34;https://somnathrakshit.github.io/post/warsaw-perspectives/warsaw/IMG_20190503_124800_hu6389821eaa52d4537c7668cbbb5c4797_316276_0x190_resize_q90_lanczos.jpg&#34; alt=&#34;&#34;&gt;
+&lt;/a&gt;
+&lt;a data-fancybox=&#34;gallery-warsaw&#34; href=&#34;https://somnathrakshit.github.io/post/warsaw-perspectives/warsaw/IMG_20190503_125259.jpg&#34; data-caption=&#34;Flowers planted everywhere during Spring&#34;&gt;
+&lt;img src=&#34;https://somnathrakshit.github.io/post/warsaw-perspectives/warsaw/IMG_20190503_125259_hub9c9d2a6879df64d5e70eb3171eb7e21_327282_0x190_resize_q90_lanczos.jpg&#34; alt=&#34;&#34;&gt;
+&lt;/a&gt;
+&lt;a data-fancybox=&#34;gallery-warsaw&#34; href=&#34;https://somnathrakshit.github.io/post/warsaw-perspectives/warsaw/IMG_20190503_130907.jpg&#34; data-caption=&#34;One of my clicks inside the Lazienki Park&#34;&gt;
+&lt;img src=&#34;https://somnathrakshit.github.io/post/warsaw-perspectives/warsaw/IMG_20190503_130907_hu0c1d9e13625b72875701310b9a435446_321242_0x190_resize_q90_lanczos.jpg&#34; alt=&#34;&#34;&gt;
+&lt;/a&gt;
+&lt;a data-fancybox=&#34;gallery-warsaw&#34; href=&#34;https://somnathrakshit.github.io/post/warsaw-perspectives/warsaw/IMG_20190503_135636.jpg&#34; data-caption=&#34;With the National Bird of India in Poland&#34;&gt;
+&lt;img src=&#34;https://somnathrakshit.github.io/post/warsaw-perspectives/warsaw/IMG_20190503_135636_hua6c17b5af4d2c3370ff62a0b65378921_333015_0x190_resize_q90_lanczos.jpg&#34; alt=&#34;&#34;&gt;
+&lt;/a&gt;
+&lt;/div&gt;&lt;/p&gt;</description></item><item><title>Hello World</title><link>https://somnathrakshit.github.io/post/hello-world/</link><pubDate>Tue, 28 May 2019 02:43:00 +0200</pubDate><guid>https://somnathrakshit.github.io/post/hello-world/</guid><description>&lt;p&gt;I spent a lot of time today thinking about what to write here. After some time, I decided it wasn’t worthwhile to think beforehand about it. Maybe, the best way to go about it is to write about something new that I learned. So, this will blog will have no fixed topic. I will write about anything interesting that I learn. Be it technology, general knowledge or whatever, I will write about it if I find it to be interesting (and of course, I get some free time as well :P).&lt;/p&gt;
+&lt;p&gt;So, here’s to this blog. May it succeed.&lt;/p&gt;</description></item></channel></rss>
