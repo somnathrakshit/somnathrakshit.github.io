@@ -50,4 +50,20 @@ We generated scanpath images from eye-tracking data of user-document pairs, usin
 2. We plotted linearized saccades: the effective eye-movement between two fixations, represented as a straight line connecting the two points. We controlled the colour of the saccade lines to follow a linear colour scale, based on their temporal occurrence. The colour of the saccades changed linearly from blue (first saccade) to green (final saccade).
 3. Using a colour wheel, the colours of the different fixation markers were chosen to be far apart, from each other, as well as from the range of colours used to draw the saccades.
 
-We hypothesized that these colour choices would enable the CNN classifier to easily distinguish between fixations and saccades, and identify necessary patterns.
+We hypothesized that these colour choices would enable the CNN classifier to easily distinguish between fixations and saccades, and identify necessary patterns. Examples of typical eye-movement patterns on three types of documents, and their corresponding generated scanpath images are shown in Figure 1. One such plot is shown in Figure 2.
+
+{{< figure src="img/image.png" title="Plot obtained after converting the eye-tracking data into scanpath images using three attributes viz. screen-coordinates (in pixels), fixation duration (in ms), and start time of the fixation relative to stimulus-onset." numbered="true" lightbox="true" >}}
+
+Data was available for 24 participants, where each participant judged the binary relevance of 120 news articles. In total we had eye-tracking data for 2,880 user-document pairs, or 2,880 scanpaths.
+
+We posed our binary classification problem as follows:
+
+> Given **only** the scanpath image of a user's eye movements on a short news article, did the user perceive the article to be relevant for answering a trigger question?
+
+For this binary classification problem, we analysed the performance of six popular CNN based architectures: VGG16 and VGG19, DenseNet121 and DenseNet201, ResNet50 and InceptionResNet (version 2). The architecture was as below (Figure 3):
+
+{{< figure src="img/flowchart.jpeg" title="Architecture of the TensorFlow-Keras implementation. Optimizer: Stochastic Gradient Descent (SGD)" numbered="true" lightbox="true" >}}
+
+We trained the models on the training set, and used the validation set for very basic hyper-parameter tuning (learning rate, number of epochs, optimizer momentum, etc.). Since our intention was to see whether the method works, and not to obtain the best benchmark performance, we performed minimal hyper-parameter tuning. The top portion of Table~\ref{tab:results_table} reports the results from the TensorFlow-Keras implementation, while Table~\ref{tab:results_fastai} reports the results from the PyTorch-fastai implementation.
+
+{{< figure src="img/flowchart.jpeg" title="Architecture of the TensorFlow-Keras implementation. Optimizer: Stochastic Gradient Descent (SGD)" numbered="true" lightbox="true" >}}
