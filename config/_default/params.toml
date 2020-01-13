@@ -22,7 +22,7 @@ font = ""
 
 # Choose a font size.
 # Sizes: XS (extra small), S (small), M (medium), L (large - DEFAULT), XL (extra large)
-font_size = "L"
+font_size = "M"
 
 ############################
 ## Basic Info
@@ -44,7 +44,7 @@ local_business_type = ""
 org_name = ""
 
 # Description for social sharing and search engines. If undefined, superuser role is used in place.
-description = "I am a Masters student (Data Science track) at the School of Information and a Teaching Assistant for MIS 385N: User Generated Content Analytics at Department of Information, Risk and Operations Management, McCombs School of Business, The University of Texas at Asutin. My current interests lie in deep learning, natural language processing and knowledge graphs."
+description = "Masters student (Data Science track) at the School of Information, UT Austin"
 
 # Display a logo in navigation bar rather than title (optional).
 #   To enable, place an image in `static/img/` and reference its filename below. To disable, set the value to "".
@@ -90,20 +90,20 @@ phone = ""
 
 # Address
 # For country_code, use the 2-letter ISO code (see https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2 )
-address = {street = "SAC 2.402", city = "Austin", region = "TX", postcode = "78701", country = "United States", country_code = "US"}
+address = {street = "UTA 5.410", city = "Austin", region = "TX", postcode = "78701", country = "United States", country_code = "US"}
 
 # Geographic coordinates
 # To get your coordinates, right-click on Google Maps and choose "What's here?". The coords will show up at the bottom.
 coordinates = {latitude = "30.284913", longitude = "-97.736215"}
 # Directions for visitors to locate you.
-directions = "2nd floor (Roughly above Starbucks)"
+directions = ""
 
 # Office hours
 # A list of your office hours. To remove, set to an empty list `[]`.
-office_hours = ["Wed 16:00 to 17:30", "Fri 15:30 to 17:00"]
+office_hours = [""]
 
 # Enter an optional link for booking appointments (e.g. calendly.com).
-appointment_url = "https://calendly.com/somnathr"
+appointment_url = ""
 
 # Contact links
 #   Set to `[]` to disable, or comment out unwanted lines with a hash `#`.
