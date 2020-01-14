@@ -10,7 +10,7 @@ categories: []
 date: 2019-12-24T18:41:08-06:00
 lastmod: 2019-12-24T18:41:08-06:00
 featured: true
-draft: false
+draft: true 
 math: true
 diagram: true
 
@@ -29,8 +29,6 @@ image:
 #   Otherwise, set `projects = []`.
 projects: []
 ---
-> We thank Splunk Inc. for the [blog post](https://www.splunk.com/en_us/blog/security/deep-learning-with-splunk-and-tensorflow-for-security-catching-the-fraudster-in-neural-networks-with-behavioral-biometrics.html) on using mouse trajectories for fraud detection, which gave us the idea to adapt this approach for relevance prediction from eye-movements.
-
 The primary purpose of Information Retrieval (IR) systems is to fetch content which is useful and relevant to people. IR systems have to cater to a variety of users, who may have wildly different mental models of what they consider to be useful and relevant. 
 
 Neuro-physiological methods, such as eye-tracking, provide an interesting avenue to observe users while they interact with information systems. Eye-tracking has been frequently used to assess if the screen-content is relevant to the user. Despite its many advantages such as being non-invasive and requiring very little effort, interpreting eye-tracking data is not straightforward. 
@@ -66,4 +64,6 @@ For this binary classification problem, we analysed the performance of six popul
 
 We trained the models on the training set, and used the validation set for very basic hyper-parameter tuning (learning rate, number of epochs, optimizer momentum, etc.). Since our intention was to see whether the method works, and not to obtain the best benchmark performance, we performed minimal hyper-parameter tuning. The top portion of Table~\ref{tab:results_table} reports the results from the TensorFlow-Keras implementation, while Table~\ref{tab:results_fastai} reports the results from the PyTorch-fastai implementation.
 
-{{< figure src="img/flowchart.jpeg" title="Architecture of the TensorFlow-Keras implementation. Optimizer: Stochastic Gradient Descent (SGD)" numbered="true" lightbox="true" >}}
+{{< figure src="img/flowchart.jpeg" title="Architecture of the TensorFlow-Keras implementation. Optimizer: Stochastic Gradient Descent (SGD)" lightbox="true" >}}
+
+> We thank Splunk Inc. for the [blog post](https://www.splunk.com/en_us/blog/security/deep-learning-with-splunk-and-tensorflow-for-security-catching-the-fraudster-in-neural-networks-with-behavioral-biometrics.html) on using mouse trajectories for fraud detection, which gave us the idea to adapt this approach for relevance prediction from eye-movements.
