@@ -23,7 +23,7 @@ bio: I am a Masters student (Data Science track) at the School of Information, T
 interests:
 - Deep Learning
 - Natural Language Processing
-- Knowledge Graphs
+- Computational Biology
 
 education:
   courses:
@@ -66,4 +66,4 @@ email: "somnath52@gmail.com"
 # - Researchers
 # - Visitors
 ---
-I am a Masters student (Data Science track) at the School of Information and a Teaching Assistant for MIS 385N: User Generated Content Analytics at Department of Information, Risk and Operations Management, McCombs School of Business, The University of Texas at Austin. Previously, I was a research assistant at [CeNT](https://cent.uw.edu.pl) working on machine learning and bioinformatics. I also worked breiefly as a software engineer at Cyware Labs, Bangalore. My current interests lie in deep learning, natural language processing and biomedical imaging. I am currently working with [Prof. Ying Ding](https://yingding.ischool.utexas.edu/).
+I am a Masters student (Data Science track) at the School of Information and a Teaching Assistant for EE 461P: Data Science Principles at Department of Electrical and Computer Engineering, The University of Texas at Austin. In the past, I have been the TA for MIS 385N: User Generated Content Analytics at McCombs School of Business. Previously, I was a research assistant at [CeNT](https://cent.uw.edu.pl) working on machine learning and bioinformatics. I also worked breiefly as a software engineer at Cyware Labs, Bangalore. My current interests lie in deep learning, natural language processing and biomedical imaging.

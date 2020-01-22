@@ -37,8 +37,7 @@ For the dearth of standard methods, researchers resort to aggregating this data-
 
 > So, how do we preserve the details about the user's progress and ensure more robustness and generalizability?
 
-We propose an image-classification method to predict user's perceived-relevance from their eye-movement patterns. Specifically, we convert participant's eye-movement scanpaths into images, and then transform the relevance-prediction problem into an image-classification problem. For this purpose, we use state-of-the art image classifiers based on convolutional neural networks.
-	Our method gives promising results, and outperforms many previously reported performances in similar studies by appreciable margins. We also attempt to interpret how the classifier possibly differentiates between user-reading-patterns on relevant and irrelevant documents.
+We propose an image-classification method to predict user's perceived-relevance from their eye-movement patterns. Specifically, we convert participant's eye-movement scanpaths into images, and then transform the relevance-prediction problem into an image-classification problem. For this purpose, we use state-of-the art image classifiers based on convolutional neural networks. Our method gives promising results, and outperforms many previously reported performances in similar studies by appreciable margins. We also attempt to interpret how the classifier possibly differentiates between user-reading-patterns on relevant and irrelevant documents.
 
 {{< figure src="img/scanpath_encoding.png" title="Top: Typical eye-movement patterns when reading relevant, irrelevant, and topical documents. Bottom: Examples of generated scanpath images, which are used to train CNN classifiers for predicting the user's perceived-relevance of the documents." numbered="true" lightbox="true" >}}
 
