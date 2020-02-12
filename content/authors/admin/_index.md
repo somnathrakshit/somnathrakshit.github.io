@@ -35,7 +35,7 @@ education:
     year: 2018
 
 # Social/Academic Networking
-# For available icons, see: https://sourcethemes.com/academic/docs/widgets/#icons
+# For available icons, see: https://sourcethemes.com/academic/docs/page-builder/#icons
 #   For an email link, use "fas" icon pack, "envelope" icon, and a link in the
 #   form "mailto:your-email@example.com" or "#contact" for contact widget.
 social:
@@ -59,11 +59,12 @@ social:
 
 # Enter email to display Gravatar (if Gravatar enabled in Config)
 email: "somnath52@gmail.com"
-  
+
 # Organizational groups that you belong to (for People widget)
-#   Set this to `[]` or comment out if you are not using People widget.  
-# user_groups:
-# - Researchers
-# - Visitors
+#   Set this to `[]` or comment out if you are not using People widget.
+user_groups:
+- Researchers
+- Visitors
 ---
+
 I am a Masters student (Data Science track) at the School of Information and a Teaching Assistant for EE 461P: Data Science Principles at Department of Electrical and Computer Engineering, The University of Texas at Austin. In the past, I have been the TA for MIS 385N: User Generated Content Analytics at McCombs School of Business. Previously, I was a research assistant at [CeNT](https://cent.uw.edu.pl) working on machine learning and bioinformatics. I also worked briefly as a software engineer at Cyware Labs, Bangalore. My current interests lie in deep learning, natural language processing and biomedical imaging.
