@@ -39,15 +39,15 @@ education:
 #   For an email link, use "fas" icon pack, "envelope" icon, and a link in the
 #   form "mailto:your-email@example.com" or "#contact" for contact widget.
 social:
+- icon: google-scholar
+  icon_pack: ai
+  link: https://scholar.google.co.in/citations?user=9UaFRzYAAAAJ&hl=en
 - icon: linkedin
   icon_pack: fab
   link: 'https://www.linkedin.com/in/somnathrakshit'  # For a direct email link, use "mailto:test@example.org".
 - icon: twitter
   icon_pack: fab
   link: https://twitter.com/_SomnathRakshit
-- icon: google-scholar
-  icon_pack: ai
-  link: https://scholar.google.co.in/citations?user=9UaFRzYAAAAJ&hl=en
 - icon: github
   icon_pack: fab
   link: https://github.com/somnathrakshit

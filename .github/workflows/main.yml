@@ -33,9 +33,18 @@ jobs:
         PUBLISH_BRANCH: master
         PUBLISH_DIR: ./public
 
-    - name: Send notification to Telegram
+    - name: Send success notification to Telegram
+      if: success()
       uses: appleboy/telegram-action@master
       with:
         to: ${{ secrets.TELEGRAM_TO }}
         token: ${{ secrets.TELEGRAM_TOKEN }}
-        message: Website at https://somnathrakshit.github.io/ built successfully.
+        message: Website at ${{ github.repository }} built SUCCESSFULLY.
+
+    - name: Send failure notification to Telegram
+      if: failed()
+      uses: appleboy/telegram-action@master
+      with:
+        to: ${{ secrets.TELEGRAM_TO }}
+        token: ${{ secrets.TELEGRAM_TOKEN }}
+        message: Website at ${{ github.repository }} build FAILED..
