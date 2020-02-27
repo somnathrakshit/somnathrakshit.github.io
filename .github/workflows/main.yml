@@ -42,7 +42,7 @@ jobs:
         message: Website at ${{ github.repository }} built SUCCESSFULLY.
 
     - name: Send failure notification to Telegram
-      if: failed()
+      if: failure()
       uses: appleboy/telegram-action@master
       with:
         to: ${{ secrets.TELEGRAM_TO }}
