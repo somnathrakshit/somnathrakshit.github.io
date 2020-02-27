@@ -32,3 +32,15 @@ jobs:
         ACTIONS_DEPLOY_KEY: ${{ secrets.ACTIONS_DEPLOY_KEY }}
         PUBLISH_BRANCH: master
         PUBLISH_DIR: ./public
+  build:
+    name: Telegram Notify
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@master
+    - name: send custom message
+      uses: appleboy/telegram-action@master
+      with:
+        to: ${{ secrets.TELEGRAM_TO }}
+        token: ${{ secrets.TELEGRAM_TOKEN }}
+        message: |
+          Website at ${{ repo }} built successfully with commit SHA: ${{ commit.sha }}.
