@@ -43,4 +43,4 @@ jobs:
         to: ${{ secrets.TELEGRAM_TO }}
         token: ${{ secrets.TELEGRAM_TOKEN }}
         message: |
-          Website at ${{ repo }} built successfully with commit SHA: ${{ commit.sha }}.
+          Website at https://somnathrakshit.github.io/ built successfully.
