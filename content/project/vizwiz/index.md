@@ -3,7 +3,7 @@
 
 title: "Answerability Classification Using Hand-Crafted Features"
 summary: "Competing with the members in your class on a challenge to predict whether a visual question is answerable. For this task, we were required to create a multi-modal (computer vision + natural language processing) classification system."
-authors: ["Somnath Rakshit"]
+authors: ["admin"]
 tags: ["machine learning", "computer vision", "natural language processing"]
 categories: []
 date: 2020-04-05T03:13:05-05:00
