@@ -67,4 +67,4 @@ user_groups:
 - Visitors
 ---
 
-I am a Masters student (Data Science track) at the School of Information and a Teaching Assistant for EE 461P: Data Science Principles at Department of Electrical and Computer Engineering, The University of Texas at Austin. In the past, I have been the TA for MIS 385N: User Generated Content Analytics at McCombs School of Business. Previously, I was a research assistant at [CeNT](https://cent.uw.edu.pl) working on machine learning and bioinformatics. I also worked briefly as a software engineer at Cyware Labs, Bangalore. My current interests lie in deep learning, natural language processing and biomedical imaging.
+I am a Masters student (Data Science track) at the School of Information, The University of Texas at Austin. Previously, I was a research assistant at [CeNT](https://cent.uw.edu.pl) working on machine learning and bioinformatics. I also worked briefly as a software engineer at Cyware Labs, Bangalore. I like working in natural language processing, biomedical imaging and machine learning in general.
