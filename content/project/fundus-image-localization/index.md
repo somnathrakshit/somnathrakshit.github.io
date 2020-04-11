@@ -1,7 +1,7 @@
 +++
 title = "Detection and Localisation of Diabetic Retinopathy"
 date = 2018-05-15T01:21:26+05:30
-draft = false
+draft = true 
 authors = ["admin"]
 
 # Tags: can be used for filtering projects.
