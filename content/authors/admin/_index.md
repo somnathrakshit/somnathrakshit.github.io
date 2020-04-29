@@ -18,12 +18,12 @@ organizations:
   url: "https://www.ischool.utexas.edu/"
 
 # Short bio (displayed in user profile at end of posts)
-bio: I am a Masters student (Data Science track) at the School of Information, The University of Texas at Austin. My current interests lie in deep learning, natural language processing and biomedical imaging.
+bio: Masters student (Data Science track) at the School of Information, The University of Texas at Austin.
 
 interests:
 - Deep Learning
+- Predictive Analytics
 - Natural Language Processing
-- Biomedical Imaging
 
 education:
   courses:
