@@ -67,4 +67,4 @@ user_groups:
 - Visitors
 ---
 
-I am a Masters student (Data Science track) at the School of Information, The University of Texas at Austin. Previously, I was a research assistant at [CeNT](https://cent.uw.edu.pl) working on machine learning and bioinformatics. I also worked briefly as a software engineer at Cyware Labs, Bangalore. I like working in natural language processing, biomedical imaging and machine learning in general.
+I am a Masters student (Data Science track) at the School of Information, The University of Texas at Austin. I am a part of [IDEAL](http://ideal.ece.utexas.edu/) here. Previously, I was a research assistant at [CeNT](https://cent.uw.edu.pl) working on machine learning and bioinformatics. I like working in natural language processing, predictive analytics and machine learning in general.
