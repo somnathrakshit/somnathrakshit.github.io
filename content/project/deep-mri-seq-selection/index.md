@@ -8,7 +8,7 @@ tags: ["deep learning"]
 categories: []
 date: 2020-05-07T16:33:09-05:00
 draft: true 
-math: true
+math: true 
 
 # Optional external URL for project (replaces project detail page).
 external_link: ""
