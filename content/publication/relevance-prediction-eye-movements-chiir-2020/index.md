@@ -36,14 +36,14 @@ featured: true
 #   icon_pack: fab
 #   icon: twitter
 
-url_pdf:
+url_pdf: "https://dl.acm.org/doi/abs/10.1145/3343413.3377960"
 url_code:
 url_dataset:
 url_poster:
 url_project:
-url_slides:
+url_slides: "https://www.slideshare.net/nilavrabhattacharya/can-ai-say-from-our-eyes-when-we-read-relevant-information"
 url_source:
-url_video:
+url_video: "https://youtu.be/ZebBgUhL-EU"
 
 # Featured image
 # To use, add an image named `featured.jpg/png` to your page's folder. 
