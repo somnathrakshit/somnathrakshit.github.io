@@ -1,0 +1,42 @@
+title = "Somnath Rakshit"
+baseURL = "https://somnathrakshit.github.io/"
+theme = "researcher"
+disableKinds = ["taxonomy", "term", "RSS", "sitemap", "robotsTXT"]
+enableEmoji = true
+math = false  # enable KaTeX (https://katex.org/) globally
+
+[params]
+  author = "Somnath Rakshit"
+  description = "Somnath Rakshit's personal website"
+  favicon = "favicon.ico"  # path to a .ico to use as favicon
+  [params.footer]
+    text = "Somnath Rakshit"
+    url = "https://github.com/somnathrakshit"
+
+[permalinks]
+  "/" = "/:filename"
+
+[menu]
+  [[menu.main]]
+    name = "Home"
+    url = "/"
+    weight = 1
+  [[menu.main]]
+    name = "Resume"
+    url = "/files/somnath_rakshit_resume.pdf"
+    weight = 2
+  [[menu.main]]
+    name = "Projects"
+    url = "/projects"
+    weight = 3
+  [[menu.main]]
+    name = "Musings"
+    url = "/musings"
+    weight = 4
+  [[menu.main]]
+    name = "Contact"
+    url = "/contact"
+    weight = 5
+
+[markup.goldmark.renderer]
+  unsafe = true  # allow raw HTML in markdown files
