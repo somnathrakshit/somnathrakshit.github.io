@@ -6,10 +6,10 @@ title = "Somnath Rakshit's personal website"
 
 {{< figure class="avatar" src="/img/img.jpg" >}}
 
-I am a Masters student (Data Science track) at the School of Information, The University of Texas at Austin. I am a part of [IDEAL](http://ideal.ece.utexas.edu/) and UT Computational and Imaging Lab here. Previously, I was a research assistant at [CeNT](https://cent.uw.edu.pl) working on machine learning and bioinformatics. I like working in natural language processing, predictive analytics and machine learning in general. I am currently working on my Master's Thesis titled *Sequence parameter selection for parameter mapping* under [Dr. Jon Tamir](http://users.ece.utexas.edu/~jtamir/)'s supervision 
-
-## Online Profiles
-[Google Scholar](https://scholar.google.co.in/citations?user=9UaFRzYAAAAJ&hl=en), [LinkedIn](https://www.linkedin.com/in/somnathrakshit), [Github](https://github.com/somnathrakshit), [Twitter](https://twitter.com/_SomnathRakshit)
+I am a Masters student (Data Science track) at the School of Information, The University of Texas at Austin. I am a part of [IDEAL](http://ideal.ece.utexas.edu/) and UT Computational and Imaging Lab here. Previously, I was a research assistant at [CeNT](https://cent.uw.edu.pl) working on machine learning and bioinformatics. I like working in natural language processing, predictive analytics and machine learning in general. I am currently working on my Master's Thesis titled *Sequence parameter selection for parameter mapping* under [Dr. Jon Tamir](http://users.ece.utexas.edu/~jtamir/)'s supervision. 
+<div align="center">
+  <a href="https://scholar.google.co.in/citations?user=9UaFRzYAAAAJ&hl=en">Google Scholar</a> / <a href="https://www.linkedin.com/in/somnathrakshit">LinkedIn</a> / <a href="https://github.com/somnathrakshit">Github</a> / <a href="https://twitter.com/_SomnathRakshit">Twitter</a> / <a href="/contact/">Email</a>
+</div>
 
 ## Publications
 

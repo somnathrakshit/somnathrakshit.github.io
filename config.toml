@@ -10,7 +10,7 @@ math = false  # enable KaTeX (https://katex.org/) globally
   description = "Somnath Rakshit's personal website"
   favicon = "favicon.ico"  # path to a .ico to use as favicon
   [params.footer]
-    text = "Somnath Rakshit"
+    text = "Copyright Somnath Rakshit, 2020"
     url = "https://github.com/somnathrakshit"
 
 [permalinks]
