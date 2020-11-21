@@ -3,12 +3,12 @@ title = "Answerability Classification Using Hand-Crafted Features"
 date = "2020-04-20"
 +++
 # Answerability Classification Using Hand-Crafted Features
-Competing with the members in my class on a challenge to predict whether a visual question is answerable. For this task, we were required to create a multi-modal (computer vision + natural language processing) classification system.
+In this project, I competed with the members in my class on a challenge to predict whether a visual question is answerable or not by using a given image and an associated question in the form of a text. For this task, we were required to create a multi-modal (computer vision + natural language processing) classification system.
 
-Microsoft Azure Vision API has been used to obtain the tags for each image. They have been joined together with space character in between to create artifical sentence. Then, the TF-IDF representation for these artificially generated sentences are created to be used as features. The TF-IDF representation for the questions have been created as features.
+First, Microsoft Azure Vision API was used to obtain the tags for each image. These tags were then joined together with spaces in between to create artifical sentences. Then, the TF-IDF representation for these artificially generated sentences were created to be used later as features. The TF-IDF representation for the questions were also created as features.
 
-The two TF-IDF matrices are now stacked horizontally to create the unified feature set. We use this as the input dataset for our machine learning model. Random forest model has been used for this.
+The two TF-IDF matrices were then stacked horizontally to create the unified feature set. We used this as the input dataset for our machine learning model, for which we selected random forest model using scikit-learn.
 
-However, we see that the dataset is imbalanced. Thus, we try to resample the dataset so that the minority class has equal number of samples as the majority class. We do this by randomly copying the samples. Finally, with this resampled dataset, we once again run a random forest classifier. We see that the results improve.
+However, we saw that the dataset was quite imbalanced. Thus, we tried to resample the dataset so that the minority class had equal number of samples as the majority class. We did this by randomly copying the samples from the minority class. Finally, we ran the random forest classifier on both the balanced as well as the imbalanced dataset. We found that the results improved substantially.
 
-Finally, we run Grid Search to find the best hyperparameter for the random forest model and test it on the validation set, which has not been resampled. We see that when the number of estimators is equal to 1000, random forest model performs the best with accuracy metric.
+Finally, we ran Grid Search to find the best hyperparameter for the random forest model and tested it on the validation set, which had not been resampled. We saw that when the number of estimators was equal to 1000, random forest model performed the best with respect to our testing metric, i.e. accuracy. This model was then submitted to run on the hidden test set. My model was then judged as the winner since it outperformed the models developed by all of my classmates. 
