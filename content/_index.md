@@ -14,7 +14,7 @@ I am a Masters student (Data Science track) at the School of Information, The Un
 ## Publications
 
 In chronological order:
-1. Nilavra Bhattacharya, **Somnath Rakshit**, Jacek Gwizdka, Paul Kogut (2020). Relevance Prediction from Eye-movements Using Semi-interpretable Convolutional Neural Networks. CHIIR 2020. ([Paper](https://dl.acm.org/doi/abs/10.1145/3343413.3377960), [Slides](https://www.slideshare.net/nilavrabhattacharya/can-ai-say-from-our-eyes-when-we-read-relevant-information), [Video](https://youtu.be/ZebBgUhL-EU))
+1. Nilavra Bhattacharya, **Somnath Rakshit**, Jacek Gwizdka, Paul Kogut (2020). Relevance Prediction from Eye-movements Using Semi-interpretable Convolutional Neural Networks. CHIIR 2020. ([Paper](https://dl.acm.org/doi/abs/10.1145/3343413.3377960), [Blog](/projects/relevance-prediction-eye-movement-cnn/), [Slides](https://www.slideshare.net/nilavrabhattacharya/can-ai-say-from-our-eyes-when-we-read-relevant-information), [Video](https://youtu.be/ZebBgUhL-EU))
 1. **Somnath Rakshit**, Indrajit Saha, Michal Wlasnowolski, Ujjwal Maulik, Dariusz Plewczynski (2019). Deep Learning for Detection and Localization of Thoracic Diseases using Chest X-Ray Imagery. ICAISC. ([Paper](https://doi.org/10.1007/978-3-030-20915-5_25), [Code](http://www.nitttrkol.ac.in/indrajit/projects/deeplearning-chestxray/), [Data](https://nihcc.app.box.com/v/ChestXray-NIHCC/folder/36938765345))
 1. Indrajit Saha, **Somnath Rakshit**, Tanay Ghosh (2018). Machine Learning for Object Labelling. IEEE TENCON. ([Paper](https://doi.org/10.1109/TENCON.2018.8650324), [Code](http://www.nitttrkol.ac.in/indrajit/projects/ObLab2018/downloads/codes/RawCode-ObLab2018.zip), [Data](http://www.nitttrkol.ac.in/indrajit/projects/ObLab2018/downloads/datasets/Testing.zip))
 
