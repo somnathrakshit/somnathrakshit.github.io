@@ -1,5 +1,5 @@
 +++
-title = "About"
+title = "Somnath Rakshit's personal website"
 +++
 
 ## About Me
