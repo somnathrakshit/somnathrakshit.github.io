@@ -23,7 +23,7 @@ math = false  # enable KaTeX (https://katex.org/) globally
     weight = 1
   [[menu.main]]
     name = "Resume"
-    url = "/files/somnath_rakshit_resume.pdf"
+    url = "/files/somnathrakshit_resume.pdf"
     weight = 2
   [[menu.main]]
     name = "Projects"
