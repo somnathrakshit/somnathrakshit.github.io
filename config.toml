@@ -1,14 +1,14 @@
 title = "Somnath Rakshit"
 baseURL = "https://somnathrakshit.github.io/"
 theme = "researcher"
-disableKinds = ["taxonomy", "term", "RSS", "sitemap", "robotsTXT"]
+disableKinds = ["taxonomy", "term", "robotsTXT"]
 enableEmoji = true
 math = false  # enable KaTeX (https://katex.org/) globally
 
 [params]
   author = "Somnath Rakshit"
   description = "Somnath Rakshit's personal website"
-  favicon = "favicon.ico"  # path to a .ico to use as favicon
+  favicon = "/favicon.ico"  # path to a .ico to use as favicon
   [params.footer]
     text = "Copyright Somnath Rakshit, 2020"
     url = "https://github.com/somnathrakshit"
