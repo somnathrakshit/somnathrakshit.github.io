@@ -4,6 +4,7 @@ theme = "researcher"
 disableKinds = ["taxonomy", "term", "robotsTXT"]
 enableEmoji = true
 math = false  # enable KaTeX (https://katex.org/) globally
+googleAnalytics = "UA-107696056-2"  # add your tracking id
 
 [params]
   author = "Somnath Rakshit"
