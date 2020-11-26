@@ -52,7 +52,10 @@
         counter-reset: list;
         list-style: none;
         & > li {
-            margin: 4px 0;
+            margin-left: 4px;
+            margin-right: 4px;
+            margin-top: 4px;
+            margin-bottom: 8px;
             &:before {
                 content: "[" counter(list, decimal) "] ";
                 counter-increment: list;

@@ -8,11 +8,10 @@ title = "Contact"
 
 ## Mailing Address
 
-> UTA 5.410, Guadalupe St
->
-> Austin, TX 78741
->
-> United States of America
+> UTA 5.410,  
+>1616, Guadalupe St  
+> Austin, TX 78741  
+> United States of America  
 
 ---
 
