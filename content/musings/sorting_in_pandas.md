@@ -539,3 +539,5 @@ df
 </div>
 
 You can know more about sorting in Pandas by visiting the [official documentation](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.sort_values.html).
+
+<script async src="https://comments.app/js/widget.js?3" data-comments-app-website="_wsr0glF" data-limit="5" data-outlined="1" data-colorful="1"></script>
