@@ -540,4 +540,4 @@ df
 
 You can know more about sorting in Pandas by visiting the [official documentation](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.sort_values.html).
 
-<script async src="https://comments.app/js/widget.js?3" data-comments-app-website="CEK_Wo-P" data-limit="5" data-color="DC3545" data-outlined="1"></script>
+<script async src="https://comments.app/js/widget.js?3" data-comments-app-website="CEK_Wo-P" data-limit="5" data-color="343638"></script>
