@@ -1,7 +1,8 @@
 title = "Somnath Rakshit"
+description = "Somnath Rakshit's personal homepage"
 baseURL = "https://somnathrakshit.github.io/"
 theme = "researcher"
-disableKinds = ["taxonomy", "term", "robotsTXT"]
+disableKinds = ["taxonomy", "term"]
 enableEmoji = true
 math = false  # enable KaTeX (https://katex.org/) globally
 googleAnalytics = "UA-107696056-2"  # add your tracking id
