@@ -1,4 +1,4 @@
 git add .
 read -r -p 'Enter commit message: ' input
-git commit -m "$input"
+git commit -S -m "$input"
 git push origin source
