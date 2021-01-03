@@ -23,6 +23,7 @@ I am a Masters student (Data Science track) at the School of Information, The Un
 1. **Somnath Rakshit**, Soumyadeep Debnath, Dhiman Mondal (2018). "Identifying Land Patterns from Satellite Imagery in Amazon Rainforest using Deep Learning". ([Paper](https://arxiv.org/abs/1809.00340))
 ## Projects
 A complete list of projects can be found [here](/projects/).
+1. mri-sim-py.epg: A GPU-accelerated Extended Phase Graph Algorithm for differentiable optimization and learning ([Details](/projects/project-mri-sim-py-epg/))
 1. Answerability Classification Using Hand-Crafted Features ([Details](/projects/project-answerability/))
 1. geograpy3 ([Details](/projects/project-geograpy3/), [Code](https://github.com/somnathrakshit/geograpy3))
 
