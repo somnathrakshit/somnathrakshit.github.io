@@ -59,7 +59,7 @@ jobs:
         to: ${{ secrets.TELEGRAM_TO }}
         token: ${{ secrets.TELEGRAM_TOKEN }}
         message: Website at ${{ github.repository }} built SUCCESSFULLY.
-        document: /tmp/Lighthouse.zip
+        document: /tmp/artifacts/Lighthouse.zip
 
     - name: Send failure notification to Telegram
       if: failure()
