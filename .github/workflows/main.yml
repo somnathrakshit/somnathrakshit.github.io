@@ -49,10 +49,8 @@ jobs:
     - name: Upload artifacts
       uses: actions/upload-artifact@master
       with:
-        name: Lighthouse reports
+        name: Lighthouse
         path: /tmp/artifacts
-
-    - run: zip -r /tmp/Lighthouse_Report.zip /tmp/artifacts 
 
     - name: Send success notification to Telegram
       if: success()
@@ -61,7 +59,7 @@ jobs:
         to: ${{ secrets.TELEGRAM_TO }}
         token: ${{ secrets.TELEGRAM_TOKEN }}
         message: Website at ${{ github.repository }} built SUCCESSFULLY.
-        document: /tmp/Lighthouse_Report.zip
+        document: /tmp/Lighthouse.zip
 
     - name: Send failure notification to Telegram
       if: failure()
