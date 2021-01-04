@@ -33,6 +33,27 @@ jobs:
         PUBLISH_BRANCH: master
         PUBLISH_DIR: ./public
 
+    - run: mkdir -p /tmp/artifacts
+    
+    - name: Send Lighthouse report to Telegram
+      if: success()
+      uses: foo-software/lighthouse-check-action@master
+      with:
+        accessToken: ${{ secrets.ACTIONS_DEPLOY_KEY }}
+        author: ${{ github.actor }}
+        branch: ${{ github.ref }}
+        outputDirectory: /tmp/artifacts
+        urls: 'https://somnathrakshit.github.io/'
+        sha: ${{ github.sha }}
+       
+    - name: Upload artifacts
+      uses: actions/upload-artifact@master
+      with:
+        name: Lighthouse reports
+        path: /tmp/artifacts
+
+    - run: zip -r /tmp/Lighthouse_Report.zip /tmp/artifacts 
+
     - name: Send success notification to Telegram
       if: success()
       uses: appleboy/telegram-action@master
@@ -40,6 +61,7 @@ jobs:
         to: ${{ secrets.TELEGRAM_TO }}
         token: ${{ secrets.TELEGRAM_TOKEN }}
         message: Website at ${{ github.repository }} built SUCCESSFULLY.
+        document: /tmp/Lighthouse_Report.zip
 
     - name: Send failure notification to Telegram
       if: failure()
@@ -47,4 +69,4 @@ jobs:
       with:
         to: ${{ secrets.TELEGRAM_TO }}
         token: ${{ secrets.TELEGRAM_TOKEN }}
-        message: Website at ${{ github.repository }} build FAILED..
+        message: Website at ${{ github.repository }} build FAILED.
