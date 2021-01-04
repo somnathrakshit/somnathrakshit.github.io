@@ -45,7 +45,9 @@ jobs:
         outputDirectory: /tmp/artifacts
         urls: 'https://somnathrakshit.github.io/'
         sha: ${{ github.sha }}
-       
+    
+    - run: cd /tmp/artifacts && ls
+
     - name: Upload artifacts
       uses: actions/upload-artifact@master
       with:
