@@ -23,11 +23,14 @@ collections:
     label: 'Projects'
     folder: 'content/projects'
     create: true
-    slug: '{{slug}}'
+    slug: '{{fields.slug}}'
     editor:
       preview: false
     fields:
       - { label: 'Title', name: 'title', widget: 'string' }
+      - { label: 'Slug', name: 'slug', widget: 'string' }
+      - { label: 'Math', name: 'math', widget: 'boolean' }
+      - { label: 'Draft', name: 'draft', widget: 'boolean' }
       - { label: 'Publish Date', name: 'date', widget: 'datetime' }
       - { label: 'Description', name: 'description', widget: 'string' }
       - { label: 'Body', name: 'body', widget: 'markdown' }
@@ -35,11 +38,14 @@ collections:
     label: 'Musings'
     folder: 'content/musings'
     create: true
-    slug: '{{slug}}'
+    slug: '{{fields.slug}}'
     editor:
       preview: false
     fields:
       - { label: 'Title', name: 'title', widget: 'string' }
+      - { label: 'Slug', name: 'slug', widget: 'string' }
+      - { label: 'Math', name: 'math', widget: 'boolean' }
+      - { label: 'Draft', name: 'draft', widget: 'boolean' }
       - { label: 'Publish Date', name: 'date', widget: 'datetime' }
       - { label: 'Description', name: 'description', widget: 'string' }
       - { label: 'Body', name: 'body', widget: 'markdown' }
