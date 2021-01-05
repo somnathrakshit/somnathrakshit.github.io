@@ -14,8 +14,6 @@ collections:
     folder: 'content'
     create: true
     slug: '{{slug}}'
-    editor:
-      preview: false
     fields:
       - { label: 'Title', name: 'title', widget: 'string' }      
       - { label: 'Body', name: 'body', widget: 'markdown' }
@@ -24,8 +22,6 @@ collections:
     folder: 'content/projects'
     create: true
     slug: '{{fields.slug}}'
-    editor:
-      preview: false
     fields:
       - { label: 'Title', name: 'title', widget: 'string' }
       - { label: 'Slug', name: 'slug', widget: 'string' }
@@ -39,8 +35,6 @@ collections:
     folder: 'content/musings'
     create: true
     slug: '{{fields.slug}}'
-    editor:
-      preview: false
     fields:
       - { label: 'Title', name: 'title', widget: 'string' }
       - { label: 'Slug', name: 'slug', widget: 'string' }
