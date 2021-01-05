@@ -14,7 +14,7 @@ For the dearth of standard methods, researchers resort to aggregating this data-
 
 We propose an image-classification method to predict user's perceived-relevance from their eye-movement patterns. Specifically, we convert participant's eye-movement scanpaths into images, and then transform the relevance-prediction problem into an image-classification problem. For this purpose, we use state-of-the art image classifiers based on convolutional neural networks. Our method gives promising results, and outperforms many previously reported performances in similar studies by appreciable margins. We also attempt to interpret how the classifier possibly differentiates between user-reading-patterns on relevant and irrelevant documents.
 
-{{< figure src="/img/projects/scanpath_encoding.png" width="100%" title="Figure 1: Top: Typical eye-movement patterns when reading relevant, irrelevant, and topical documents. Bottom: Examples of generated scanpath images, which are used to train CNN classifiers for predicting the user's perceived-relevance of the documents." >}}
+{{< figure src="/files/scanpath_encoding.png" width="100%" title="Figure 1: Top: Typical eye-movement patterns when reading relevant, irrelevant, and topical documents. Bottom: Examples of generated scanpath images, which are used to train CNN classifiers for predicting the user's perceived-relevance of the documents." >}}
 
 We generated scanpath images from eye-tracking data of user-document pairs, using only three attributes of eye-fixations: screen-coordinates (in pixels), fixation duration (in ms), and start time of the fixation relative to stimulus-onset.
 
@@ -24,7 +24,7 @@ We generated scanpath images from eye-tracking data of user-document pairs, usin
 
 We hypothesized that these colour choices would enable the CNN classifier to easily distinguish between fixations and saccades, and identify necessary patterns. Examples of typical eye-movement patterns on three types of documents, and their corresponding generated scanpath images are shown in Figure 1. One such plot is shown in Figure 2.
 
-{{< figure src="/img/projects/image.png" width="100%" title="Figure 2: Plot obtained after converting the eye-tracking data into scanpath images using three attributes viz. screen-coordinates (in pixels), fixation duration (in ms), and start time of the fixation relative to stimulus-onset." >}}
+{{< figure src="/files/image.png" width="100%" title="Figure 2: Plot obtained after converting the eye-tracking data into scanpath images using three attributes viz. screen-coordinates (in pixels), fixation duration (in ms), and start time of the fixation relative to stimulus-onset." >}}
 
 Data was available for 24 participants, where each participant judged the binary relevance of 120 news articles. In total we had eye-tracking data for 2,880 user-document pairs, or 2,880 scanpaths.
 
@@ -34,8 +34,8 @@ We posed our binary classification problem as follows:
 
 For this binary classification problem, we analysed the performance of six popular CNN based architectures: VGG16 and VGG19, DenseNet121 and DenseNet201, ResNet50 and InceptionResNet (version 2). The architecture was as below (Figure 3):
 
-{{< figure src="/img/projects/flowchart.jpeg" title="Figure 3: Architecture of the TensorFlow-Keras implementation. Optimizer: Stochastic Gradient Descent (SGD)" >}}
-{{< figure src="/img/projects/results_table.png" title="Figure 4: Results obtained using different models" >}}
+{{< figure src="/files/flowchart.jpeg" title="Figure 3: Architecture of the TensorFlow-Keras implementation. Optimizer: Stochastic Gradient Descent (SGD)" >}}
+{{< figure src="/files/results_table.png" title="Figure 4: Results obtained using different models" >}}
 
 We trained the models on the training set, and used the validation set for very basic hyper-parameter tuning (learning rate, number of epochs, optimizer momentum, etc.). Since our intention was to see whether the method works, and not to obtain the best benchmark performance, we performed minimal hyper-parameter tuning. The top portion of the results table reports the results from the TensorFlow-Keras implementation.
 
