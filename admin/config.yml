@@ -4,7 +4,9 @@ backend:
   branch: source
   site_domain: somnath.netlify.com
 
-media_folder: "static"
+media_folder: "static/files"
+public_folder: "files"
+display_url: https://somnathrakshit.github.io
 
 collections:
   - name: 'home'
@@ -15,8 +17,7 @@ collections:
     editor:
       preview: false
     fields:
-      - { label: 'Title', name: 'title', widget: 'string' }
-      
+      - { label: 'Title', name: 'title', widget: 'string' }      
       - { label: 'Body', name: 'body', widget: 'markdown' }
   - name: 'projects'
     label: 'Projects'
@@ -30,7 +31,6 @@ collections:
       - { label: 'Publish Date', name: 'date', widget: 'datetime' }
       - { label: 'Description', name: 'description', widget: 'string' }
       - { label: 'Body', name: 'body', widget: 'markdown' }
-
   - name: 'musings'
     label: 'Musings'
     folder: 'content/musings'
