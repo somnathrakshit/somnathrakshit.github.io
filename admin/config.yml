@@ -6,7 +6,7 @@ backend:
 
 media_folder: "static/files"
 public_folder: "files"
-display_url: https://somnathrakshit.github.io
+display_url: https://somnath.pages.dev
 
 collections:
   - name: 'home'
