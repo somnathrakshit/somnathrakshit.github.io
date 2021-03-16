@@ -1,6 +1,6 @@
 title = "Somnath Rakshit"
 description = "Somnath Rakshit's personal homepage"
-baseURL = "https://somnathrakshit.github.io/"
+baseURL = "https://somnath.pages.dev/"
 theme = "researcher"
 disableKinds = ["taxonomy", "term"]
 enableEmoji = true
