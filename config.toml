@@ -1,18 +1,18 @@
 title = "Somnath Rakshit"
 description = "Somnath Rakshit's personal homepage"
-baseURL = "https://somnath.pages.dev/"
+baseURL = "https://somnath.pages.dev"
 theme = "researcher"
 disableKinds = ["taxonomy", "term"]
 enableEmoji = true
 math = false  # enable KaTeX (https://katex.org/) globally
-googleAnalytics = "UA-107696056-2"  # add your tracking id
+googleAnalytics = ""  # add your tracking id
 
 [params]
   author = "Somnath Rakshit"
   description = "Somnath Rakshit's personal website"
   favicon = "/favicon.ico"  # path to a .ico to use as favicon
   [params.footer]
-    text = "Copyright Somnath Rakshit, 2020"
+    text = "Copyright Somnath Rakshit, 2021"
     url = "https://github.com/somnathrakshit"
 
 [permalinks]
