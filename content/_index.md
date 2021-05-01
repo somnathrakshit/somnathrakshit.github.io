@@ -3,7 +3,7 @@ title: Somnath Rakshit's personal website
 ---
 ## About Me
 
-{{< figure class="avatar" src="/files/img.jpg" >}}
+{{< figure class="avatar" src="files/img.jpg" >}}
 
 I am a Masters student (Data Science track) at the School of Information, The University of Texas at Austin. I am a part of [IDEAL](http://ideal.ece.utexas.edu/) and UT Computational and Imaging Lab here. Previously, I was a research assistant at [CeNT](https://cent.uw.edu.pl) working on machine learning and bioinformatics. I like working in natural language processing, predictive analytics and machine learning in general. I am currently working on my Master's Thesis titled *A GPU-accelerated Extended Phase Graph Algorithm for differentiable optimization and learning* under the supervision of [Dr. Jon Tamir](http://users.ece.utexas.edu/~jtamir/).
 <div align="center">
