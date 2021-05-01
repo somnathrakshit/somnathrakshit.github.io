@@ -1,0 +1,493 @@
+﻿body {
+    margin: 0px;
+    padding: 0px;  
+    font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif!important;
+    font-size: 14px;
+    line-height: 1.42857143;
+    color: #333;
+    background-color: #fff;
+}
+
+@media screen and (max-width:800px) {
+	body {
+		font-size:12px;
+	}
+}
+
+.MainContentWrapper{    
+	padding-right: 15px;
+	padding-left: 15px;
+	margin-right: auto;
+	margin-left: auto;
+    word-wrap: break-word;
+}
+
+
+.fancybox-title-inside-wrap{
+    word-wrap: break-word !important;
+}
+
+.fancybox-iframe img{
+    max-width: 200px !important;
+}
+
+.figureImages img{
+    max-width: 200px !important;
+}
+
+.submissionTitle {
+    color:#59ABE3;
+    font-size:3em;
+    font-weight:200;
+}
+
+.affAuthers{
+    color:#757D75;
+    font-size:1.2em;
+}
+
+.affOther{    
+    color:#ABB7B7;
+    font-size:1.2em;
+}
+
+.affOther div{
+    margin-top: 5px;
+}
+
+.h3, h3 {
+  font-size: 1.7em;
+  color: #59ABE3;
+  font-weight: bold;
+  font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif!important;
+}
+
+b, strong {
+  font-weight: 700;
+}
+
+.MainSubmissionPart{
+    max-width:75%;
+    float:left;
+    padding: 0px;  
+    margin: 0px;
+}
+
+.SecondSubmissionPart{
+    max-width:20%;
+    float:right;
+    padding: 0px;  
+    margin: 0px;
+    margin-left: 15px;
+}
+
+p.synopsis {
+	font-weight:bold;
+}
+
+.eventTypeTitle {
+    margin-bottom:.25em;
+}
+
+	.eventTypeTitle span {
+	    color:#59ABE3;
+	    font-size:2.5em;
+	    font-weight:200;
+	}
+	
+	.eventTypeTitle i {
+		font-size: 66%;
+	}
+
+.TOCTrackContainer {
+	padding-top: .5em;
+}
+
+	.TOCTrackContainer a {
+		font-size: 1.75em;
+	}
+
+.TOCTopicHeading {
+	margin:0px 0px 0px 0px; 
+}
+	.TOCTopicHeading a {
+		color:#007bff;
+		font-weight: 400;
+	}
+
+@media print {
+    a:after {
+    content: "";
+    }
+    img:after {
+    content: "";
+    }
+
+    body {
+        margin: 0px;
+        padding: 0px;  
+        font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif!important;
+        font-size: 7px;
+        line-height: 1.42857143;
+        color: #333;
+        background-color: #fff;
+    }
+
+	.divPrintButton {
+		display:none;
+	}
+
+    .MainContentWrapper{    
+	    padding-right: 0px;
+	    padding-left: 0px;
+    }
+    .h3, h3 {
+        font-size: 14px;
+        color: #59ABE3;
+        font-weight: bold;
+        font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif!important;
+        margin-top: 3px;
+        margin-bottom: 3px;
+    }
+
+    .submissionTitle {
+        color:#59ABE3;
+        font-size:16px;
+        font-weight:bold;
+    }
+
+    .affAuthers{
+        color:#757D75;
+        font-size:12px;
+    }
+
+    .affOther{    
+        color:#ABB7B7;
+        font-size:10px;
+    }
+
+	.divSectionBlock {
+		margin-bottom:20px;
+	}
+
+		.divSectionBlock {
+			margin-top:0px;
+			font-size:10px;
+		}
+		.divSectionBlock h3 {
+	        font-size: 14px;
+		}
+
+
+    .AffiliationBlockContainer
+    {
+        padding: 5px;
+        margin-bottom: 0px;
+    }
+
+
+    .sectionsWrapper{
+        margin-top:20px;
+        color:#59ABE3;
+        font-size:14px;
+        /*font-weight:200;*/
+    }
+
+	/*p.synopsis {
+		font-size:12px;
+	}*/
+    
+    .thumbnail{
+        border: 0px;
+        content: "";
+    }
+
+    .thumbnail a{        
+       pointer-events: none;
+       cursor: default;
+    }
+
+    a[href]:after {
+        content: none !important;
+    }
+
+    .thumbnail img{
+        min-width: 50px !important;
+    }
+
+    .col-sm-8{
+        float:left;
+        max-width: 525px !important;
+        padding: 0px;  
+        margin: 0px;
+
+    }
+    .col-sm-3{
+        float:right;
+        max-width: 160px !important;
+        padding: 0px;  
+        margin: 0px;
+    }
+
+    .thumbnail{
+        width: 250px !important;
+        padding: 0px;  
+    }
+
+    .thumbnailCaptions{
+        padding: 0px;  
+		text-align:left;
+    }
+    
+    .figuresWrapper{
+        align-content:center;
+        text-align:center;
+    }
+
+}
+
+
+.figuresWrapper{
+    align-content:center;
+    text-align:center;
+}
+
+
+.submissionID{
+  font-size: 24px !important;
+  color: #59ABE3 !important;
+  font-weight: 200 !important;
+  font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif !important;
+    border-bottom: 1px solid #333 !important;
+}
+
+.PresentationTime{
+    padding-right:10px;
+    padding-left:50px;
+    vertical-align:top;
+}
+.PresentationTimeWithImages{
+    color:#4197D1 !important;
+    width: 110px !important;
+    vertical-align:top;
+    font-weight:400;
+}
+
+.PresentationTimeWithImages a {    
+    color:#4197D1 !important;
+    font-weight:400;
+}
+.PresentationTimeWithImages a:visited{    
+    color:#4197D1 !important;
+    font-weight:400;
+}
+.PresentationTimeWithImages span{    
+    color:#4197D1 !important;
+    font-weight:400;
+}
+
+.PresentationSynopsis{    
+    color:#4197D1 !important;
+    font-weight:400;
+}
+
+
+.ProgramHeader {
+	width:100%; 
+	margin-bottom:15px; 
+	border-bottom: 3px solid #cccccc;
+    font-size:16px;
+}
+
+@media screen and (max-width: 800px) {
+	.ProgramHeader {
+		font-size:1em;
+	}
+}
+
+.ProgramAuthors{    
+    color:#5C6363 !important;
+    font-size:1em;
+    font-weight:400;
+}
+
+.ProgramTime{
+    color:#778080;
+    font-size:1em;
+}
+
+hr{
+    border-top: 1px solid #C9BFBF !important;
+}
+
+.PresentationTitle{
+    color:#4197D1 !important;
+    font-size: 1em;
+    font-weight:400;
+}
+
+.TOCsectionsWrapper{
+        
+    color:#59ABE3;
+    font-size:1em;
+    font-weight:200;
+}
+
+.PresentationTimeContainer {
+    margin-bottom: 8px;
+}
+
+.ComputerNumberContainer {
+    margin-top: 1px;
+    margin-bottom: 8px;
+}
+
+.ImgContainer img {
+    width: 100px;
+    height: auto;
+}
+
+/*  Bootstrap Clearfix */
+
+/*  Tablet  */
+@media (min-width:767px){
+
+  /* Column clear fix */
+  .col-lg-1:nth-child(12n+1),
+  .col-lg-2:nth-child(6n+1),
+  .col-lg-3:nth-child(4n+1),
+  .col-lg-4:nth-child(3n+1),
+  .col-lg-6:nth-child(2n+1),
+  .col-md-1:nth-child(12n+1),
+  .col-md-2:nth-child(6n+1),
+  .col-md-3:nth-child(4n+1),
+  .col-md-4:nth-child(3n+1),
+  .col-md-6:nth-child(2n+1){
+    clear: none;
+  }
+  .col-sm-1:nth-child(12n+1),
+  .col-sm-2:nth-child(6n+1),
+  .col-sm-3:nth-child(4n+1),
+  .col-sm-4:nth-child(3n+1),
+  .col-sm-6:nth-child(2n+1){
+    clear: left;
+  }
+}
+
+
+/*  Medium Desktop  */
+@media (min-width:992px){
+
+  /* Column clear fix */
+  .col-lg-1:nth-child(12n+1),
+  .col-lg-2:nth-child(6n+1),
+  .col-lg-3:nth-child(4n+1),
+  .col-lg-4:nth-child(3n+1),
+  .col-lg-6:nth-child(2n+1),
+  .col-sm-1:nth-child(12n+1),
+  .col-sm-2:nth-child(6n+1),
+  .col-sm-3:nth-child(4n+1),
+  .col-sm-4:nth-child(3n+1),
+  .col-sm-6:nth-child(2n+1){
+    clear: none;
+  }
+  .col-md-1:nth-child(12n+1),
+  .col-md-2:nth-child(6n+1),
+  .col-md-3:nth-child(4n+1),
+  .col-md-4:nth-child(3n+1),
+  .col-md-6:nth-child(2n+1){
+    clear: left;
+  }
+}
+
+
+/*  Large Desktop  */
+@media (min-width:1200px){
+
+  /* Column clear fix */
+  .col-md-1:nth-child(12n+1),
+  .col-md-2:nth-child(6n+1),
+  .col-md-3:nth-child(4n+1),
+  .col-md-4:nth-child(3n+1),
+  .col-md-6:nth-child(2n+1),
+  .col-sm-1:nth-child(12n+1),
+  .col-sm-2:nth-child(6n+1),
+  .col-sm-3:nth-child(4n+1),
+  .col-sm-4:nth-child(3n+1),
+  .col-sm-6:nth-child(2n+1){
+    clear: none;
+  }
+  .col-lg-1:nth-child(12n+1),
+  .col-lg-2:nth-child(6n+1),
+  .col-lg-3:nth-child(4n+1),
+  .col-lg-4:nth-child(3n+1),
+  .col-lg-6:nth-child(2n+1){
+    clear: left;
+  }
+}
+
+
+
+/* ------------Printable Bootstrap -------------*/
+
+@media print {
+	.col-print-1 {
+		width: 8%;
+		float: left;
+	}
+
+	.col-print-2 {
+		width: 16%;
+		float: left;
+	}
+
+	.col-print-3 {
+		width: 25%;
+		float: left;
+	}
+
+	.col-print-4 {
+		width: 33%;
+		float: left;
+	}
+
+	.col-print-5 {
+		width: 42%;
+		float: left;
+	}
+
+	.col-print-6 {
+		width: 50%;
+		float: left;
+	}
+
+	.col-print-7 {
+		width: 58%;
+		float: left;
+	}
+
+	.col-print-8 {
+		width: 66%;
+		float: left;
+	}
+
+	.col-print-9 {
+		width: 75%;
+		float: left;
+	}
+
+	.col-print-10 {
+		width: 83%;
+		float: left;
+	}
+
+	.col-print-11 {
+		width: 92%;
+		float: left;
+	}
+
+	.col-print-12 {
+		width: 100%;
+		float: left;
+	}
+}

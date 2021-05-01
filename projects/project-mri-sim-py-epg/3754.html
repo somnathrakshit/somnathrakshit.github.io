@@ -1,0 +1,91 @@
+
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head><title>
+
+</title>
+    
+	<script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.min.js" crossorigin="anonymous"></script>
+
+    <link type="text/css" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,300,400italic,600italic,700italic,800italic,300italic" /><link type="text/css" rel="Stylesheet" href="Styles/bootstrap-3.3.2-dist/css/bootstrap.min.css" /><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.1/css/lightbox.min.css" /><link type="text/css" rel="Stylesheet" href="Styles/viewSubmissions.css" />
+	
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+     
+    
+
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />  
+
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$$$','$$$'], ["\\(","\\)"] ],
+          processEscapes: true
+        }
+      });
+    </script>
+
+    
+
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.16.0/prism.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.16.0/plugins/unescaped-markup/prism-unescaped-markup.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.1/js/lightbox-plus-jquery.min.js"></script>
+</head>
+<body>
+    
+        <div id="SubmissionViewBreadCrumbWrapper"> </div>         
+        <div id="contentWrapper" class="MainContentWrapper">   
+           
+    
+
+	
+    
+
+
+
+
+
+<div class="col-lg-8 col-md-12 col-xm-12"> 
+    <h3>
+        <span id="ctl00_MainContent_ctl00_lblSubmissionID">3754</span>
+    </h3>
+    <span id="ctl00_MainContent_ctl00_submissionTitle" class="submissionTitle">A GPU-accelerated Extended Phase Graph Algorithm for differentiable optimization and learning</span>
+    <div id="ctl00_MainContent_ctl00_autherBlock">        
+        <div id="ctl00_MainContent_ctl00_AuthorsAndAffiliationsBlock_divBlockContainer" class="AffiliationBlockContainer">
+    Somnath Rakshit<SUP>1</SUP>, Ke Wang<SUP>2</SUP>, and Jonathan I Tamir<SUP>3,4,5</SUP><i><BR><SUP>1</SUP>School of Information, The University of Texas at Austin, Austin, TX, United States, <SUP>2</SUP>Electrical Engineering and Computer Sciences, University of California, Berkeley, Berkeley, CA, United States, <SUP>3</SUP>Electrical and Computer Engineering, The University of Texas at Austin, Austin, TX, United States, <SUP>4</SUP>Diagnostic Medicine, Dell Medical School, The University of Texas at Austin, Austin, TX, United States, <SUP>5</SUP>Oden Institute for Computational Engineering and Sciences, The University of Texas at Austin, Austin, TX, United States</i>
+</div>
+
+
+    </div>
+
+    <div id="ctl00_MainContent_ctl00_sectionsWrapper" class="sectionsWrapper">
+	        
+    <div class="divSectionBlock"><h3>Synopsis</h3><p class="synopsis">The Extended Phase Graph Algorithm is a powerful tool for MRI sequence simulation and quantitative fitting, but such simulators are mostly written to run on CPU only and (with some exception) are poorly parallelized. A parallelized simulator compatible with other learning-based frameworks would be a useful tool to optimize scan parameters. Thus, we created an open source, GPU-accelerated EPG simulator in PyTorch. Since the simulator is fully differentiable by means of automatic differentiation, it can be used to take derivatives with respect to sequence parameters, e.g. flip angles, as well as tissue parameters, e.g. T1 and T2. </p></div><div class="divSectionBlock"><h3>Target Audience</h3>MRI RF pulse and sequence developers and educators.</div><div class="divSectionBlock"><h3>Introduction</h3>The Extended Phase Graph (EPG) Algorithm forms the backbone of many sequence simulations<sup>1,2</sup> and is also used for quantitative fitting<sup>3,4</sup>. While developers increasingly share EPG simulators online in independent repositories, most are written to be run on CPU with minimal parallelization<sup>5</sup>. More recently, parallelized implementations have been developed<sup>6</sup>, though they are still limited to CPU and do not include auto-differentiation. Auto-Differentiation and GPU acceleration would enable the use of EPG within other physics-based learning frameworks<sup>7</sup>. Hence, an open source, parallelized and PyTorch<sup>8</sup>-based differentiable simulator could help develop and disseminate novel imaging techniques. This is similar to how packages like SigPy<sup>9</sup>, BART<sup>10</sup>, and MIRT<sup>11</sup> have made advanced parallel imaging and compressed sensing reconstruction methods widely accessible. To satisfy this need, we developed a GPU-accelerated EPG implementation as part of the mri-sim-py Python package. Here, we describe the software&rsquo;s goals, organization, and demonstrate a few examples of its usage.</div><div class="divSectionBlock"><h3>Software Design</h3>We chose mri-sim-py as the host package because it already contains different algorithms for simulating signals and this was a natural extension. Python was chosen as it can be demonstrated easily by means of Jupyter notebooks and interfaced with PyTorch, a popular machine learning auto-differentiation framework. The EPG Algorithm has three components: RF excitation, gradient application, and tissue relaxation. Figure 1a shows how these three components of the EPG algorithm are organized. Figure 1b shows 100 signals simulated using various values of T1 and T2 for a multi-echo spin-echo sequence with 60-degree refocusing flip angles. Figure 2 shows a comparison of the time taken by the naive and our parallelized EPG simulators running on CPU and GPU respectively. We can see that the increase in batch size has negligible impact on the evaluation time of the parallelized EPG algorithm running on GPU. Figure 3 shows code snippets for two applications. Application 1 shows how to use the algorithm to generate signal values from a fast spin-echo simulation using the flip angle train, T1 and T2, TE, TR, and B1 parameters. Application 2 shows how to use auto-differentiation to estimate T2 relaxation, as described below in detail</div><div class="divSectionBlock"><h3>Application Examples</h3>We show an application to estimating T2 relaxation. A volunteer was scanned under IRB approval and informed consent. A multi-echo spin-echo acquisition of the brain was acquired on a 3 Tesla Siemens Vida scanner. Scan parameters included: 32 echoes, TR=2800 ms, TE=9 ms, matrix size=288x288, nominal refocusing flip angles of 105 degrees. Using the EPG simulator, a least-squares solver with gradient descent was implemented (Figure 3, Application 2), taking advantage of automatic differentiation. Figure 4a and 4b show images of the resulting Proton Density map and T2 map respectively, which was estimated in 543 seconds using batch size = 14,000, for a total number of 58 million signal evaluations. We also show how the result of optimizing the flip angles of a multi-echo spin-echo experiment using the Cramer Rao lower bound<sup>12</sup>. The optimized flip angle train is shown in Figure 4c. A third application, shown in  Figure 5, combines the simulator with a fully connected neural network for estimating T1 and T2, where again the flip angle train is optimized via auto-differentiation to minimize fitting error.</div><div class="divSectionBlock"><h3>Availability</h3>The latest version of this tool is available from the Github repository of mri-sim-py at https://github.com/utcsilab/mri-sim-py/tree/master/epg. Installation instructions are provided in the README file present there. Jupyter notebooks containing examples are also available at the same repository inside epg_parallel folder.</div><div class="divSectionBlock"><h3>Acknowledgements</h3>This work was supported by the Amazon AWS Machine Learning Research grant.</div><div class="divSectionBlock"><h3>References</h3><p>1. Hennig, J&uuml;rgen. "Multiecho imaging sequences with low refocusing flip angles." <em>Journal of Magnetic Resonance (1988)</em> 78.3 (1988): 397-407.</p><p>2. Weigel, Matthias. "Extended phase graphs: dephasing, RF pulses, and echoes‐pure and simple." <em>Journal of Magnetic Resonance Imaging</em> 41.2 (2015): 266-295.</p><p>3. Ben‐Eliezer, Noam, Daniel K. Sodickson, and Kai Tobias Block. "Rapid and accurate T2 mapping from multi&ndash;spin‐echo data using Bloch‐simulation‐based reconstruction." <em>Magnetic resonance in medicine</em> 73.2 (2015): 809-817.</p><p>4. McPhee, Kelly C., and Alan H. Wilman. "Transverse relaxation and flip angle mapping: evaluation of simultaneous and independent methods using multiple spin echoes." <em>Magnetic resonance in medicine</em> 77.5 (2017): 2057-2065.</p><p>5. Hargreaves, Brian A., &ldquo;Extended phase graph Matlab algorithm.&rdquo; (2012) Available at https://web.stanford.edu/~bah/software/epg/. Downloaded Dec 2020.</p><p>6. Lamy, Julien, and P. Loureiro de Sousa, &ldquo;Sycomore: an MRI simulation toolkit.&rdquo; <em>Proceedings of the ISMRM 28th Annual Meeting, Online.</em> Vol. 4819. 2020.</p><p>7. Kellman, Michael R., et al. "Physics-based learned design: Optimized coded-illumination for quantitative phase imaging." IEEE Transactions on Computational Imaging 5.3 (2019): 344-353. </p><p>8. Paszke, Adam, et al. "Pytorch: An imperative style, high-performance deep learning library." <em>Advances in neural information processing systems.</em> 2019.</p><p>9. Ong, F., and M. Lustig. "SigPy: a python package for high performance iterative reconstruction." <em>Proceedings of the ISMRM 27th Annual Meeting, Montreal, Quebec, Canada.</em> Vol. 4819. 2019.</p><p>10. Martin, U., et al. "Berkeley Advanced Reconstruction Toolbox (BART)." <em>Proceedings of the 23rd Annual Meeting of ISMRM, Toronto, Canada.</em> 2015.</p><p>11. Fessler, J. A. "Michigan image reconstruction toolbox." (2018), available at https://web.eecs.umich.edu/~fessler/code/. Downloaded Dec 2020.</p><p>12. Tamir, Jonathan I., et al. "Computational MRI With Physics-Based Constraints: Application to Multicontrast and Quantitative Imaging." <em>IEEE Signal Processing Magazine</em> 37.1 (2020): 94-104.</p></div>
+</div>
+        
+</div>
+            
+<div class="col-lg-3">
+    <div id="ctl00_MainContent_ctl00_figures">
+        <h3>Figures</h3>
+        <div id="ctl00_MainContent_ctl00_figuresWrapper" class="figuresWrapper">
+	
+        
+        <div class="divSectionBlock"><a id="ctl00_MainContent_ctl00_lnkImage_1" class="thumbnail" data-lightbox="figureImages" data-title="Figure 1: (a) Organization of the three components of the EPG algorithm, (b) 100 signals simulated using various values of T1 and T2 for a multi-echo spin-echo sequence with 60-degree refocusing flip angles." href="images/2670/ISMRM2021-002670_Fig1.PNG" target="_blank"><img src="images/2670/thumbnail/ISMRM2021-002670_Fig1.PNG" border="0" style="text-align:center;" /></a><div class="thumbnailCaptions">Figure 1: (a) Organization of the three components of the EPG algorithm, (b) 100 signals simulated using various values of T1 and T2 for a multi-echo spin-echo sequence with 60-degree refocusing flip angles.</div><br /><a id="ctl00_MainContent_ctl00_lnkImage_2" class="thumbnail" data-lightbox="figureImages" data-title="Figure 2: A comparison of the time taken by the naive and our parallelized EPG simulators running on CPU and GPU respectively" href="images/2670/ISMRM2021-002670_Fig2.png" target="_blank"><img src="images/2670/thumbnail/ISMRM2021-002670_Fig2.png" border="0" style="text-align:center;" /></a><div class="thumbnailCaptions">Figure 2: A comparison of the time taken by the naive and our parallelized EPG simulators running on CPU and GPU respectively</div><br /><a id="ctl00_MainContent_ctl00_lnkImage_3" class="thumbnail" data-lightbox="figureImages" data-title="Figure 3: Code snippet showing two applications of the algorithm. Application 1 shows how to use the algorithm to generate signal values from a fast spin-echo simulation using the flip angle train, T1 and T2, TE, TR, and B1 parameters. Application 2 shows how to use auto-differentiation to estimate T2 relaxation using a least-squares solver with gradient descent." href="images/2670/ISMRM2021-002670_Fig3.png" target="_blank"><img src="images/2670/thumbnail/ISMRM2021-002670_Fig3.png" border="0" style="text-align:center;" /></a><div class="thumbnailCaptions">Figure 3: Code snippet showing two applications of the algorithm. Application 1 shows how to use the algorithm to generate signal values from a fast spin-echo simulation using the flip angle train, T1 and T2, TE, TR, and B1 parameters. Application 2 shows how to use auto-differentiation to estimate T2 relaxation using a least-squares solver with gradient descent.</div><br /><a id="ctl00_MainContent_ctl00_lnkImage_4" class="thumbnail" data-lightbox="figureImages" data-title="Figure 4: Images of the resulting (a) Proton Density map, (b) T2 map. (c) Optimized flip angles of a multi-echo spin-echo experiment using the Cramer Rao lower bound." href="images/2670/ISMRM2021-002670_Fig4.PNG" target="_blank"><img src="images/2670/thumbnail/ISMRM2021-002670_Fig4.PNG" border="0" style="text-align:center;" /></a><div class="thumbnailCaptions">Figure 4: Images of the resulting (a) Proton Density map, (b) T2 map. (c) Optimized flip angles of a multi-echo spin-echo experiment using the Cramer Rao lower bound.</div><br /><a id="ctl00_MainContent_ctl00_lnkImage_5" class="thumbnail" data-lightbox="figureImages" data-title="Figure 5: The simulator is combined with a fully connected neural network for estimating T1 and T2, where the flip angle train is optimized via auto-differentiation to minimize fitting error." href="images/2670/ISMRM2021-002670_Fig5.PNG" target="_blank"><img src="images/2670/thumbnail/ISMRM2021-002670_Fig5.PNG" border="0" style="text-align:center;" /></a><div class="thumbnailCaptions">Figure 5: The simulator is combined with a fully connected neural network for estimating T1 and T2, where the flip angle train is optimized via auto-differentiation to minimize fitting error.</div><br /></div>
+</div>
+    </div>
+</div>
+<div id="ctl00_MainContent_ctl00_divFooter" style="font-weight:bold">
+    <div class="col-lg-5 col-md-5 col-sm-5">
+        Proc. Intl. Soc. Mag. Reson. Med. 29 (2021)
+    </div>
+    <span id="ctl00_MainContent_ctl00_lblProgramNumber" class="col-7 col-md-7 col-sm-7">3754</span>
+</div>
+
+
+        </div>
+    
+</body>
+</html>
