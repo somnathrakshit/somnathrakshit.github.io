@@ -17,7 +17,7 @@ A complete list of projects can be found [here](/projects/).
 1. geograpy3 ([Details](/projects/project-geograpy3/), [Code](https://github.com/somnathrakshit/geograpy3))
 
 ## Publications
-1. **Somnath Rakshit**, A GPU-accelerated MRI Sequence Simulator for Differentiable Optimization and Learning. PhD Thesis, Spring 2021. ([PDF](files/RAKSHIT-THESIS-2021.pdf))
+1. **Somnath Rakshit**, A GPU-accelerated MRI Sequence Simulator for Differentiable Optimization and Learning. MS Thesis, Spring 2021. ([PDF](files/RAKSHIT-THESIS-2021.pdf))
 1. **Somnath Rakshit**, Ke Wang, and Jon Tamir, "A GPU-accelerated Extended Phase Graph Algorithm for differentiable optimization and learning". ISMRM 2021. ([Paper](/projects/project-mri-sim-py-epg/3754.html), [Slides](https://docs.google.com/presentation/d/e/2PACX-1vThgT-tp8b3dKC6VU3Tn6A0JYhMW9mc7Gy0uzNGoq6sEsfHaGe2JBWcnOrOujtoqnEYiNUN_NTZvnMB/pub?start=true&loop=false&delayms=60000&slide=id.p1))
 1. Nilavra Bhattacharya, **Somnath Rakshit**, Jacek Gwizdka, Paul Kogut (2020). Relevance Prediction from Eye-movements Using Semi-interpretable Convolutional Neural Networks. CHIIR 2020. ([Paper](https://dl.acm.org/doi/abs/10.1145/3343413.3377960), [Blog](/projects/relevance-prediction-eye-movement-cnn/), [Video](https://youtu.be/ZebBgUhL-EU), [Slides](https://www.slideshare.net/nilavrabhattacharya/can-ai-say-from-our-eyes-when-we-read-relevant-information))
 1. Michał Denkiewicz, Indrajit Saha, **Somnath Rakshit**, Jnanendra Prasad Sarkar, Dariusz Plewczynski, Identification of Breast Cancer subtype specific MicroRNAs using Survival Analysis to find their role in transcriptomic regulation, Frontiers in genetics (2019). ([Paper](https://doi.org/10.3389/fgene.2019.01047))
