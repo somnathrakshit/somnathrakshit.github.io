@@ -6,5 +6,5 @@ First, Microsoft Azure Vision API was used to obtain the tags for each image.</d
 In this tutorial, I will be showing how to use Pandas to sort rows based on different criterion.
 You can run a colab notebook containing all code present in this post by clicking here.</description></item><item><title>geograpy3</title><link>https://somnath.pages.dev/projects/project-geograpy3/</link><pubDate>Mon, 10 Sep 2018 00:00:00 +0000</pubDate><guid>https://somnath.pages.dev/projects/project-geograpy3/</guid><description>geograpy3 geograpy3 extracts place names from a URL or text, and adds context to those names &amp;ndash; for example distinguishing between a country, region or city. It is a fork of Geograpy2, which is itself a fork of geograpy and inherits most of it, but solves several problems (such as support for utf8, places names with multiple words, confusion over homonyms etc). Also, geograpy3 is compatible with Python 3.6+, unlike Geography2.</description></item><item><title>Contact</title><link>https://somnath.pages.dev/contact/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://somnath.pages.dev/contact/</guid><description> Email: firstname at utexas dot edu Mailing Address UTA 5.410,
 1616, Guadalupe St
-Austin, TX 78741
+Austin, TX 78701
 United States of America</description></item></channel></rss>
