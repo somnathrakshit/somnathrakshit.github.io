@@ -1,6 +1,6 @@
 title = "Somnath Rakshit"
 description = "Somnath Rakshit's personal homepage"
-baseURL = "https://somnath.pages.dev"
+baseURL = "https://somnathr.com"
 theme = "researcher"
 disableKinds = ["taxonomy", "term"]
 enableEmoji = true
@@ -12,7 +12,7 @@ googleAnalytics = ""  # add your tracking id
   description = "Somnath Rakshit's personal website"
   favicon = "/favicon.ico"  # path to a .ico to use as favicon
   [params.footer]
-    text = "Copyright Somnath Rakshit, 2021"
+    text = "Copyright Somnath Rakshit, 2022"
     url = "https://github.com/somnathrakshit"
 
 [permalinks]
