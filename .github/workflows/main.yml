@@ -20,18 +20,18 @@ jobs:
     - name: Setup Hugo
       uses: peaceiris/actions-hugo@v2
       with:
-        hugo-version: '0.75.0'
+        hugo-version: '0.98.0'
         extended: true
 
     - name: Build
-      run: hugo --gc --minify --cleanDestinationDir
+      run: hugo --gc --minify
 
     - name: Deploy
-      uses: peaceiris/actions-gh-pages@v2
-      env:
-        ACTIONS_DEPLOY_KEY: ${{ secrets.ACTIONS_DEPLOY_KEY }}
-        PUBLISH_BRANCH: master
-        PUBLISH_DIR: ./public
+      uses: peaceiris/actions-gh-pages@v3
+      with:
+        deploy_key: ${{ secrets.ACTIONS_DEPLOY_KEY }}
+        publish_dir: ./public
+        publish_branch: master
 
     - name: Send success notification to Telegram
       if: success()
