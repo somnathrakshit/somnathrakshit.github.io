@@ -1,50 +1,106 @@
-title = "Somnath Rakshit"
-description = "Somnath Rakshit's personal homepage"
-baseURL = "https://somnathr.com"
-theme = "researcher"
-disableKinds = ["taxonomy", "term"]
-enableEmoji = true
-math = false  # enable KaTeX (https://katex.org/) globally
-googleAnalytics = ""  # add your tracking id
-
-[params]
-  author = "Somnath Rakshit"
-  description = "Somnath Rakshit's personal website"
-  favicon = "/favicon.ico"  # path to a .ico to use as favicon
-  [params.footer]
-    text = "Copyright Somnath Rakshit, 2022"
-    url = "https://github.com/somnathrakshit"
-
-[permalinks]
-  "/" = "/:filename"
-
-[menu]
-  [[menu.main]]
-    name = "Home"
-    url = "/"
-    weight = 1
-  [[menu.main]]
-    name = "Resume"
-    url = "/files/somnathrakshit_resume.pdf"
-    weight = 2
-  [[menu.main]]
-    name = "Projects"
-    url = "/projects"
-    weight = 3
-  [[menu.main]]
-    name = "Musings"
-    url = "/musings"
-    weight = 4
-  [[menu.main]]
-    name = "Contact"
-    url = "/contact"
-    weight = 5
+baseurl = "/"
+languageCode = "en-us"
+theme = "terminal"
+paginate = 5
 
 [markup.goldmark.renderer]
-  unsafe = true  # allow raw HTML in markdown files
+  unsafe= true
 
-[markup]
-  [markup.tableOfContents]
-    startLevel = 2
-    endLevel = 5
-    ordered = false
+[params]
+  # dir name of your main content (default is `content/posts`).
+  # the list of set content will show up on your index page (baseurl).
+  contentTypeName = "content"
+
+  # ["orange", "blue", "red", "green", "pink"]
+  themeColor = "orange"
+
+  # if you set this to 0, only submenu trigger will be visible
+  showMenuItems = 4
+
+  # show selector to switch language
+  showLanguageSelector = false
+
+  # set theme to full screen width
+  fullWidthTheme = false
+
+  # center theme with default width
+  centerTheme = true
+
+  # if your resource directory contains an image called `cover.(jpg|png|webp)`,
+  # then the file will be used as a cover automatically.
+  # With this option you don't have to put the `cover` param in a front-matter.
+  autoCover = true
+
+  # set post to show the last updated
+  # If you use git, you can set `enableGitInfo` to `true` and then post will automatically get the last updated
+  showLastUpdated = false
+
+  # set a custom favicon (default is a `themeColor` square)
+  # favicon = "favicon.ico"
+
+  # Provide a string as a prefix for the last update date. By default, it looks like this: 2020-xx-xx [Updated: 2020-xx-xx] :: Author
+  # updatedDatePrefix = "Updated"
+
+  # set all headings to their default size (depending on browser settings)
+  # oneHeadingSize = true # default
+
+  # whether to show a page's estimated reading time
+  # readingTime = false # default
+
+  # whether to show a table of contents
+  # can be overridden in a page's front-matter
+  # Toc = false # default
+
+  # set title for the table of contents
+  # can be overridden in a page's front-matter
+  # TocTitle = "Table of Contents" # default
+
+
+[params.twitter]
+  # set Twitter handles for Twitter cards
+  # see https://developer.twitter.com/en/docs/tweets/optimize-with-cards/guides/getting-started#card-and-content-attribution
+  # do not include @
+  creator = ""
+  site = ""
+
+[languages]
+  [languages.en]
+    languageName = "English"
+    title = "Terminal"
+    subtitle = "A simple, retro theme for Hugo"
+    owner = ""
+    keywords = ""
+    copyright = ""
+    menuMore = "Show more"
+    readMore = "Read more"
+    readOtherPosts = "Read other posts"
+    newerPosts = "Newer posts"
+    olderPosts = "Older posts"
+    missingContentMessage = "Page not found..."
+    missingBackButtonLabel = "Back to home page"
+
+    [languages.en.params.logo]
+      logoText = "Somnath Rakshit"
+      logoHomeLink = "/"
+
+    [languages.en.menu]
+
+      [[languages.en.menu.main]]
+        identifier = "Blog"
+        name = "Blog"
+        url = "/blog"
+
+      [[languages.en.menu.main]]
+        identifier = "Projects"
+        name = "Projects"
+        url = "/projects"
+
+      [[languages.en.menu.main]]
+        identifier = "Contact"
+        name = "Contact"
+        url = "/contact"
+      
+      [[languages.en.menu.main]]
+        identifier = "Resume"
+        name = "Resume"
+        url = "/files/somnathrakshit_resume.pdf"
