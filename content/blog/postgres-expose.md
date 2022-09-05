@@ -76,4 +76,15 @@ FROM pg_catalog.pg_stat_ssl ssl, pg_catalog.pg_stat_activity activity
 WHERE ssl.pid = activity.pid
 LIMIT 100
 ```
-That's it! You can now run your own PostgreSQL instance on the web.
+That's it! You can now run your own PostgreSQL instance on the web. 
+
+## References
+1. https://linuxconfig.org/ubuntu-22-04-postgresql-installation
+1. https://www.learnitguide.net/2022/04/install-certbot-on-ubuntu.html
+1.  https://docs.min.io/docs/generate-let-s-encypt-certificate-using-concert-for-minio.html
+1. https://loganmarchione.com/2020/10/securing-postgres-connections-using-lets-encrypt-certificates/
+1. https://medium.com/coding-blocks/creating-user-database-and-adding-access-on-postgresql-8bfcd2f4a91e
+
+All commands are available on this Github Gist.
+
+<script src="https://gist.github.com/somnathrakshit/4d4cd4c19f13013075164490dc4b6827.js"></script>
