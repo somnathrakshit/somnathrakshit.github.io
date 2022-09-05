@@ -55,6 +55,14 @@ sudo chmod 600 /etc/postgresql/$VERSION/main/fullchain.pem /etc/postgresql/$VERS
 sudo chown postgres:postgres /etc/postgresql/$VERSION/main/fullchain.pem /etc/postgresql/$VERSION/main/privkey.pem
 sudo systemctl restart postgresql
 ```
+Remember that these SSL certificates are valid for 90 days and should be updated every 60 days. One way of automating this process is by using `cron`.
+```bash
+crontab -e
+```
+Now go to the last line and paste the text given below. Make sure to replace $HOSTNAME and $VERSION with their actual values before saving. This command may look messy but it gets the job done.
+```markdown
+02  08  *   *   *   /opt/certbot/bin/certbot renew --post-hook "sudo cp /etc/letsencrypt/live/$HOSTNAME/fullchain.pem /etc/postgresql/$VERSION/main/fullchain.pem && sudo cp /etc/letsencrypt/live/$HOSTNAME/privkey.pem /etc/postgresql/$VERSION/main/privkey.pem && sudo chmod 600 /etc/postgresql/$VERSION/main/fullchain.pem /etc/postgresql/$VERSION/main/privkey.pem && sudo chown postgres:postgres /etc/postgresql/$VERSION/main/fullchain.pem /etc/postgresql/$VERSION/main/privkey.pem && sudo systemctl restart postgresql" --quiet
+```
 That's it, we should be able to create test database now.
 ```bash
 sudo -u postgres psql
