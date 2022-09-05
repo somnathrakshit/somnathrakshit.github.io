@@ -2,7 +2,6 @@
 title: "My Git Command Collection"
 date: 2021-03-15
 ---
-# My Git Command Collection
 Like many other people, I tend to be frustrated often trying to find the right command while using Git. This document is an attempt to collect as many useful commands from various places on the internet to make commands easier to find in a single location. I used some excellant resources such as [this](https://sethrobertson.github.io/GitFixUm/fixup.html) while creating this.
 
 ## Before You Begin

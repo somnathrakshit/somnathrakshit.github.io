@@ -2,8 +2,6 @@
 title: "A Comprehensive Guide to Sorting in Pandas"
 date: 2019-06-01
 ---
-# A Comprehensive Guide to Sorting in Pandas
-
 In order to sort rows in `Pandas`, you can use the `sort_values()` function. I have taken examples from this excellant [blog](https://datatofish.com/sort-pandas-dataframe/). Although it shows a lot of the use cases covered here, the last case is absent pretty much everywhere.
 
 In this tutorial, I will be showing how to use `Pandas` to sort rows based on different criterion.
