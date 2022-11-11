@@ -103,4 +103,4 @@ paginate = 5
       [[languages.en.menu.main]]
         identifier = "Resume"
         name = "Resume"
-        url = "/files/Somnath_Resume.pdf"
+        url = "/files/somnath_resume.pdf"
