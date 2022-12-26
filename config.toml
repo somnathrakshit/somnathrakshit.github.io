@@ -1,4 +1,4 @@
-baseurl = "http://somnathr.com"
+baseurl = "http://somnathr.com/"
 languageCode = "en-us"
 theme = "terminal"
 paginate = 5
