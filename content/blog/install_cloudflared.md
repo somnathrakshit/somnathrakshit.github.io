@@ -67,8 +67,9 @@ The `run` command will connect cloudflared to Cloudflare's edge network using th
 cloudflared tunnel run $NAME
 ```
 ## Step 7: Run Tunnel as a service
-By running the following command, the tunnel can be installed as a system service which allows the tunnel to run at boot automatically as launch daemon. By default, the tunnel expects to find the configuration file in the default directory, `~/.cloudflared/config.yml` but to run tunnel as a service, we might need to move the `config.yml` file to `~/etc/cloudflared/`.
+By running the following command, the tunnel can be installed as a system service which allows the tunnel to run at boot automatically as launch daemon. By default, the tunnel expects to find the configuration file in the default directory, `~/.cloudflared/config.yml` but to run tunnel as a service, we might need to move the `config.yml` file to `/etc/cloudflared/`.
 ```bash
+sudo mkdir -p /etc/cloudflared/
 sudo mv ~/.cloudflared/config.yml /etc/cloudflared/
 ```
 Now, we are ready to run Tunnel as a service utilizing the command below
