@@ -1,11 +1,269 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Somnath Rakshit's personal website on Somnath Rakshit</title><link>/</link><description>Recent content in Somnath Rakshit's personal website on Somnath Rakshit</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Mon, 26 Dec 2022 00:00:00 +0000</lastBuildDate><atom:link href="/index.xml" rel="self" type="application/rss+xml"/><item><title>Install Mastodon using Docker on Linux and expose instance using Cloudflare Tunnels</title><link>/blog/install_mastodon/</link><pubDate>Mon, 26 Dec 2022 00:00:00 +0000</pubDate><guid>/blog/install_mastodon/</guid><description>This post is about the following:
-Setup Cloudflare Tunnels to access your website publicly without the risks of opening ports on your router. Install Docker and Docker-Compose on Linux. Install Postgres database using Docker. Install Mastodon on Docker</description><content>&lt;p>This post is about the following:&lt;/p>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Somnath Rakshit's personal website on Somnath Rakshit</title><link>http://somnathr.com/</link><description>Recent content in Somnath Rakshit's personal website on Somnath Rakshit</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Mon, 26 Dec 2022 00:00:00 +0000</lastBuildDate><atom:link href="http://somnathr.com/index.xml" rel="self" type="application/rss+xml"/><item><title>Install Mastodon using Docker on Linux and expose instance using Cloudflare Tunnels</title><link>http://somnathr.com/blog/install_mastodon/</link><pubDate>Mon, 26 Dec 2022 00:00:00 +0000</pubDate><guid>http://somnathr.com/blog/install_mastodon/</guid><description>This post is about the following:
+Setup Cloudflare Tunnels to access your website publicly without the risks of opening ports on your router. Install Docker and Docker-Compose on Linux. Install Postgres database using Docker. Install Mastodon on Docker Setup Cloudflare Tunnels I have another post on how to setup Cloudflare Tunnels on Linux. Please follow those steps and then return here. Make sure you use port 3000 instead of port 80 as shown in the example config.</description><content>&lt;p>This post is about the following:&lt;/p>
 &lt;ol>
 &lt;li>Setup Cloudflare Tunnels to access your website publicly without the risks of opening ports on your router.&lt;/li>
 &lt;li>Install Docker and Docker-Compose on Linux.&lt;/li>
 &lt;li>Install Postgres database using Docker.&lt;/li>
 &lt;li>Install Mastodon on Docker&lt;/li>
-&lt;/ol></content></item><item><title>Install cloudflared to set up secure Cloudflare Tunnels for free</title><link>/blog/install_cloudflared/</link><pubDate>Mon, 05 Sep 2022 00:00:00 +0000</pubDate><guid>/blog/install_cloudflared/</guid><description>I have been using Cloudflare Tunnels increasingly over the last year to securely enable my applications to be reached publicly without having to open firewall ports in my server. However, installing cloudflared and then setting up tunnels is not very straightforward. So, I wanted to develop this tutorial as a way to get tunnels up and running quickly. These steps are tested on Ubuntu 22.04.
+&lt;/ol>
+&lt;h1 id="setup-cloudflare-tunnels">Setup Cloudflare Tunnels&lt;/h1>
+&lt;p>I have &lt;a href="http://somnathr.com/blog/install_cloudflared/">another post&lt;/a> on how to setup Cloudflare Tunnels on Linux. Please follow those steps and then return here. Make sure you use port &lt;code>3000&lt;/code> instead of port &lt;code>80&lt;/code> as shown in the example &lt;code>config.yml&lt;/code> file.&lt;/p>
+&lt;h1 id="install-docker-and-docker-compose">Install Docker and Docker-Compose&lt;/h1>
+&lt;p>The easiest way to install docker and docker-compose on Linux is to run these commands on your terminal:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>sudo apt-get update &lt;span style="color:#f92672">&amp;amp;&amp;amp;&lt;/span> sudo apt-get upgrade
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Docker provides an automated script that will install docker for you. Beware, always study the script before running it. To study the script, replace &lt;code>sh&lt;/code> by &lt;code>cat&lt;/code> in the below command. To run this script, use the below command, unchanged.&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>curl -fsSL test.docker.com -o get-docker.sh &lt;span style="color:#f92672">&amp;amp;&amp;amp;&lt;/span> sh get-docker.sh
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>After installing, you may want to add a non-root user to the docker user group so that you can run docker commands without using &lt;code>sudo&lt;/code> or logging in as root. The syntax for adding users to the Docker group is:
+&lt;code>sudo usermod -aG docker [user_name]&lt;/code>. To add current user to docker group, run:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>sudo usermod -aG docker &lt;span style="color:#e6db74">${&lt;/span>USER&lt;span style="color:#e6db74">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Now, log out of the server with the following command to allow this chage to take effect:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>exit
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Log back in and run these commands to install docker-compose.&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>sudo apt-get install -y libffi-dev libssl-dev
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>sudo apt install -y python3-dev
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>sudo apt-get install -y python3 python3-pip
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>sudo pip3 install docker-compose
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Now, enable the Docker system service to start your containers on boot. This is a very nice and important addition. With the following command you can configure your Raspberry Pi to automatically run the Docker system service, whenever it boots up.&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>sudo systemctl enable docker
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>The best way to test whether Docker has been set up correctly is to run the Hello World container.
+To do so, type in the following command:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>docker run hello-world
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Once it goes through all the steps, the output should inform you that your installation appears to be working correctly.&lt;/p>
+&lt;h1 id="install-postgres-using-docker">Install Postgres using Docker&lt;/h1>
+&lt;p>Run the commands below to install PostgreSQL using docker.&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>docker pull postgres
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>docker run --name postgresql -e POSTGRES_USER&lt;span style="color:#f92672">=&lt;/span>postgres -e POSTGRES_PASSWORD&lt;span style="color:#f92672">=&lt;/span>YOUR_STRONG_PASSWORD -p 5432:5432 -v /data:/var/lib/postgresql/data -d postgres
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>docker ps -a
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>The output of &lt;code>docker ps -a&lt;/code> should show the name of the container running and the port associated with it.&lt;/p>
+&lt;h1 id="install-mastodon-using-docker">Install Mastodon using Docker&lt;/h1>
+&lt;p>In order to install Mastodon, let us clone the repo from Github using these commands and create a branch called latest using the latest commit. Then, we will checkout this branch and use it to install Mastodon on our instance.&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>git clone https://github.com/mastodon/mastodon.git
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>cd mastodon
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>latest&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#66d9ef">$(&lt;/span>git describe --tags &lt;span style="color:#e6db74">`&lt;/span>git rev-list --tags --max-count&lt;span style="color:#f92672">=&lt;/span>1&lt;span style="color:#e6db74">`&lt;/span>&lt;span style="color:#66d9ef">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>git checkout $lastest -b &lt;span style="color:#e6db74">${&lt;/span>latest&lt;span style="color:#e6db74">}&lt;/span>-branch
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Now, replace docker-compose.yml file using the contents provided below.&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-yaml" data-lang="yaml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">version&lt;/span>: &lt;span style="color:#e6db74">&amp;#39;3&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">services&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">db&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">restart&lt;/span>: &lt;span style="color:#ae81ff">always&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">image&lt;/span>: &lt;span style="color:#ae81ff">postgres:14-alpine&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">container_name&lt;/span>: &lt;span style="color:#ae81ff">postgres&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">shm_size&lt;/span>: &lt;span style="color:#ae81ff">256mb&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">networks&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#ae81ff">internal_network&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">healthcheck&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">test&lt;/span>: [&lt;span style="color:#e6db74">&amp;#39;CMD&amp;#39;&lt;/span>, &lt;span style="color:#e6db74">&amp;#39;pg_isready&amp;#39;&lt;/span>, &lt;span style="color:#e6db74">&amp;#39;-U&amp;#39;&lt;/span>, &lt;span style="color:#e6db74">&amp;#39;postgres&amp;#39;&lt;/span>]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">volumes&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#ae81ff">./postgres14:/var/lib/postgresql/data&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">environment&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#e6db74">&amp;#39;POSTGRES_HOST_AUTH_METHOD=trust&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">redis&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">restart&lt;/span>: &lt;span style="color:#ae81ff">always&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">image&lt;/span>: &lt;span style="color:#ae81ff">redis:7-alpine&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">container_name&lt;/span>: &lt;span style="color:#ae81ff">redis&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">networks&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#ae81ff">internal_network&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">healthcheck&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">test&lt;/span>: [&lt;span style="color:#e6db74">&amp;#39;CMD&amp;#39;&lt;/span>, &lt;span style="color:#e6db74">&amp;#39;redis-cli&amp;#39;&lt;/span>, &lt;span style="color:#e6db74">&amp;#39;ping&amp;#39;&lt;/span>]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">volumes&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#ae81ff">./redis:/data&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># es:&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># restart: always&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># image: docker.elastic.co/elasticsearch/elasticsearch:7.17.4&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># environment:&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># - &amp;#34;ES_JAVA_OPTS=-Xms512m -Xmx512m -Des.enforce.bootstrap.checks=true&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># - &amp;#34;xpack.license.self_generated.type=basic&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># - &amp;#34;xpack.security.enabled=false&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># - &amp;#34;xpack.watcher.enabled=false&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># - &amp;#34;xpack.graph.enabled=false&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># - &amp;#34;xpack.ml.enabled=false&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># - &amp;#34;bootstrap.memory_lock=true&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># - &amp;#34;cluster.name=es-mastodon&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># - &amp;#34;discovery.type=single-node&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># - &amp;#34;thread_pool.write.queue_size=1000&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># networks:&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># - external_network&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># - internal_network&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># healthcheck:&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># test: [&amp;#34;CMD-SHELL&amp;#34;, &amp;#34;curl --silent --fail localhost:9200/_cluster/health || exit 1&amp;#34;]&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># volumes:&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># - ./elasticsearch:/usr/share/elasticsearch/data&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># ulimits:&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># memlock:&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># soft: -1&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># hard: -1&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># nofile:&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># soft: 65536&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># hard: 65536&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># ports:&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># - &amp;#39;127.0.0.1:9200:9200&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">web&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># build: .&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">image&lt;/span>: &lt;span style="color:#ae81ff">tootsuite/mastodon:v4.0.2&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">restart&lt;/span>: &lt;span style="color:#ae81ff">always&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">container_name&lt;/span>: &lt;span style="color:#ae81ff">web&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">env_file&lt;/span>: &lt;span style="color:#ae81ff">.env.production&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">command&lt;/span>: &lt;span style="color:#ae81ff">bash -c &amp;#34;rm -f /mastodon/tmp/pids/server.pid; bundle exec rails s -p 3000&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">networks&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#ae81ff">external_network&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#ae81ff">internal_network&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">healthcheck&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># prettier-ignore&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">test&lt;/span>: [&lt;span style="color:#e6db74">&amp;#39;CMD-SHELL&amp;#39;&lt;/span>, &lt;span style="color:#e6db74">&amp;#39;wget -q --spider --proxy=off localhost:3000/health || exit 1&amp;#39;&lt;/span>]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">ports&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#e6db74">&amp;#39;127.0.0.1:3000:3000&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">depends_on&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#ae81ff">db&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#ae81ff">redis&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># - es&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">volumes&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#ae81ff">./public/system:/mastodon/public/system&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">streaming&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># build: .&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">image&lt;/span>: &lt;span style="color:#ae81ff">tootsuite/mastodon:v4.0.2&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">restart&lt;/span>: &lt;span style="color:#ae81ff">always&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">container_name&lt;/span>: &lt;span style="color:#ae81ff">streaming&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">env_file&lt;/span>: &lt;span style="color:#ae81ff">.env.production&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">command&lt;/span>: &lt;span style="color:#ae81ff">node ./streaming&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">networks&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#ae81ff">external_network&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#ae81ff">internal_network&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">healthcheck&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># prettier-ignore&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">test&lt;/span>: [&lt;span style="color:#e6db74">&amp;#39;CMD-SHELL&amp;#39;&lt;/span>, &lt;span style="color:#e6db74">&amp;#39;wget -q --spider --proxy=off localhost:4000/api/v1/streaming/health || exit 1&amp;#39;&lt;/span>]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">ports&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#e6db74">&amp;#39;127.0.0.1:4000:4000&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">depends_on&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#ae81ff">db&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#ae81ff">redis&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">sidekiq&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># build: .&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">image&lt;/span>: &lt;span style="color:#ae81ff">tootsuite/mastodon:v4.0.2&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">restart&lt;/span>: &lt;span style="color:#ae81ff">always&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">container_name&lt;/span>: &lt;span style="color:#ae81ff">sidekiq&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">env_file&lt;/span>: &lt;span style="color:#ae81ff">.env.production&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">command&lt;/span>: &lt;span style="color:#ae81ff">bundle exec sidekiq&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">depends_on&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#ae81ff">db&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#ae81ff">redis&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">networks&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#ae81ff">external_network&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#ae81ff">internal_network&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">volumes&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#ae81ff">./public/system:/mastodon/public/system&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">healthcheck&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">test&lt;/span>: [&lt;span style="color:#e6db74">&amp;#39;CMD-SHELL&amp;#39;&lt;/span>, &lt;span style="color:#e6db74">&amp;#34;ps aux | grep &amp;#39;[s]idekiq\ 6&amp;#39; || false&amp;#34;&lt;/span>]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e">## Uncomment to enable federation with tor instances along with adding the following ENV variables&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e">## http_proxy=http://privoxy:8118&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e">## ALLOW_ACCESS_TO_HIDDEN_SERVICE=true&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># tor:&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># image: sirboops/tor&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># networks:&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># - external_network&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># - internal_network&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e">#&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># privoxy:&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># image: sirboops/privoxy&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># volumes:&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># - ./priv-config:/opt/config&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># networks:&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># - external_network&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># - internal_network&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">networks&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">external_network&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">internal_network&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">internal&lt;/span>: &lt;span style="color:#66d9ef">true&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>You don&amp;rsquo;t need to enable the es instance unless you intend to enable fulltext searching (which is outside the scope of this post). We&amp;rsquo;re almost ready to launch Mastodon&amp;rsquo;s setup utility.&lt;/p>
+&lt;p>However, if we simply try and launch setup, Docker will refuse to start the containers because .env.production doesn&amp;rsquo;t exist.&lt;/p>
+&lt;p>I had initially just touch&amp;rsquo;d the file (because you won&amp;rsquo;t know what to put in it until after setup is complete), however, doing this leads to setup failing part way through.&lt;/p>
+&lt;p>There&amp;rsquo;s a step where the setup script exports environment variables for use by later steps. However, some of those steps execute within a different container and variables exported in one container won&amp;rsquo;t be available to another, so the streaming container fails to connect to Redis (because it tries to connect to the default - localhost rather than the redis container).&lt;/p>
+&lt;p>To resolve this, we start by creating .env.production with known connection details (replace the Database password with the correct value)&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>cat &lt;span style="color:#e6db74">&amp;lt;&amp;lt; EOM &amp;gt; .env.production
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74">DB_HOST=db
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74">DB_PORT=5432
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74">DB_NAME=mastodon
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74">DB_USER=mastodon
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74">DB_PASS=&amp;lt;replace&amp;gt;
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74">REDIS_HOST=redis
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74">REDIS_PORT=6379
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74">REDIS_PASSWORD=
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74">EOM&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>(REDIS_PASSWORD is supposed to have an empty value in the above).&lt;/p>
+&lt;p>With this file created, we&amp;rsquo;re ready to fire off the setup process&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>docker-compose run --rm web bundle exec rake mastodon:setup
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>This will prompt you for some information:&lt;/p>
+&lt;pre tabindex="0">&lt;code>Domain name: mastodon.bentasker.co.uk
+Single user mode disables registrations and redirects the landing page to your public profile.
+Do you want to enable single user mode? No
+Are you using Docker to run Mastodon? Yes
+PostgreSQL host: db
+PostgreSQL port: 5432
+Name of PostgreSQL database: postgres
+Name of PostgreSQL user: mastodon
+Password of PostgreSQL user:
+Database configuration works!
+Redis host: redis
+Redis port: 6379
+Redis password:
+Redis configuration works!
+Do you want to store uploaded files on the cloud? No
+Do you want to send e-mails from localhost? No
+&lt;/code>&lt;/pre>&lt;p>You&amp;rsquo;ll be prompted for SMTP details.&lt;/p>
+&lt;p>Once you&amp;rsquo;ve provided all the necessary information, it&amp;rsquo;ll print a bunch of environment variables&lt;/p>
+&lt;pre tabindex="0">&lt;code>LOCAL_DOMAIN=mastodon.bentasker.co.uk
+SINGLE_USER_MODE=false
+SECRET_KEY_BASE=&amp;lt;redacted&amp;gt;
+OTP_SECRET=&amp;lt;redacted&amp;gt;
+VAPID_PRIVATE_KEY=&amp;lt;redacted&amp;gt;
+VAPID_PUBLIC_KEY=&amp;lt;redacted&amp;gt;
+DB_HOST=db
+DB_PORT=5432
+DB_NAME=mastodon
+DB_USER=mastodon
+DB_PASS=&amp;lt;redacted&amp;gt;
+REDIS_HOST=redis
+REDIS_PORT=6379
+REDIS_PASSWORD=
+SMTP_SERVER=&amp;lt;redacted&amp;gt;
+SMTP_PORT=587
+SMTP_LOGIN=&amp;lt;redacted&amp;gt;
+SMTP_PASSWORD=&amp;lt;redacted&amp;gt;
+SMTP_AUTH_METHOD=plain
+SMTP_OPENSSL_VERIFY_MODE=peer
+SMTP_ENABLE_STARTTLS=always
+SMTP_FROM_ADDRESS=&amp;lt;redacted&amp;gt;
+&lt;/code>&lt;/pre>&lt;p>Take a copy of these, and in another terminal, save them into &lt;code>.env.production&lt;/code> (you can remove the lines added earlier).&lt;/p>
+&lt;p>The setup script will ask whether you want to create the admin user, and once that&amp;rsquo;s done will print the initial auto-generated password for this account.&lt;/p>
+&lt;pre tabindex="0">&lt;code>Do you want to create an admin user straight away? Yes
+Username: admin
+E-mail: &amp;lt;redacted&amp;gt;
+You can login with the password: &amp;lt;redacted&amp;gt;
+You can change your password once you login.
+&lt;/code>&lt;/pre>&lt;p>The initial setup is now complete, and the container should exit.&lt;/p>
+&lt;p>If the process failed for some reason, once you&amp;rsquo;ve figured out what you need to correct, you can&amp;rsquo;t just re-run the setup script: you&amp;rsquo;ll need to add the following to &lt;code>.env.production&lt;/code> first&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># Don&amp;#39;t add this unless your initial setup failed&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>DISABLE_DATABASE_ENVIRONMENT_CHECK&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#ae81ff">1&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>On your re-run, when it asks you if you want to proceed with destroying the database, choose &lt;code>Yes&lt;/code> (otherwise you&amp;rsquo;ll run into key constraints when it tries to create the admin user).&lt;/p>
+&lt;p>We now want to briefly run the containers. This will cause the volume directories to be created on disk so that we can set permissions appropriately (reducing risk if something else gets compromised)&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>docker-compose up -d &lt;span style="color:#75715e"># will take a bit&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>docker-compose down
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Fix permissions&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>sudo chown -R 70:70 postgres
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>sudo chown -R 991:991 public/
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>It&amp;rsquo;s time to bring the containers up&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>docker-compose up -d
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>The system is now up and running: the web container will be listening on the loopback interface for port 3000, and streaming is on 4000.&lt;/p>
+&lt;h1 id="references">References&lt;/h1>
+&lt;ol>
+&lt;li>&lt;a href="https://dev.to/elalemanyo/how-to-install-docker-and-docker-compose-on-raspberry-pi-1mo">https://dev.to/elalemanyo/how-to-install-docker-and-docker-compose-on-raspberry-pi-1mo&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://hevodata.com/learn/docker-postgresql/">https://hevodata.com/learn/docker-postgresql/&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://www.bentasker.co.uk/posts/blog/general/running-mastodon-in-docker-compose.html">https://www.bentasker.co.uk/posts/blog/general/running-mastodon-in-docker-compose.html&lt;/a>&lt;/li>
+&lt;/ol></content></item><item><title>Install cloudflared to set up secure Cloudflare Tunnels for free</title><link>http://somnathr.com/blog/install_cloudflared/</link><pubDate>Mon, 05 Sep 2022 00:00:00 +0000</pubDate><guid>http://somnathr.com/blog/install_cloudflared/</guid><description>I have been using Cloudflare Tunnels increasingly over the last year to securely enable my applications to be reached publicly without having to open firewall ports in my server. However, installing cloudflared and then setting up tunnels is not very straightforward. So, I wanted to develop this tutorial as a way to get tunnels up and running quickly. These steps are tested on Ubuntu 22.04.
 Step 1: Install cloudflared Let us create env variables first.</description><content>&lt;p>I have been using Cloudflare Tunnels increasingly over the last year to securely enable my applications to be reached publicly without having to open firewall ports in my server. However, installing cloudflared and then setting up tunnels is not very straightforward. So, I wanted to develop this tutorial as a way to get tunnels up and running quickly. These steps are tested on Ubuntu 22.04.&lt;/p>
 &lt;h2 id="step-1-install-cloudflared">Step 1: Install cloudflared&lt;/h2>
 &lt;p>Let us create env variables first.&lt;/p>
@@ -59,7 +317,7 @@ Let&amp;rsquo;s create our config file and save in the default expected director
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h1 id="references">References&lt;/h1>
 &lt;ol>
 &lt;li>&lt;a href="https://dev.to/omarcloud20/a-free-cloudflare-tunnel-running-on-a-raspberry-pi-1jid">https://dev.to/omarcloud20/a-free-cloudflare-tunnel-running-on-a-raspberry-pi-1jid&lt;/a>&lt;/li>
-&lt;/ol></content></item><item><title>Create a PostgreSQL server and expose it remotely using Lets Encrypt</title><link>/blog/postgres-expose/</link><pubDate>Sun, 04 Sep 2022 00:00:00 +0000</pubDate><guid>/blog/postgres-expose/</guid><description>I have been trying for some days to create a PostgreSQL server and expose it on the web so that it can be accessed by external clients. This is useful to me for hosting several personal projects that require a database.
+&lt;/ol></content></item><item><title>Create a PostgreSQL server and expose it remotely using Lets Encrypt</title><link>http://somnathr.com/blog/postgres-expose/</link><pubDate>Sun, 04 Sep 2022 00:00:00 +0000</pubDate><guid>http://somnathr.com/blog/postgres-expose/</guid><description>I have been trying for some days to create a PostgreSQL server and expose it on the web so that it can be accessed by external clients. This is useful to me for hosting several personal projects that require a database.
 First things first, let&amp;rsquo;s create our env variables.
 HOSTNAME=&amp;#34;subdomain.domain.tld&amp;#34; # Hostname of your server EMAIL=&amp;#34;email@email.com&amp;#34; # Used for Let&amp;#39;s Encrypt certificate VERSION=&amp;#34;14&amp;#34; # PostgreSQL version NAME=&amp;#34;db&amp;#34; # Database name Let&amp;rsquo;s update our packages now.</description><content>&lt;p>I have been trying for some days to create a PostgreSQL server and expose it on the web so that it can be accessed by external clients. This is useful to me for hosting several personal projects that require a database.&lt;/p>
 &lt;p>First things first, let&amp;rsquo;s create our env variables.&lt;/p>
@@ -123,7 +381,7 @@ HOSTNAME=&amp;#34;subdomain.domain.tld&amp;#34; # Hostname of your server EMAIL=
 &lt;li>&lt;a href="https://medium.com/coding-blocks/creating-user-database-and-adding-access-on-postgresql-8bfcd2f4a91e">https://medium.com/coding-blocks/creating-user-database-and-adding-access-on-postgresql-8bfcd2f4a91e&lt;/a>&lt;/li>
 &lt;/ol>
 &lt;p>All commands are available on this Github Gist.&lt;/p>
-&lt;script src="https://gist.github.com/somnathrakshit/4d4cd4c19f13013075164490dc4b6827.js">&lt;/script></content></item><item><title>My Git Command Collection</title><link>/blog/git_commands/</link><pubDate>Mon, 15 Mar 2021 00:00:00 +0000</pubDate><guid>/blog/git_commands/</guid><description>Like many other people, I tend to be frustrated often trying to find the right command while using Git. This document is an attempt to collect as many useful commands from various places on the internet to make commands easier to find in a single location. I used some excellant resources such as this while creating this.
+&lt;script src="https://gist.github.com/somnathrakshit/4d4cd4c19f13013075164490dc4b6827.js">&lt;/script></content></item><item><title>My Git Command Collection</title><link>http://somnathr.com/blog/git_commands/</link><pubDate>Mon, 15 Mar 2021 00:00:00 +0000</pubDate><guid>http://somnathr.com/blog/git_commands/</guid><description>Like many other people, I tend to be frustrated often trying to find the right command while using Git. This document is an attempt to collect as many useful commands from various places on the internet to make commands easier to find in a single location. I used some excellant resources such as this while creating this.
 Before You Begin It is always a good idea to take a backup of your entire working directory including .</description><content>&lt;p>Like many other people, I tend to be frustrated often trying to find the right command while using Git. This document is an attempt to collect as many useful commands from various places on the internet to make commands easier to find in a single location. I used some excellant resources such as &lt;a href="https://sethrobertson.github.io/GitFixUm/fixup.html">this&lt;/a> while creating this.&lt;/p>
 &lt;h2 id="before-you-begin">Before You Begin&lt;/h2>
 &lt;p>It is always a good idea to take a backup of your entire working directory including .git before you attempt anything mentioned here.&lt;/p>
@@ -223,15 +481,15 @@ Obviously replace &lt;code>REF&lt;/code> with the reference or SHA you want to g
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>git checkout -b newbranch SHA
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Obviously replace &lt;code>SHA&lt;/code> in both commands with the reference you want to get back to.&lt;/p>
 &lt;p>Note that any other commits you have performed since you did that &amp;ldquo;bad&amp;rdquo; operation will then be lost. You could &lt;code>git cherry-pick&lt;/code> or &lt;code>git rebase -p --onto&lt;/code> those other commits over.&lt;/p>
-&lt;script async src="https://comments.app/js/widget.js?3" data-comments-app-website="u3US6zJB" data-limit="5" data-color="343638">&lt;/script></content></item><item><title>mri-sim-py.epg: A GPU-accelerated Extended Phase Graph Algorithm for differentiable optimization and learning</title><link>/projects/project-mri-sim-py-epg/</link><pubDate>Wed, 16 Dec 2020 00:00:00 +0000</pubDate><guid>/projects/project-mri-sim-py-epg/</guid><description>mri-sim-py.epg: A GPU-accelerated Extended Phase Graph Algorithm for differentiable optimization and learning Paper, Talk, Slides
+&lt;script async src="https://comments.app/js/widget.js?3" data-comments-app-website="u3US6zJB" data-limit="5" data-color="343638">&lt;/script></content></item><item><title>mri-sim-py.epg: A GPU-accelerated Extended Phase Graph Algorithm for differentiable optimization and learning</title><link>http://somnathr.com/projects/project-mri-sim-py-epg/</link><pubDate>Wed, 16 Dec 2020 00:00:00 +0000</pubDate><guid>http://somnathr.com/projects/project-mri-sim-py-epg/</guid><description>mri-sim-py.epg: A GPU-accelerated Extended Phase Graph Algorithm for differentiable optimization and learning Paper, Talk, Slides
 The Extended Phase Graph Algorithm is a powerful tool for MRI sequence simulation and quantitative fitting, but such simulators are mostly written to run on CPU only and (with some exception) are poorly parallelized. A parallelized simulator compatible with other learning-based frameworks would be a useful tool to optimize scan parameters. Thus, we created an open source, GPU-accelerated EPG simulator in PyTorch.</description><content>&lt;h1 id="mri-sim-pyepg-a-gpu-accelerated-extended-phase-graph-algorithm-for-differentiable-optimization-and-learning">mri-sim-py.epg: A GPU-accelerated Extended Phase Graph Algorithm for differentiable optimization and learning&lt;/h1>
-&lt;p>&lt;a href="/projects/project-mri-sim-py-epg/3754.html">Paper&lt;/a>, &lt;a href="https://youtu.be/EIexXEhh7Cc">Talk&lt;/a>, &lt;a href="https://docs.google.com/presentation/d/e/2PACX-1vThgT-tp8b3dKC6VU3Tn6A0JYhMW9mc7Gy0uzNGoq6sEsfHaGe2JBWcnOrOujtoqnEYiNUN_NTZvnMB/pub?start=true&amp;amp;loop=false&amp;amp;delayms=60000&amp;amp;slide=id.p1">Slides&lt;/a>&lt;br>
+&lt;p>&lt;a href="http://somnathr.com/projects/project-mri-sim-py-epg/3754.html">Paper&lt;/a>, &lt;a href="https://youtu.be/EIexXEhh7Cc">Talk&lt;/a>, &lt;a href="https://docs.google.com/presentation/d/e/2PACX-1vThgT-tp8b3dKC6VU3Tn6A0JYhMW9mc7Gy0uzNGoq6sEsfHaGe2JBWcnOrOujtoqnEYiNUN_NTZvnMB/pub?start=true&amp;amp;loop=false&amp;amp;delayms=60000&amp;amp;slide=id.p1">Slides&lt;/a>&lt;br>
 The Extended Phase Graph Algorithm is a powerful tool for MRI sequence simulation and quantitative fitting, but such simulators are mostly written to run on CPU only and (with some exception) are poorly parallelized. A parallelized simulator compatible with other learning-based frameworks would be a useful tool to optimize scan parameters. Thus, we created an open source, GPU-accelerated EPG simulator in PyTorch. Since the simulator is fully differentiable by means of automatic differentiation, it can be used to take derivatives with respect to sequence parameters, e.g. flip angles, as well as tissue parameters, e.g. T1 and T2.&lt;/p>
 &lt;p>We chose mri-sim-py as the host package because it already contains different algorithms for simulating signals and this was a natural extension. Python was chosen as it can be demonstrated easily by means of Jupyter notebooks and interfaced with PyTorch, a popular machine learning auto-differentiation framework. The EPG Algorithm has three components: RF excitation, gradient application, and tissue relaxation.&lt;/p>
 &lt;p>The latest version of this tool is available from the &lt;a href="https://github.com/utcsilab/mri-sim-py/tree/master/epg">Github repository&lt;/a> of mri-sim-py. Installation instructions are provided in the README file present there. Jupyter notebook containing an example is also available &lt;a href="https://github.com/utcsilab/mri-sim-py/blob/master/EPG_Parallel.ipynb">here&lt;/a>.&lt;/p>
 &lt;p>After successfully parallelizing the simulator, we increased its speed by almost 100,000 times. This work was submitted as an abstract in ISMRM virtual conference.&lt;/p>
 &lt;h2 id="acknowledgements">Acknowledgements&lt;/h2>
-&lt;p>This work was supported by the Amazon AWS Machine Learning Research grant.&lt;/p></content></item><item><title>Relevance Prediction from Eye-movements Using Semi-interpretable Convolutional Neural Networks</title><link>/projects/relevance-prediction-eye-movement-cnn/</link><pubDate>Thu, 13 Aug 2020 00:00:00 +0000</pubDate><guid>/projects/relevance-prediction-eye-movement-cnn/</guid><description>Relevance Prediction from Eye-movements Using Semi-interpretable Convolutional Neural Networks The primary purpose of Information Retrieval (IR) systems is to fetch content which is useful and relevant to people. IR systems have to cater to a variety of users, who may have wildly different mental models of what they consider to be useful and relevant.
+&lt;p>This work was supported by the Amazon AWS Machine Learning Research grant.&lt;/p></content></item><item><title>Relevance Prediction from Eye-movements Using Semi-interpretable Convolutional Neural Networks</title><link>http://somnathr.com/projects/relevance-prediction-eye-movement-cnn/</link><pubDate>Thu, 13 Aug 2020 00:00:00 +0000</pubDate><guid>http://somnathr.com/projects/relevance-prediction-eye-movement-cnn/</guid><description>Relevance Prediction from Eye-movements Using Semi-interpretable Convolutional Neural Networks The primary purpose of Information Retrieval (IR) systems is to fetch content which is useful and relevant to people. IR systems have to cater to a variety of users, who may have wildly different mental models of what they consider to be useful and relevant.
 Neuro-physiological methods, such as eye-tracking, provide an interesting avenue to observe users while they interact with information systems.</description><content>&lt;h1 id="relevance-prediction-from-eye-movements-using-semi-interpretable-convolutional-neural-networks">Relevance Prediction from Eye-movements Using Semi-interpretable Convolutional Neural Networks&lt;/h1>
 &lt;p>The primary purpose of Information Retrieval (IR) systems is to fetch content which is useful and relevant to people. IR systems have to cater to a variety of users, who may have wildly different mental models of what they consider to be useful and relevant.&lt;/p>
 &lt;p>Neuro-physiological methods, such as eye-tracking, provide an interesting avenue to observe users while they interact with information systems. Eye-tracking has been frequently used to assess if the screen-content is relevant to the user. Despite its many advantages such as being non-invasive and requiring very little effort, interpreting eye-tracking data is not straightforward.&lt;/p>
@@ -270,13 +528,13 @@ Neuro-physiological methods, such as eye-tracking, provide an interesting avenue
 &lt;p>We trained the models on the training set, and used the validation set for very basic hyper-parameter tuning (learning rate, number of epochs, optimizer momentum, etc.). Since our intention was to see whether the method works, and not to obtain the best benchmark performance, we performed minimal hyper-parameter tuning. The top portion of the results table reports the results from the TensorFlow-Keras implementation.&lt;/p>
 &lt;blockquote>
 &lt;p>We thank Splunk Inc. for the &lt;a href="https://www.splunk.com/en_us/blog/security/deep-learning-with-splunk-and-tensorflow-for-security-catching-the-fraudster-in-neural-networks-with-behavioral-biometrics.html">blog post&lt;/a> on using mouse trajectories for fraud detection, which gave us the idea to adapt this approach for relevance prediction from eye-movements.&lt;/p>
-&lt;/blockquote></content></item><item><title>Answerability Classification Using Hand-Crafted Features</title><link>/projects/project-answerability/</link><pubDate>Mon, 20 Apr 2020 00:00:00 +0000</pubDate><guid>/projects/project-answerability/</guid><description>Answerability Classification Using Hand-Crafted Features In this project, I competed with the members in my class on a challenge to predict whether a visual question is answerable or not by using a given image and an associated question in the form of a text. For this task, we were required to create a multi-modal (computer vision + natural language processing) classification system.
+&lt;/blockquote></content></item><item><title>Answerability Classification Using Hand-Crafted Features</title><link>http://somnathr.com/projects/project-answerability/</link><pubDate>Mon, 20 Apr 2020 00:00:00 +0000</pubDate><guid>http://somnathr.com/projects/project-answerability/</guid><description>Answerability Classification Using Hand-Crafted Features In this project, I competed with the members in my class on a challenge to predict whether a visual question is answerable or not by using a given image and an associated question in the form of a text. For this task, we were required to create a multi-modal (computer vision + natural language processing) classification system.
 First, Microsoft Azure Vision API was used to obtain the tags for each image.</description><content>&lt;h1 id="answerability-classification-using-hand-crafted-features">Answerability Classification Using Hand-Crafted Features&lt;/h1>
 &lt;p>In this project, I competed with the members in my class on a challenge to predict whether a visual question is answerable or not by using a given image and an associated question in the form of a text. For this task, we were required to create a multi-modal (computer vision + natural language processing) classification system.&lt;/p>
 &lt;p>First, Microsoft Azure Vision API was used to obtain the tags for each image. These tags were then joined together with spaces in between to create artifical sentences. Then, the TF-IDF representation for these artificially generated sentences were created to be used later as features. The TF-IDF representation for the questions were also created as features.&lt;/p>
 &lt;p>The two TF-IDF matrices were then stacked horizontally to create the unified feature set. We used this as the input dataset for our machine learning model, for which we selected random forest model using scikit-learn.&lt;/p>
 &lt;p>However, we saw that the dataset was quite imbalanced. Thus, we tried to resample the dataset so that the minority class had equal number of samples as the majority class. We did this by randomly copying the samples from the minority class. Finally, we ran the random forest classifier on both the balanced as well as the imbalanced dataset. We found that the results improved substantially.&lt;/p>
-&lt;p>Finally, we ran Grid Search to find the best hyperparameter for the random forest model and tested it on the validation set, which had not been resampled. We saw that when the number of estimators was equal to 1000, random forest model performed the best with respect to our testing metric, i.e. accuracy. This model was then submitted to run on the hidden test set. My model was then judged as the winner since it outperformed the models developed by all of my classmates.&lt;/p></content></item><item><title>A Comprehensive Guide to Sorting in Pandas</title><link>/blog/sorting_in_pandas/</link><pubDate>Sat, 01 Jun 2019 00:00:00 +0000</pubDate><guid>/blog/sorting_in_pandas/</guid><description>In order to sort rows in Pandas, you can use the sort_values() function. I have taken examples from this excellant blog. Although it shows a lot of the use cases covered here, the last case is absent pretty much everywhere.
+&lt;p>Finally, we ran Grid Search to find the best hyperparameter for the random forest model and tested it on the validation set, which had not been resampled. We saw that when the number of estimators was equal to 1000, random forest model performed the best with respect to our testing metric, i.e. accuracy. This model was then submitted to run on the hidden test set. My model was then judged as the winner since it outperformed the models developed by all of my classmates.&lt;/p></content></item><item><title>A Comprehensive Guide to Sorting in Pandas</title><link>http://somnathr.com/blog/sorting_in_pandas/</link><pubDate>Sat, 01 Jun 2019 00:00:00 +0000</pubDate><guid>http://somnathr.com/blog/sorting_in_pandas/</guid><description>In order to sort rows in Pandas, you can use the sort_values() function. I have taken examples from this excellant blog. Although it shows a lot of the use cases covered here, the last case is absent pretty much everywhere.
 In this tutorial, I will be showing how to use Pandas to sort rows based on different criterion.
 You can run a colab notebook containing all code present in this post by clicking here.</description><content>&lt;p>In order to sort rows in &lt;code>Pandas&lt;/code>, you can use the &lt;code>sort_values()&lt;/code> function. I have taken examples from this excellant &lt;a href="https://datatofish.com/sort-pandas-dataframe/">blog&lt;/a>. Although it shows a lot of the use cases covered here, the last case is absent pretty much everywhere.&lt;/p>
 &lt;p>In this tutorial, I will be showing how to use &lt;code>Pandas&lt;/code> to sort rows based on different criterion.&lt;/p>
@@ -730,9 +988,9 @@ text-align: right;
 &lt;/table>
 &lt;/div>
 &lt;p>You can know more about sorting in Pandas by visiting the &lt;a href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.sort_values.html">official documentation&lt;/a>.&lt;/p>
-&lt;script async src="https://comments.app/js/widget.js?3" data-comments-app-website="u3US6zJB" data-limit="5" data-color="343638">&lt;/script></content></item><item><title>geograpy3</title><link>/projects/project-geograpy3/</link><pubDate>Mon, 10 Sep 2018 00:00:00 +0000</pubDate><guid>/projects/project-geograpy3/</guid><description>geograpy3 geograpy3 extracts place names from a URL or text, and adds context to those names &amp;ndash; for example distinguishing between a country, region or city. It is a fork of Geograpy2, which is itself a fork of geograpy and inherits most of it, but solves several problems (such as support for utf8, places names with multiple words, confusion over homonyms etc). Also, geograpy3 is compatible with Python 3.6+, unlike Geography2.</description><content>&lt;h1 id="geograpy3">geograpy3&lt;/h1>
+&lt;script async src="https://comments.app/js/widget.js?3" data-comments-app-website="u3US6zJB" data-limit="5" data-color="343638">&lt;/script></content></item><item><title>geograpy3</title><link>http://somnathr.com/projects/project-geograpy3/</link><pubDate>Mon, 10 Sep 2018 00:00:00 +0000</pubDate><guid>http://somnathr.com/projects/project-geograpy3/</guid><description>geograpy3 geograpy3 extracts place names from a URL or text, and adds context to those names &amp;ndash; for example distinguishing between a country, region or city. It is a fork of Geograpy2, which is itself a fork of geograpy and inherits most of it, but solves several problems (such as support for utf8, places names with multiple words, confusion over homonyms etc). Also, geograpy3 is compatible with Python 3.6+, unlike Geography2.</description><content>&lt;h1 id="geograpy3">geograpy3&lt;/h1>
 &lt;p>&lt;a href="https://github.com/somnathrakshit/geograpy3">geograpy3&lt;/a> extracts place names from a URL or text, and adds context to those names &amp;ndash; for example distinguishing between a country, region or city. It is a fork of &lt;a href="https://github.com/Corollarium/geograpy2">Geograpy2&lt;/a>, which is itself a fork of &lt;a href="https://github.com/ushahidi/geograpy">geograpy&lt;/a> and inherits most of it, but solves several problems (such as support for utf8, places names with multiple words, confusion over homonyms etc). Also, geograpy3 is compatible with Python 3.6+, unlike Geography2. This project is under active development by &lt;a href="https://github.com/somnathrakshit/geograpy3/graphs/contributors">these people&lt;/a>. This project has been downloaded over 35k times as of Nov 2020.&lt;/p>
 &lt;p>This is installable from PyPi by running the following command.&lt;/p>
-&lt;p>&lt;code>pip install geograpy3&lt;/code>&lt;/p></content></item><item><title>Contact</title><link>/contact/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/contact/</guid><description> Email: firstname at utexas dot edu</description><content>&lt;ul>
+&lt;p>&lt;code>pip install geograpy3&lt;/code>&lt;/p></content></item><item><title>Contact</title><link>http://somnathr.com/contact/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>http://somnathr.com/contact/</guid><description> Email: firstname at utexas dot edu</description><content>&lt;ul>
 &lt;li>Email: firstname &lt;em>at&lt;/em> utexas &lt;em>dot&lt;/em> edu&lt;/li>
 &lt;/ul></content></item></channel></rss>

@@ -1,5 +1,227 @@
 <!doctype html><html lang=en><head><title>Install Mastodon using Docker on Linux and expose instance using Cloudflare Tunnels :: Somnath Rakshit</title><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=description content="This post is about the following:
- Setup Cloudflare Tunnels to access your website publicly without the risks of opening ports on your router. Install Docker and Docker-Compose on Linux. Install Postgres database using Docker. Install Mastodon on Docker  "><meta name=keywords content><meta name=robots content="noodp"><link rel=canonical href=/blog/install_mastodon/><link rel=stylesheet href=/assets/style.css><link rel=apple-touch-icon href=/img/apple-touch-icon-192x192.png><link rel="shortcut icon" href=/img/favicon/orange.png><meta name=twitter:card content="summary"><meta name=twitter:site content><meta name=twitter:creator content><meta property="og:locale" content="en"><meta property="og:type" content="article"><meta property="og:title" content="Install Mastodon using Docker on Linux and expose instance using Cloudflare Tunnels"><meta property="og:description" content="This post is about the following:
- Setup Cloudflare Tunnels to access your website publicly without the risks of opening ports on your router. Install Docker and Docker-Compose on Linux. Install Postgres database using Docker. Install Mastodon on Docker  "><meta property="og:url" content="/blog/install_mastodon/"><meta property="og:site_name" content="Somnath Rakshit"><meta property="og:image" content="/img/favicon/orange.png"><meta property="og:image:width" content="2048"><meta property="og:image:height" content="1024"><meta property="article:published_time" content="2022-12-26 00:00:00 +0000 UTC"></head><body class=orange><div class="container center headings--one-size"><header class=header><div class=header__inner><div class=header__logo><a href=/><div class=logo>Somnath Rakshit</div></a></div><div class=menu-trigger>menu</div></div><nav class=menu><ul class="menu__inner menu__inner--desktop"><li><a href=/blog>Blog</a></li><li><a href=/contact>Contact</a></li><li><a href=/projects>Projects</a></li><li><a href=/files/somnathrakshit_resume.pdf>Resume</a></li></ul><ul class="menu__inner menu__inner--mobile"><li><a href=/blog>Blog</a></li><li><a href=/contact>Contact</a></li><li><a href=/projects>Projects</a></li><li><a href=/files/somnathrakshit_resume.pdf>Resume</a></li></ul></nav></header><div class=content><div class=post><h1 class=post-title><a href=/blog/install_mastodon/>Install Mastodon using Docker on Linux and expose instance using Cloudflare Tunnels</a></h1><div class=post-meta><span class=post-date>2022-12-26</span></div><div class=post-content><div><p>This post is about the following:</p><ol><li>Setup Cloudflare Tunnels to access your website publicly without the risks of opening ports on your router.</li><li>Install Docker and Docker-Compose on Linux.</li><li>Install Postgres database using Docker.</li><li>Install Mastodon on Docker</li></ol></div></div></div></div><footer class=footer><div class=footer__inner><div class=copyright><span>© 2022 Powered by <a href=http://gohugo.io>Hugo</a></span>
-<span>:: Theme made by <a href=https://twitter.com/panr>panr</a></span></div></div></footer><script src=/assets/main.js></script>
-<script src=/assets/prism.js></script></div></body></html>
+ Setup Cloudflare Tunnels to access your website publicly without the risks of opening ports on your router. Install Docker and Docker-Compose on Linux. Install Postgres database using Docker. Install Mastodon on Docker  Setup Cloudflare Tunnels I have another post on how to setup Cloudflare Tunnels on Linux. Please follow those steps and then return here. Make sure you use port 3000 instead of port 80 as shown in the example config."><meta name=keywords content><meta name=robots content="noodp"><link rel=canonical href=http://somnathr.com/blog/install_mastodon/><link rel=stylesheet href=http://somnathr.com/assets/style.css><link rel=apple-touch-icon href=http://somnathr.com/img/apple-touch-icon-192x192.png><link rel="shortcut icon" href=http://somnathr.com/img/favicon/orange.png><meta name=twitter:card content="summary"><meta name=twitter:site content><meta name=twitter:creator content><meta property="og:locale" content="en"><meta property="og:type" content="article"><meta property="og:title" content="Install Mastodon using Docker on Linux and expose instance using Cloudflare Tunnels"><meta property="og:description" content="This post is about the following:
+ Setup Cloudflare Tunnels to access your website publicly without the risks of opening ports on your router. Install Docker and Docker-Compose on Linux. Install Postgres database using Docker. Install Mastodon on Docker  Setup Cloudflare Tunnels I have another post on how to setup Cloudflare Tunnels on Linux. Please follow those steps and then return here. Make sure you use port 3000 instead of port 80 as shown in the example config."><meta property="og:url" content="http://somnathr.com/blog/install_mastodon/"><meta property="og:site_name" content="Somnath Rakshit"><meta property="og:image" content="http://somnathr.com/img/favicon/orange.png"><meta property="og:image:width" content="2048"><meta property="og:image:height" content="1024"><meta property="article:published_time" content="2022-12-26 00:00:00 +0000 UTC"></head><body class=orange><div class="container center headings--one-size"><header class=header><div class=header__inner><div class=header__logo><a href=/><div class=logo>Somnath Rakshit</div></a></div><div class=menu-trigger>menu</div></div><nav class=menu><ul class="menu__inner menu__inner--desktop"><li><a href=/blog>Blog</a></li><li><a href=/contact>Contact</a></li><li><a href=/projects>Projects</a></li><li><a href=/files/somnathrakshit_resume.pdf>Resume</a></li></ul><ul class="menu__inner menu__inner--mobile"><li><a href=/blog>Blog</a></li><li><a href=/contact>Contact</a></li><li><a href=/projects>Projects</a></li><li><a href=/files/somnathrakshit_resume.pdf>Resume</a></li></ul></nav></header><div class=content><div class=post><h1 class=post-title><a href=http://somnathr.com/blog/install_mastodon/>Install Mastodon using Docker on Linux and expose instance using Cloudflare Tunnels</a></h1><div class=post-meta><span class=post-date>2022-12-26</span></div><div class=post-content><div><p>This post is about the following:</p><ol><li>Setup Cloudflare Tunnels to access your website publicly without the risks of opening ports on your router.</li><li>Install Docker and Docker-Compose on Linux.</li><li>Install Postgres database using Docker.</li><li>Install Mastodon on Docker</li></ol><h1 id=setup-cloudflare-tunnels>Setup Cloudflare Tunnels<a href=#setup-cloudflare-tunnels class=hanchor arialabel=Anchor>&#8983;</a></h1><p>I have <a href=http://somnathr.com/blog/install_cloudflared/>another post</a> on how to setup Cloudflare Tunnels on Linux. Please follow those steps and then return here. Make sure you use port <code>3000</code> instead of port <code>80</code> as shown in the example <code>config.yml</code> file.</p><h1 id=install-docker-and-docker-compose>Install Docker and Docker-Compose<a href=#install-docker-and-docker-compose class=hanchor arialabel=Anchor>&#8983;</a></h1><p>The easiest way to install docker and docker-compose on Linux is to run these commands on your terminal:</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>sudo apt-get update <span style=color:#f92672>&amp;&amp;</span> sudo apt-get upgrade
+</span></span></code></pre></div><p>Docker provides an automated script that will install docker for you. Beware, always study the script before running it. To study the script, replace <code>sh</code> by <code>cat</code> in the below command. To run this script, use the below command, unchanged.</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>curl -fsSL test.docker.com -o get-docker.sh <span style=color:#f92672>&amp;&amp;</span> sh get-docker.sh
+</span></span></code></pre></div><p>After installing, you may want to add a non-root user to the docker user group so that you can run docker commands without using <code>sudo</code> or logging in as root. The syntax for adding users to the Docker group is:
+<code>sudo usermod -aG docker [user_name]</code>. To add current user to docker group, run:</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>sudo usermod -aG docker <span style=color:#e6db74>${</span>USER<span style=color:#e6db74>}</span>
+</span></span></code></pre></div><p>Now, log out of the server with the following command to allow this chage to take effect:</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>exit
+</span></span></code></pre></div><p>Log back in and run these commands to install docker-compose.</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>sudo apt-get install -y libffi-dev libssl-dev
+</span></span><span style=display:flex><span>sudo apt install -y python3-dev
+</span></span><span style=display:flex><span>sudo apt-get install -y python3 python3-pip
+</span></span><span style=display:flex><span>sudo pip3 install docker-compose
+</span></span></code></pre></div><p>Now, enable the Docker system service to start your containers on boot. This is a very nice and important addition. With the following command you can configure your Raspberry Pi to automatically run the Docker system service, whenever it boots up.</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>sudo systemctl enable docker
+</span></span></code></pre></div><p>The best way to test whether Docker has been set up correctly is to run the Hello World container.
+To do so, type in the following command:</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>docker run hello-world
+</span></span></code></pre></div><p>Once it goes through all the steps, the output should inform you that your installation appears to be working correctly.</p><h1 id=install-postgres-using-docker>Install Postgres using Docker<a href=#install-postgres-using-docker class=hanchor arialabel=Anchor>&#8983;</a></h1><p>Run the commands below to install PostgreSQL using docker.</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>docker pull postgres
+</span></span><span style=display:flex><span>docker run --name postgresql -e POSTGRES_USER<span style=color:#f92672>=</span>postgres -e POSTGRES_PASSWORD<span style=color:#f92672>=</span>YOUR_STRONG_PASSWORD -p 5432:5432 -v /data:/var/lib/postgresql/data -d postgres
+</span></span><span style=display:flex><span>docker ps -a
+</span></span></code></pre></div><p>The output of <code>docker ps -a</code> should show the name of the container running and the port associated with it.</p><h1 id=install-mastodon-using-docker>Install Mastodon using Docker<a href=#install-mastodon-using-docker class=hanchor arialabel=Anchor>&#8983;</a></h1><p>In order to install Mastodon, let us clone the repo from Github using these commands and create a branch called latest using the latest commit. Then, we will checkout this branch and use it to install Mastodon on our instance.</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>git clone https://github.com/mastodon/mastodon.git
+</span></span><span style=display:flex><span>cd mastodon
+</span></span><span style=display:flex><span>latest<span style=color:#f92672>=</span><span style=color:#66d9ef>$(</span>git describe --tags <span style=color:#e6db74>`</span>git rev-list --tags --max-count<span style=color:#f92672>=</span>1<span style=color:#e6db74>`</span><span style=color:#66d9ef>)</span>
+</span></span><span style=display:flex><span>git checkout $lastest -b <span style=color:#e6db74>${</span>latest<span style=color:#e6db74>}</span>-branch
+</span></span></code></pre></div><p>Now, replace docker-compose.yml file using the contents provided below.</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-yaml data-lang=yaml><span style=display:flex><span><span style=color:#f92672>version</span>: <span style=color:#e6db74>&#39;3&#39;</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>services</span>:
+</span></span><span style=display:flex><span>  <span style=color:#f92672>db</span>:
+</span></span><span style=display:flex><span>    <span style=color:#f92672>restart</span>: <span style=color:#ae81ff>always</span>
+</span></span><span style=display:flex><span>    <span style=color:#f92672>image</span>: <span style=color:#ae81ff>postgres:14-alpine</span>
+</span></span><span style=display:flex><span>    <span style=color:#f92672>container_name</span>: <span style=color:#ae81ff>postgres</span>
+</span></span><span style=display:flex><span>    <span style=color:#f92672>shm_size</span>: <span style=color:#ae81ff>256mb</span>
+</span></span><span style=display:flex><span>    <span style=color:#f92672>networks</span>:
+</span></span><span style=display:flex><span>      - <span style=color:#ae81ff>internal_network</span>
+</span></span><span style=display:flex><span>    <span style=color:#f92672>healthcheck</span>:
+</span></span><span style=display:flex><span>      <span style=color:#f92672>test</span>: [<span style=color:#e6db74>&#39;CMD&#39;</span>, <span style=color:#e6db74>&#39;pg_isready&#39;</span>, <span style=color:#e6db74>&#39;-U&#39;</span>, <span style=color:#e6db74>&#39;postgres&#39;</span>]
+</span></span><span style=display:flex><span>    <span style=color:#f92672>volumes</span>:
+</span></span><span style=display:flex><span>      - <span style=color:#ae81ff>./postgres14:/var/lib/postgresql/data</span>
+</span></span><span style=display:flex><span>    <span style=color:#f92672>environment</span>:
+</span></span><span style=display:flex><span>      - <span style=color:#e6db74>&#39;POSTGRES_HOST_AUTH_METHOD=trust&#39;</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>  <span style=color:#f92672>redis</span>:
+</span></span><span style=display:flex><span>    <span style=color:#f92672>restart</span>: <span style=color:#ae81ff>always</span>
+</span></span><span style=display:flex><span>    <span style=color:#f92672>image</span>: <span style=color:#ae81ff>redis:7-alpine</span>
+</span></span><span style=display:flex><span>    <span style=color:#f92672>container_name</span>: <span style=color:#ae81ff>redis</span>
+</span></span><span style=display:flex><span>    <span style=color:#f92672>networks</span>:
+</span></span><span style=display:flex><span>      - <span style=color:#ae81ff>internal_network</span>
+</span></span><span style=display:flex><span>    <span style=color:#f92672>healthcheck</span>:
+</span></span><span style=display:flex><span>      <span style=color:#f92672>test</span>: [<span style=color:#e6db74>&#39;CMD&#39;</span>, <span style=color:#e6db74>&#39;redis-cli&#39;</span>, <span style=color:#e6db74>&#39;ping&#39;</span>]
+</span></span><span style=display:flex><span>    <span style=color:#f92672>volumes</span>:
+</span></span><span style=display:flex><span>      - <span style=color:#ae81ff>./redis:/data</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>  <span style=color:#75715e># es:</span>
+</span></span><span style=display:flex><span>  <span style=color:#75715e>#   restart: always</span>
+</span></span><span style=display:flex><span>  <span style=color:#75715e>#   image: docker.elastic.co/elasticsearch/elasticsearch:7.17.4</span>
+</span></span><span style=display:flex><span>  <span style=color:#75715e>#   environment:</span>
+</span></span><span style=display:flex><span>  <span style=color:#75715e>#     - &#34;ES_JAVA_OPTS=-Xms512m -Xmx512m -Des.enforce.bootstrap.checks=true&#34;</span>
+</span></span><span style=display:flex><span>  <span style=color:#75715e>#     - &#34;xpack.license.self_generated.type=basic&#34;</span>
+</span></span><span style=display:flex><span>  <span style=color:#75715e>#     - &#34;xpack.security.enabled=false&#34;</span>
+</span></span><span style=display:flex><span>  <span style=color:#75715e>#     - &#34;xpack.watcher.enabled=false&#34;</span>
+</span></span><span style=display:flex><span>  <span style=color:#75715e>#     - &#34;xpack.graph.enabled=false&#34;</span>
+</span></span><span style=display:flex><span>  <span style=color:#75715e>#     - &#34;xpack.ml.enabled=false&#34;</span>
+</span></span><span style=display:flex><span>  <span style=color:#75715e>#     - &#34;bootstrap.memory_lock=true&#34;</span>
+</span></span><span style=display:flex><span>  <span style=color:#75715e>#     - &#34;cluster.name=es-mastodon&#34;</span>
+</span></span><span style=display:flex><span>  <span style=color:#75715e>#     - &#34;discovery.type=single-node&#34;</span>
+</span></span><span style=display:flex><span>  <span style=color:#75715e>#     - &#34;thread_pool.write.queue_size=1000&#34;</span>
+</span></span><span style=display:flex><span>  <span style=color:#75715e>#   networks:</span>
+</span></span><span style=display:flex><span>  <span style=color:#75715e>#      - external_network</span>
+</span></span><span style=display:flex><span>  <span style=color:#75715e>#      - internal_network</span>
+</span></span><span style=display:flex><span>  <span style=color:#75715e>#   healthcheck:</span>
+</span></span><span style=display:flex><span>  <span style=color:#75715e>#      test: [&#34;CMD-SHELL&#34;, &#34;curl --silent --fail localhost:9200/_cluster/health || exit 1&#34;]</span>
+</span></span><span style=display:flex><span>  <span style=color:#75715e>#   volumes:</span>
+</span></span><span style=display:flex><span>  <span style=color:#75715e>#      - ./elasticsearch:/usr/share/elasticsearch/data</span>
+</span></span><span style=display:flex><span>  <span style=color:#75715e>#   ulimits:</span>
+</span></span><span style=display:flex><span>  <span style=color:#75715e>#     memlock:</span>
+</span></span><span style=display:flex><span>  <span style=color:#75715e>#       soft: -1</span>
+</span></span><span style=display:flex><span>  <span style=color:#75715e>#       hard: -1</span>
+</span></span><span style=display:flex><span>  <span style=color:#75715e>#     nofile:</span>
+</span></span><span style=display:flex><span>  <span style=color:#75715e>#       soft: 65536</span>
+</span></span><span style=display:flex><span>  <span style=color:#75715e>#       hard: 65536</span>
+</span></span><span style=display:flex><span>  <span style=color:#75715e>#   ports:</span>
+</span></span><span style=display:flex><span>  <span style=color:#75715e>#     - &#39;127.0.0.1:9200:9200&#39;</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>  <span style=color:#f92672>web</span>:
+</span></span><span style=display:flex><span><span style=color:#75715e>#    build: .</span>
+</span></span><span style=display:flex><span>    <span style=color:#f92672>image</span>: <span style=color:#ae81ff>tootsuite/mastodon:v4.0.2</span>
+</span></span><span style=display:flex><span>    <span style=color:#f92672>restart</span>: <span style=color:#ae81ff>always</span>
+</span></span><span style=display:flex><span>    <span style=color:#f92672>container_name</span>: <span style=color:#ae81ff>web</span>
+</span></span><span style=display:flex><span>    <span style=color:#f92672>env_file</span>: <span style=color:#ae81ff>.env.production</span>
+</span></span><span style=display:flex><span>    <span style=color:#f92672>command</span>: <span style=color:#ae81ff>bash -c &#34;rm -f /mastodon/tmp/pids/server.pid; bundle exec rails s -p 3000&#34;</span>
+</span></span><span style=display:flex><span>    <span style=color:#f92672>networks</span>:
+</span></span><span style=display:flex><span>      - <span style=color:#ae81ff>external_network</span>
+</span></span><span style=display:flex><span>      - <span style=color:#ae81ff>internal_network</span>
+</span></span><span style=display:flex><span>    <span style=color:#f92672>healthcheck</span>:
+</span></span><span style=display:flex><span>      <span style=color:#75715e># prettier-ignore</span>
+</span></span><span style=display:flex><span>      <span style=color:#f92672>test</span>: [<span style=color:#e6db74>&#39;CMD-SHELL&#39;</span>, <span style=color:#e6db74>&#39;wget -q --spider --proxy=off localhost:3000/health || exit 1&#39;</span>]
+</span></span><span style=display:flex><span>    <span style=color:#f92672>ports</span>:
+</span></span><span style=display:flex><span>      - <span style=color:#e6db74>&#39;127.0.0.1:3000:3000&#39;</span>
+</span></span><span style=display:flex><span>    <span style=color:#f92672>depends_on</span>:
+</span></span><span style=display:flex><span>      - <span style=color:#ae81ff>db</span>
+</span></span><span style=display:flex><span>      - <span style=color:#ae81ff>redis</span>
+</span></span><span style=display:flex><span>      <span style=color:#75715e># - es</span>
+</span></span><span style=display:flex><span>    <span style=color:#f92672>volumes</span>:
+</span></span><span style=display:flex><span>      - <span style=color:#ae81ff>./public/system:/mastodon/public/system</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>  <span style=color:#f92672>streaming</span>:
+</span></span><span style=display:flex><span><span style=color:#75715e>#    build: .</span>
+</span></span><span style=display:flex><span>    <span style=color:#f92672>image</span>: <span style=color:#ae81ff>tootsuite/mastodon:v4.0.2</span>
+</span></span><span style=display:flex><span>    <span style=color:#f92672>restart</span>: <span style=color:#ae81ff>always</span>
+</span></span><span style=display:flex><span>    <span style=color:#f92672>container_name</span>: <span style=color:#ae81ff>streaming</span>
+</span></span><span style=display:flex><span>    <span style=color:#f92672>env_file</span>: <span style=color:#ae81ff>.env.production</span>
+</span></span><span style=display:flex><span>    <span style=color:#f92672>command</span>: <span style=color:#ae81ff>node ./streaming</span>
+</span></span><span style=display:flex><span>    <span style=color:#f92672>networks</span>:
+</span></span><span style=display:flex><span>      - <span style=color:#ae81ff>external_network</span>
+</span></span><span style=display:flex><span>      - <span style=color:#ae81ff>internal_network</span>
+</span></span><span style=display:flex><span>    <span style=color:#f92672>healthcheck</span>:
+</span></span><span style=display:flex><span>      <span style=color:#75715e># prettier-ignore</span>
+</span></span><span style=display:flex><span>      <span style=color:#f92672>test</span>: [<span style=color:#e6db74>&#39;CMD-SHELL&#39;</span>, <span style=color:#e6db74>&#39;wget -q --spider --proxy=off localhost:4000/api/v1/streaming/health || exit 1&#39;</span>]
+</span></span><span style=display:flex><span>    <span style=color:#f92672>ports</span>:
+</span></span><span style=display:flex><span>      - <span style=color:#e6db74>&#39;127.0.0.1:4000:4000&#39;</span>
+</span></span><span style=display:flex><span>    <span style=color:#f92672>depends_on</span>:
+</span></span><span style=display:flex><span>      - <span style=color:#ae81ff>db</span>
+</span></span><span style=display:flex><span>      - <span style=color:#ae81ff>redis</span>
+</span></span><span style=display:flex><span>  <span style=color:#f92672>sidekiq</span>:
+</span></span><span style=display:flex><span><span style=color:#75715e>#    build: .</span>
+</span></span><span style=display:flex><span>    <span style=color:#f92672>image</span>: <span style=color:#ae81ff>tootsuite/mastodon:v4.0.2</span>
+</span></span><span style=display:flex><span>    <span style=color:#f92672>restart</span>: <span style=color:#ae81ff>always</span>
+</span></span><span style=display:flex><span>    <span style=color:#f92672>container_name</span>: <span style=color:#ae81ff>sidekiq</span>
+</span></span><span style=display:flex><span>    <span style=color:#f92672>env_file</span>: <span style=color:#ae81ff>.env.production</span>
+</span></span><span style=display:flex><span>    <span style=color:#f92672>command</span>: <span style=color:#ae81ff>bundle exec sidekiq</span>
+</span></span><span style=display:flex><span>    <span style=color:#f92672>depends_on</span>:
+</span></span><span style=display:flex><span>      - <span style=color:#ae81ff>db</span>
+</span></span><span style=display:flex><span>      - <span style=color:#ae81ff>redis</span>
+</span></span><span style=display:flex><span>    <span style=color:#f92672>networks</span>:
+</span></span><span style=display:flex><span>      - <span style=color:#ae81ff>external_network</span>
+</span></span><span style=display:flex><span>      - <span style=color:#ae81ff>internal_network</span>
+</span></span><span style=display:flex><span>    <span style=color:#f92672>volumes</span>:
+</span></span><span style=display:flex><span>      - <span style=color:#ae81ff>./public/system:/mastodon/public/system</span>
+</span></span><span style=display:flex><span>    <span style=color:#f92672>healthcheck</span>:
+</span></span><span style=display:flex><span>      <span style=color:#f92672>test</span>: [<span style=color:#e6db74>&#39;CMD-SHELL&#39;</span>, <span style=color:#e6db74>&#34;ps aux | grep &#39;[s]idekiq\ 6&#39; || false&#34;</span>]
+</span></span><span style=display:flex><span>  <span style=color:#75715e>## Uncomment to enable federation with tor instances along with adding the following ENV variables</span>
+</span></span><span style=display:flex><span>  <span style=color:#75715e>## http_proxy=http://privoxy:8118</span>
+</span></span><span style=display:flex><span>  <span style=color:#75715e>## ALLOW_ACCESS_TO_HIDDEN_SERVICE=true</span>
+</span></span><span style=display:flex><span>  <span style=color:#75715e># tor:</span>
+</span></span><span style=display:flex><span>  <span style=color:#75715e>#   image: sirboops/tor</span>
+</span></span><span style=display:flex><span>  <span style=color:#75715e>#   networks:</span>
+</span></span><span style=display:flex><span>  <span style=color:#75715e>#      - external_network</span>
+</span></span><span style=display:flex><span>  <span style=color:#75715e>#      - internal_network</span>
+</span></span><span style=display:flex><span>  <span style=color:#75715e>#</span>
+</span></span><span style=display:flex><span>  <span style=color:#75715e># privoxy:</span>
+</span></span><span style=display:flex><span>  <span style=color:#75715e>#   image: sirboops/privoxy</span>
+</span></span><span style=display:flex><span>  <span style=color:#75715e>#   volumes:</span>
+</span></span><span style=display:flex><span>  <span style=color:#75715e>#     - ./priv-config:/opt/config</span>
+</span></span><span style=display:flex><span>  <span style=color:#75715e>#   networks:</span>
+</span></span><span style=display:flex><span>  <span style=color:#75715e>#     - external_network</span>
+</span></span><span style=display:flex><span>  <span style=color:#75715e>#     - internal_network</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#f92672>networks</span>:
+</span></span><span style=display:flex><span>  <span style=color:#f92672>external_network</span>:
+</span></span><span style=display:flex><span>  <span style=color:#f92672>internal_network</span>:
+</span></span><span style=display:flex><span>    <span style=color:#f92672>internal</span>: <span style=color:#66d9ef>true</span>
+</span></span></code></pre></div><p>You don&rsquo;t need to enable the es instance unless you intend to enable fulltext searching (which is outside the scope of this post). We&rsquo;re almost ready to launch Mastodon&rsquo;s setup utility.</p><p>However, if we simply try and launch setup, Docker will refuse to start the containers because .env.production doesn&rsquo;t exist.</p><p>I had initially just touch&rsquo;d the file (because you won&rsquo;t know what to put in it until after setup is complete), however, doing this leads to setup failing part way through.</p><p>There&rsquo;s a step where the setup script exports environment variables for use by later steps. However, some of those steps execute within a different container and variables exported in one container won&rsquo;t be available to another, so the streaming container fails to connect to Redis (because it tries to connect to the default - localhost rather than the redis container).</p><p>To resolve this, we start by creating .env.production with known connection details (replace the Database password with the correct value)</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>cat <span style=color:#e6db74>&lt;&lt; EOM &gt; .env.production
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>DB_HOST=db
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>DB_PORT=5432
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>DB_NAME=mastodon
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>DB_USER=mastodon
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>DB_PASS=&lt;replace&gt;
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>REDIS_HOST=redis
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>REDIS_PORT=6379
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>REDIS_PASSWORD=
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>EOM</span>
+</span></span></code></pre></div><p>(REDIS_PASSWORD is supposed to have an empty value in the above).</p><p>With this file created, we&rsquo;re ready to fire off the setup process</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>docker-compose run --rm web bundle exec rake mastodon:setup
+</span></span></code></pre></div><p>This will prompt you for some information:</p><pre tabindex=0><code>Domain name: mastodon.bentasker.co.uk
+
+Single user mode disables registrations and redirects the landing page to your public profile.
+Do you want to enable single user mode? No
+
+Are you using Docker to run Mastodon? Yes
+
+PostgreSQL host: db
+PostgreSQL port: 5432
+Name of PostgreSQL database: postgres
+Name of PostgreSQL user: mastodon
+Password of PostgreSQL user: 
+Database configuration works! 
+
+Redis host: redis
+Redis port: 6379
+Redis password: 
+Redis configuration works!
+
+Do you want to store uploaded files on the cloud? No
+
+Do you want to send e-mails from localhost? No
+</code></pre><p>You&rsquo;ll be prompted for SMTP details.</p><p>Once you&rsquo;ve provided all the necessary information, it&rsquo;ll print a bunch of environment variables</p><pre tabindex=0><code>LOCAL_DOMAIN=mastodon.bentasker.co.uk
+SINGLE_USER_MODE=false
+SECRET_KEY_BASE=&lt;redacted&gt;
+OTP_SECRET=&lt;redacted&gt;
+VAPID_PRIVATE_KEY=&lt;redacted&gt;
+VAPID_PUBLIC_KEY=&lt;redacted&gt;
+DB_HOST=db
+DB_PORT=5432
+DB_NAME=mastodon
+DB_USER=mastodon
+DB_PASS=&lt;redacted&gt;
+REDIS_HOST=redis
+REDIS_PORT=6379
+REDIS_PASSWORD=
+SMTP_SERVER=&lt;redacted&gt;
+SMTP_PORT=587
+SMTP_LOGIN=&lt;redacted&gt;
+SMTP_PASSWORD=&lt;redacted&gt;
+SMTP_AUTH_METHOD=plain
+SMTP_OPENSSL_VERIFY_MODE=peer
+SMTP_ENABLE_STARTTLS=always
+SMTP_FROM_ADDRESS=&lt;redacted&gt;
+</code></pre><p>Take a copy of these, and in another terminal, save them into <code>.env.production</code> (you can remove the lines added earlier).</p><p>The setup script will ask whether you want to create the admin user, and once that&rsquo;s done will print the initial auto-generated password for this account.</p><pre tabindex=0><code>Do you want to create an admin user straight away? Yes
+Username: admin
+E-mail: &lt;redacted&gt;
+You can login with the password: &lt;redacted&gt;
+You can change your password once you login.
+</code></pre><p>The initial setup is now complete, and the container should exit.</p><p>If the process failed for some reason, once you&rsquo;ve figured out what you need to correct, you can&rsquo;t just re-run the setup script: you&rsquo;ll need to add the following to <code>.env.production</code> first</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#75715e># Don&#39;t add this unless your initial setup failed</span>
+</span></span><span style=display:flex><span>DISABLE_DATABASE_ENVIRONMENT_CHECK<span style=color:#f92672>=</span><span style=color:#ae81ff>1</span>
+</span></span></code></pre></div><p>On your re-run, when it asks you if you want to proceed with destroying the database, choose <code>Yes</code> (otherwise you&rsquo;ll run into key constraints when it tries to create the admin user).</p><p>We now want to briefly run the containers. This will cause the volume directories to be created on disk so that we can set permissions appropriately (reducing risk if something else gets compromised)</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>docker-compose up -d <span style=color:#75715e># will take a bit</span>
+</span></span><span style=display:flex><span>docker-compose down
+</span></span></code></pre></div><p>Fix permissions</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>sudo chown -R 70:70 postgres
+</span></span><span style=display:flex><span>sudo chown -R 991:991 public/
+</span></span></code></pre></div><p>It&rsquo;s time to bring the containers up</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>docker-compose up -d
+</span></span></code></pre></div><p>The system is now up and running: the web container will be listening on the loopback interface for port 3000, and streaming is on 4000.</p><h1 id=references>References<a href=#references class=hanchor arialabel=Anchor>&#8983;</a></h1><ol><li><a href=https://dev.to/elalemanyo/how-to-install-docker-and-docker-compose-on-raspberry-pi-1mo>https://dev.to/elalemanyo/how-to-install-docker-and-docker-compose-on-raspberry-pi-1mo</a></li><li><a href=https://hevodata.com/learn/docker-postgresql/>https://hevodata.com/learn/docker-postgresql/</a></li><li><a href=https://www.bentasker.co.uk/posts/blog/general/running-mastodon-in-docker-compose.html>https://www.bentasker.co.uk/posts/blog/general/running-mastodon-in-docker-compose.html</a></li></ol></div></div></div></div><footer class=footer><div class=footer__inner><div class=copyright><span>© 2022 Powered by <a href=http://gohugo.io>Hugo</a></span>
+<span>:: Theme made by <a href=https://twitter.com/panr>panr</a></span></div></div></footer><script src=http://somnathr.com/assets/main.js></script>
+<script src=http://somnathr.com/assets/prism.js></script></div></body></html>
