@@ -76,5 +76,30 @@ Now, we are ready to run Tunnel as a service utilizing the command below
 ```bash
 sudo cloudflared service install 
 ```
+
+## Step 8: Add more services (optional)
+Pair another hostname: 
+```bash
+cloudflared tunnel route dns <UUID or NAME> demo2.example.com
+```
+Add another ingress point to the config:
+```
+ingress:
+  - hostname: demo.example.com
+    service: http://localhost:80
+  - hostname: demo2.example.com
+    service: http://localhost:8080
+  - service: http_status:404
+```
+Re-install the previous config:
+```bash
+sudo cloudflared service uninstall
+sudo cloudflared service install
+```
+Restart service: 
+```bash
+sudo systemctl restart cloudflared
+```
 # References
 1. https://dev.to/omarcloud20/a-free-cloudflare-tunnel-running-on-a-raspberry-pi-1jid
+1. https://cyberhost.uk/cloudflare-argo-tunnel
