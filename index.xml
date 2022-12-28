@@ -314,9 +314,25 @@ Let&amp;rsquo;s create our config file and save in the default expected director
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>sudo mv ~/.cloudflared/config.yml /etc/cloudflared/
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Now, we are ready to run Tunnel as a service utilizing the command below&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>sudo cloudflared service install
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="step-8-add-more-services-optional">Step 8: Add more services (optional)&lt;/h2>
+&lt;p>Pair another hostname:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>cloudflared tunnel route dns &amp;lt;UUID or NAME&amp;gt; demo2.example.com
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Add another ingress point to the config:&lt;/p>
+&lt;pre tabindex="0">&lt;code>ingress:
+- hostname: demo.example.com
+service: http://localhost:80
+- hostname: demo2.example.com
+service: http://localhost:8080
+- service: http_status:404
+&lt;/code>&lt;/pre>&lt;p>Re-install the previous config:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>sudo cloudflared service uninstall
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>sudo cloudflared service install
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Restart service:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>sudo systemctl restart cloudflared
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h1 id="references">References&lt;/h1>
 &lt;ol>
 &lt;li>&lt;a href="https://dev.to/omarcloud20/a-free-cloudflare-tunnel-running-on-a-raspberry-pi-1jid">https://dev.to/omarcloud20/a-free-cloudflare-tunnel-running-on-a-raspberry-pi-1jid&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://cyberhost.uk/cloudflare-argo-tunnel">https://cyberhost.uk/cloudflare-argo-tunnel&lt;/a>&lt;/li>
 &lt;/ol></content></item><item><title>Create a PostgreSQL server and expose it remotely using Lets Encrypt</title><link>/blog/postgres-expose/</link><pubDate>Sun, 04 Sep 2022 00:00:00 +0000</pubDate><guid>/blog/postgres-expose/</guid><description>I have been trying for some days to create a PostgreSQL server and expose it on the web so that it can be accessed by external clients. This is useful to me for hosting several personal projects that require a database.
 First things first, let&amp;rsquo;s create our env variables.
 HOSTNAME=&amp;#34;subdomain.domain.tld&amp;#34; # Hostname of your server EMAIL=&amp;#34;email@email.com&amp;#34; # Used for Let&amp;#39;s Encrypt certificate VERSION=&amp;#34;14&amp;#34; # PostgreSQL version NAME=&amp;#34;db&amp;#34; # Database name Let&amp;rsquo;s update our packages now.</description><content>&lt;p>I have been trying for some days to create a PostgreSQL server and expose it on the web so that it can be accessed by external clients. This is useful to me for hosting several personal projects that require a database.&lt;/p>
