@@ -1,6 +1,6 @@
 ---
 title: "Install cloudflared to set up secure Cloudflare Tunnels for free"
-date: 2022-09-05
+date: 2026-04-25
 ---
 I have been using Cloudflare Tunnels increasingly over the last year to securely enable my applications to be reached publicly without having to open firewall ports in my server. However, installing cloudflared and then setting up tunnels is not very straightforward. So, I wanted to develop this tutorial as a way to get tunnels up and running quickly. These steps are tested on Ubuntu 22.04.
 
