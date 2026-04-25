@@ -5,7 +5,7 @@ date: 2022-09-05
 I have been using Cloudflare Tunnels increasingly over the last year to securely enable my applications to be reached publicly without having to open firewall ports in my server. However, installing cloudflared and then setting up tunnels is not very straightforward. So, I wanted to develop this tutorial as a way to get tunnels up and running quickly. These steps are tested on Ubuntu 22.04.
 
 ## TL;DR: The "One-Script" Method
-If you want to automate everything, save the following script as `setup_tunnel.sh`, make it executable (`chmod +x`), and run it as `./setup_tunnel.sh <name> <hostname>`.
+If you want to automate everything, save the following script as `setup_tunnel.sh`, make it executable (`chmod +x`), and run it as `./setup_tunnel.sh <name> <hostname> <port>`.
 
 ```bash
 #!/bin/bash
