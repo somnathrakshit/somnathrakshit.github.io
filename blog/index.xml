@@ -1,4 +1,115 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>My (in)frequent musings on Somnath Rakshit</title><link>/blog/</link><description>Recent content in My (in)frequent musings on Somnath Rakshit</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Mon, 26 Dec 2022 00:00:00 +0000</lastBuildDate><atom:link href="/blog/index.xml" rel="self" type="application/rss+xml"/><item><title>Install Mastodon using Docker on Linux and expose instance using Cloudflare Tunnels</title><link>/blog/install_mastodon/</link><pubDate>Mon, 26 Dec 2022 00:00:00 +0000</pubDate><guid>/blog/install_mastodon/</guid><description>&lt;p&gt;This post is about the following:&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>My (in)frequent musings on Somnath Rakshit</title><link>/blog/</link><description>Recent content in My (in)frequent musings on Somnath Rakshit</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Sat, 25 Apr 2026 00:00:00 +0000</lastBuildDate><atom:link href="/blog/index.xml" rel="self" type="application/rss+xml"/><item><title>Install cloudflared to set up secure Cloudflare Tunnels for free</title><link>/blog/install_cloudflared/</link><pubDate>Sat, 25 Apr 2026 00:00:00 +0000</pubDate><guid>/blog/install_cloudflared/</guid><description>&lt;p&gt;I have been using Cloudflare Tunnels increasingly over the last year to securely enable my applications to be reached publicly without having to open firewall ports in my server. However, installing cloudflared and then setting up tunnels is not very straightforward. So, I wanted to develop this tutorial as a way to get tunnels up and running quickly. These steps are tested on Ubuntu 22.04.&lt;/p&gt;
+&lt;h2 id="tldr-the-one-script-method"&gt;TL;DR: The &amp;ldquo;One-Script&amp;rdquo; Method&lt;/h2&gt;
+&lt;p&gt;If you want to automate everything, save the following script as &lt;code&gt;setup_tunnel.sh&lt;/code&gt;, make it executable (&lt;code&gt;chmod +x&lt;/code&gt;), and run it as &lt;code&gt;./setup_tunnel.sh &amp;lt;name&amp;gt; &amp;lt;hostname&amp;gt; &amp;lt;port&amp;gt;&lt;/code&gt;.&lt;/p&gt;</description><content>&lt;p&gt;I have been using Cloudflare Tunnels increasingly over the last year to securely enable my applications to be reached publicly without having to open firewall ports in my server. However, installing cloudflared and then setting up tunnels is not very straightforward. So, I wanted to develop this tutorial as a way to get tunnels up and running quickly. These steps are tested on Ubuntu 22.04.&lt;/p&gt;
+&lt;h2 id="tldr-the-one-script-method"&gt;TL;DR: The &amp;ldquo;One-Script&amp;rdquo; Method&lt;/h2&gt;
+&lt;p&gt;If you want to automate everything, save the following script as &lt;code&gt;setup_tunnel.sh&lt;/code&gt;, make it executable (&lt;code&gt;chmod +x&lt;/code&gt;), and run it as &lt;code&gt;./setup_tunnel.sh &amp;lt;name&amp;gt; &amp;lt;hostname&amp;gt; &amp;lt;port&amp;gt;&lt;/code&gt;.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;#!/bin/bash
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;TUNNEL_NAME&lt;span style="color:#f92672"&gt;=&lt;/span&gt;$1
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;HOSTNAME&lt;span style="color:#f92672"&gt;=&lt;/span&gt;$2
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;PORT&lt;span style="color:#f92672"&gt;=&lt;/span&gt;&lt;span style="color:#e6db74"&gt;${&lt;/span&gt;3&lt;span style="color:#66d9ef"&gt;:-&lt;/span&gt;80&lt;span style="color:#e6db74"&gt;}&lt;/span&gt; &lt;span style="color:#75715e"&gt;# Default to port 80 if not provided&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# 1. Install cloudflared&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;sudo mkdir -p --mode&lt;span style="color:#f92672"&gt;=&lt;/span&gt;&lt;span style="color:#ae81ff"&gt;0755&lt;/span&gt; /usr/share/keyrings
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;curl -fsSL https://pkg.cloudflare.com/cloudflare-main.gpg | sudo tee /usr/share/keyrings/cloudflare-main.gpg &amp;gt;/dev/null
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;echo &lt;span style="color:#e6db74"&gt;&amp;#34;deb [signed-by=/usr/share/keyrings/cloudflare-main.gpg] https://pkg.cloudflare.com/cloudflared &lt;/span&gt;&lt;span style="color:#66d9ef"&gt;$(&lt;/span&gt;lsb_release -cs&lt;span style="color:#66d9ef"&gt;)&lt;/span&gt;&lt;span style="color:#e6db74"&gt; main&amp;#34;&lt;/span&gt; | sudo tee /etc/apt/sources.list.d/cloudflared.list
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;sudo apt-get update &lt;span style="color:#f92672"&gt;&amp;amp;&amp;amp;&lt;/span&gt; sudo apt-get install -y cloudflared
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# 2. Login (Interactive)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;cloudflared login
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# 3. Create Tunnel &amp;amp; Config&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;CREATE_OUTPUT&lt;span style="color:#f92672"&gt;=&lt;/span&gt;&lt;span style="color:#66d9ef"&gt;$(&lt;/span&gt;cloudflared tunnel create &lt;span style="color:#e6db74"&gt;&amp;#34;&lt;/span&gt;$TUNNEL_NAME&lt;span style="color:#e6db74"&gt;&amp;#34;&lt;/span&gt;&lt;span style="color:#66d9ef"&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;UUID&lt;span style="color:#f92672"&gt;=&lt;/span&gt;&lt;span style="color:#66d9ef"&gt;$(&lt;/span&gt;echo &lt;span style="color:#e6db74"&gt;&amp;#34;&lt;/span&gt;$CREATE_OUTPUT&lt;span style="color:#e6db74"&gt;&amp;#34;&lt;/span&gt; | grep -oE &lt;span style="color:#e6db74"&gt;&amp;#34;[a-f0-9]{8}-([a-f0-9]{4}-){3}[a-f0-9]{12}&amp;#34;&lt;/span&gt; | head -n 1&lt;span style="color:#66d9ef"&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;sudo mkdir -p /etc/cloudflared
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;sudo mv &lt;span style="color:#e6db74"&gt;&amp;#34;&lt;/span&gt;$HOME&lt;span style="color:#e6db74"&gt;/.cloudflared/&lt;/span&gt;$UUID&lt;span style="color:#e6db74"&gt;.json&amp;#34;&lt;/span&gt; /etc/cloudflared/
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;cat &lt;span style="color:#e6db74"&gt;&amp;lt;&amp;lt;EOF | sudo tee /etc/cloudflared/config.yml &amp;gt; /dev/null
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e6db74"&gt;tunnel: $UUID
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e6db74"&gt;credentials-file: /etc/cloudflared/$UUID.json
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e6db74"&gt;ingress:
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e6db74"&gt; - hostname: $HOSTNAME
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e6db74"&gt; service: http://localhost:$PORT
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e6db74"&gt; - service: http_status:404
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e6db74"&gt;EOF&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# 4. Route &amp;amp; Start&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;cloudflared tunnel route dns &lt;span style="color:#e6db74"&gt;&amp;#34;&lt;/span&gt;$TUNNEL_NAME&lt;span style="color:#e6db74"&gt;&amp;#34;&lt;/span&gt; &lt;span style="color:#e6db74"&gt;&amp;#34;&lt;/span&gt;$HOSTNAME&lt;span style="color:#e6db74"&gt;&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;sudo cloudflared service install
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;sudo systemctl start cloudflared
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;hr&gt;
+&lt;h2 id="step-1-install-cloudflared"&gt;Step 1: Install cloudflared&lt;/h2&gt;
+&lt;p&gt;Let us create env variables first.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;NAME&lt;span style="color:#f92672"&gt;=&lt;/span&gt;&lt;span style="color:#e6db74"&gt;&amp;#34;tunnelname&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;HOSTNAME&lt;span style="color:#f92672"&gt;=&lt;/span&gt;&lt;span style="color:#e6db74"&gt;&amp;#34;subdomain.domain.tld&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;PORT&lt;span style="color:#f92672"&gt;=&lt;/span&gt;&lt;span style="color:#e6db74"&gt;&amp;#34;8080&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Now, let us install cloudflared using their package. The commands below are specifically for Ubuntu 22.04. You can find instructions for other operating systems &lt;a href="https://pkg.cloudflare.com/"&gt;here&lt;/a&gt;.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# Add cloudflare gpg key&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;sudo mkdir -p --mode&lt;span style="color:#f92672"&gt;=&lt;/span&gt;&lt;span style="color:#ae81ff"&gt;0755&lt;/span&gt; /usr/share/keyrings
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;curl -fsSL https://pkg.cloudflare.com/cloudflare-main.gpg | sudo tee /usr/share/keyrings/cloudflare-main.gpg &amp;gt;/dev/null
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# Add this repo to your apt repositories&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;echo &lt;span style="color:#e6db74"&gt;&amp;#39;deb [signed-by=/usr/share/keyrings/cloudflare-main.gpg] https://pkg.cloudflare.com/cloudflared jammy main&amp;#39;&lt;/span&gt; | sudo tee /etc/apt/sources.list.d/cloudflared.list
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# install cloudflared&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;sudo apt-get update &lt;span style="color:#f92672"&gt;&amp;amp;&amp;amp;&lt;/span&gt; sudo apt-get install cloudflared
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;This will install &lt;code&gt;cloudflared&lt;/code&gt;.&lt;/p&gt;
+&lt;h2 id="step-2-authenticate-cloudflared"&gt;Step 2: Authenticate cloudflared&lt;/h2&gt;
+&lt;p&gt;Let us login and authenticate the cloudflared daemon to our account.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;cloudflared login
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Running the above command will launch the default browser window and prompt you to login to your Cloudflare account. Then, you will be prompted to select a site, which we have created previously. As soon as you have chosen your hostname, Cloudflare will download a certificate file to authenticate &lt;code&gt;cloudflared&lt;/code&gt; with Cloudflare&amp;rsquo;s network. Once authorization is completed successfully, your cert.pem will be download to the default directory. If you&amp;rsquo;re running a headless server (no monitor or keyboard), you could copy the authentication URL and paste it in a browser manually.&lt;/p&gt;
+&lt;h2 id="step-3-create-a-cloudflare-tunnel"&gt;Step 3: Create a Cloudflare Tunnel&lt;/h2&gt;
+&lt;p&gt;Now, we are ready to create a Cloudflare Tunnel that will connect &lt;code&gt;cloudflared&lt;/code&gt; to Cloudflare&amp;rsquo;s edge. Running the following command will create a Tunnel with tht name and generate an ID credentials file for it.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;cloudflared tunnel create $NAME
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Once the Tunnel is created, a credential file is generated. It&amp;rsquo;s a JSON file that has the Universally Unique Identifier (UUID) assigned for the Tunnel.&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;Note: although the Tunnel is created, the connection is not established yet.&lt;/em&gt;&lt;/p&gt;
+&lt;h2 id="step-4-configure-the-tunnel-details"&gt;Step 4: Configure the Tunnel details&lt;/h2&gt;
+&lt;p&gt;Cloudflare utilizes a configuration file to determine how to route traffic. For a system service, it is best to store everything in &lt;code&gt;/etc/cloudflared/&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;First, create the directory and the config file:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;sudo mkdir -p /etc/cloudflared
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;sudo nano /etc/cloudflared/config.yml
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Then, paste your configuration. &lt;strong&gt;Important:&lt;/strong&gt; Ensure you replace the UUID and paths with your actual values generated in Step 3.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-yaml" data-lang="yaml"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#f92672"&gt;tunnel&lt;/span&gt;: &lt;span style="color:#ae81ff"&gt;&amp;lt;YOUR-TUNNEL-UUID&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#f92672"&gt;credentials-file&lt;/span&gt;: &lt;span style="color:#ae81ff"&gt;/etc/cloudflared/&amp;lt;YOUR-TUNNEL-UUID&amp;gt;.json&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#f92672"&gt;ingress&lt;/span&gt;:
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; - &lt;span style="color:#f92672"&gt;hostname&lt;/span&gt;: &lt;span style="color:#ae81ff"&gt;your-app.example.com&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#f92672"&gt;service&lt;/span&gt;: &lt;span style="color:#ae81ff"&gt;http://localhost:&amp;lt;PORT&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; - &lt;span style="color:#f92672"&gt;service&lt;/span&gt;: &lt;span style="color:#ae81ff"&gt;http_status:404&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id="step-5-create-dns-records-to-route-traffic-to-the-tunnel"&gt;Step 5: Create DNS records to route traffic to the Tunnel&lt;/h2&gt;
+&lt;p&gt;Run the following command from the command line. This command will generate a CNAME record that points to the subdomain of a specific Tunnel. The result is the same as creating a CNAME record from the dashboard.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;cloudflared tunnel route dns $NAME $HOSTNAME
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;em&gt;Note: unlike the previous Argo Tunnel architecture, this DNS record will not be deleted if the Tunnel disconnects.&lt;/em&gt;&lt;/p&gt;
+&lt;h2 id="step-6-run-and-manage-the-tunnel"&gt;Step 6: Run and manage the Tunnel&lt;/h2&gt;
+&lt;p&gt;The &lt;code&gt;run&lt;/code&gt; command will connect cloudflared to Cloudflare&amp;rsquo;s edge network using the configuration created in step 4. We will not specify a configuration file location so Cloudflared retrieves it from the default location, which is &lt;code&gt;~/.cloudflared/config.yml&lt;/code&gt;.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;cloudflared tunnel run $NAME
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id="step-7-run-tunnel-as-a-service"&gt;Step 7: Run Tunnel as a service&lt;/h2&gt;
+&lt;p&gt;By running the following command, the tunnel can be installed as a system service. To ensure the service can find your credentials, move the config and the JSON file to the global directory.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# Move config and credentials to the global directory&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;sudo mv ~/.cloudflared/config.yml /etc/cloudflared/
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;sudo mv ~/.cloudflared/&amp;lt;YOUR-UUID&amp;gt;.json /etc/cloudflared/
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Now, install and start the service:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;sudo cloudflared service install
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;sudo systemctl start cloudflared
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id="step-8-add-more-services-optional"&gt;Step 8: Add more services (optional)&lt;/h2&gt;
+&lt;p&gt;Pair another hostname:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;cloudflared tunnel route dns &amp;lt;UUID or NAME&amp;gt; demo2.example.com
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Add another ingress point to the config:&lt;/p&gt;
+&lt;pre tabindex="0"&gt;&lt;code&gt;ingress:
+- hostname: demo.example.com
+service: http://localhost:80
+- hostname: demo2.example.com
+service: http://localhost:8080
+- service: http_status:404
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Re-install the previous config:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;sudo cloudflared service uninstall
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;sudo cloudflared service install
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Restart service:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;sudo systemctl restart cloudflared
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h1 id="references"&gt;References&lt;/h1&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;a href="https://dev.to/omarcloud20/a-free-cloudflare-tunnel-running-on-a-raspberry-pi-1jid"&gt;https://dev.to/omarcloud20/a-free-cloudflare-tunnel-running-on-a-raspberry-pi-1jid&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://cyberhost.uk/cloudflare-argo-tunnel"&gt;https://cyberhost.uk/cloudflare-argo-tunnel&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;</content></item><item><title>Install Mastodon using Docker on Linux and expose instance using Cloudflare Tunnels</title><link>/blog/install_mastodon/</link><pubDate>Mon, 26 Dec 2022 00:00:00 +0000</pubDate><guid>/blog/install_mastodon/</guid><description>&lt;p&gt;This post is about the following:&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;Setup Cloudflare Tunnels to access your website publicly without the risks of opening ports on your router.&lt;/li&gt;
 &lt;li&gt;Install Docker and Docker-Compose on Linux.&lt;/li&gt;
@@ -270,117 +381,6 @@ You can change your password once you login.
 &lt;li&gt;&lt;a href="https://dev.to/elalemanyo/how-to-install-docker-and-docker-compose-on-raspberry-pi-1mo"&gt;https://dev.to/elalemanyo/how-to-install-docker-and-docker-compose-on-raspberry-pi-1mo&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="https://hevodata.com/learn/docker-postgresql/"&gt;https://hevodata.com/learn/docker-postgresql/&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="https://www.bentasker.co.uk/posts/blog/general/running-mastodon-in-docker-compose.html"&gt;https://www.bentasker.co.uk/posts/blog/general/running-mastodon-in-docker-compose.html&lt;/a&gt;&lt;/li&gt;
-&lt;/ol&gt;</content></item><item><title>Install cloudflared to set up secure Cloudflare Tunnels for free</title><link>/blog/install_cloudflared/</link><pubDate>Mon, 05 Sep 2022 00:00:00 +0000</pubDate><guid>/blog/install_cloudflared/</guid><description>&lt;p&gt;I have been using Cloudflare Tunnels increasingly over the last year to securely enable my applications to be reached publicly without having to open firewall ports in my server. However, installing cloudflared and then setting up tunnels is not very straightforward. So, I wanted to develop this tutorial as a way to get tunnels up and running quickly. These steps are tested on Ubuntu 22.04.&lt;/p&gt;
-&lt;h2 id="tldr-the-one-script-method"&gt;TL;DR: The &amp;ldquo;One-Script&amp;rdquo; Method&lt;/h2&gt;
-&lt;p&gt;If you want to automate everything, save the following script as &lt;code&gt;setup_tunnel.sh&lt;/code&gt;, make it executable (&lt;code&gt;chmod +x&lt;/code&gt;), and run it as &lt;code&gt;./setup_tunnel.sh &amp;lt;name&amp;gt; &amp;lt;hostname&amp;gt; &amp;lt;port&amp;gt;&lt;/code&gt;.&lt;/p&gt;</description><content>&lt;p&gt;I have been using Cloudflare Tunnels increasingly over the last year to securely enable my applications to be reached publicly without having to open firewall ports in my server. However, installing cloudflared and then setting up tunnels is not very straightforward. So, I wanted to develop this tutorial as a way to get tunnels up and running quickly. These steps are tested on Ubuntu 22.04.&lt;/p&gt;
-&lt;h2 id="tldr-the-one-script-method"&gt;TL;DR: The &amp;ldquo;One-Script&amp;rdquo; Method&lt;/h2&gt;
-&lt;p&gt;If you want to automate everything, save the following script as &lt;code&gt;setup_tunnel.sh&lt;/code&gt;, make it executable (&lt;code&gt;chmod +x&lt;/code&gt;), and run it as &lt;code&gt;./setup_tunnel.sh &amp;lt;name&amp;gt; &amp;lt;hostname&amp;gt; &amp;lt;port&amp;gt;&lt;/code&gt;.&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;#!/bin/bash
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;TUNNEL_NAME&lt;span style="color:#f92672"&gt;=&lt;/span&gt;$1
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;HOSTNAME&lt;span style="color:#f92672"&gt;=&lt;/span&gt;$2
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;PORT&lt;span style="color:#f92672"&gt;=&lt;/span&gt;&lt;span style="color:#e6db74"&gt;${&lt;/span&gt;3&lt;span style="color:#66d9ef"&gt;:-&lt;/span&gt;80&lt;span style="color:#e6db74"&gt;}&lt;/span&gt; &lt;span style="color:#75715e"&gt;# Default to port 80 if not provided&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# 1. Install cloudflared&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;sudo mkdir -p --mode&lt;span style="color:#f92672"&gt;=&lt;/span&gt;&lt;span style="color:#ae81ff"&gt;0755&lt;/span&gt; /usr/share/keyrings
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;curl -fsSL https://pkg.cloudflare.com/cloudflare-main.gpg | sudo tee /usr/share/keyrings/cloudflare-main.gpg &amp;gt;/dev/null
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;echo &lt;span style="color:#e6db74"&gt;&amp;#34;deb [signed-by=/usr/share/keyrings/cloudflare-main.gpg] https://pkg.cloudflare.com/cloudflared &lt;/span&gt;&lt;span style="color:#66d9ef"&gt;$(&lt;/span&gt;lsb_release -cs&lt;span style="color:#66d9ef"&gt;)&lt;/span&gt;&lt;span style="color:#e6db74"&gt; main&amp;#34;&lt;/span&gt; | sudo tee /etc/apt/sources.list.d/cloudflared.list
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;sudo apt-get update &lt;span style="color:#f92672"&gt;&amp;amp;&amp;amp;&lt;/span&gt; sudo apt-get install -y cloudflared
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# 2. Login (Interactive)&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;cloudflared login
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# 3. Create Tunnel &amp;amp; Config&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;CREATE_OUTPUT&lt;span style="color:#f92672"&gt;=&lt;/span&gt;&lt;span style="color:#66d9ef"&gt;$(&lt;/span&gt;cloudflared tunnel create &lt;span style="color:#e6db74"&gt;&amp;#34;&lt;/span&gt;$TUNNEL_NAME&lt;span style="color:#e6db74"&gt;&amp;#34;&lt;/span&gt;&lt;span style="color:#66d9ef"&gt;)&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;UUID&lt;span style="color:#f92672"&gt;=&lt;/span&gt;&lt;span style="color:#66d9ef"&gt;$(&lt;/span&gt;echo &lt;span style="color:#e6db74"&gt;&amp;#34;&lt;/span&gt;$CREATE_OUTPUT&lt;span style="color:#e6db74"&gt;&amp;#34;&lt;/span&gt; | grep -oE &lt;span style="color:#e6db74"&gt;&amp;#34;[a-f0-9]{8}-([a-f0-9]{4}-){3}[a-f0-9]{12}&amp;#34;&lt;/span&gt; | head -n 1&lt;span style="color:#66d9ef"&gt;)&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;sudo mkdir -p /etc/cloudflared
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;sudo mv &lt;span style="color:#e6db74"&gt;&amp;#34;&lt;/span&gt;$HOME&lt;span style="color:#e6db74"&gt;/.cloudflared/&lt;/span&gt;$UUID&lt;span style="color:#e6db74"&gt;.json&amp;#34;&lt;/span&gt; /etc/cloudflared/
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;cat &lt;span style="color:#e6db74"&gt;&amp;lt;&amp;lt;EOF | sudo tee /etc/cloudflared/config.yml &amp;gt; /dev/null
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e6db74"&gt;tunnel: $UUID
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e6db74"&gt;credentials-file: /etc/cloudflared/$UUID.json
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e6db74"&gt;ingress:
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e6db74"&gt; - hostname: $HOSTNAME
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e6db74"&gt; service: http://localhost:$PORT
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e6db74"&gt; - service: http_status:404
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e6db74"&gt;EOF&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# 4. Route &amp;amp; Start&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;cloudflared tunnel route dns &lt;span style="color:#e6db74"&gt;&amp;#34;&lt;/span&gt;$TUNNEL_NAME&lt;span style="color:#e6db74"&gt;&amp;#34;&lt;/span&gt; &lt;span style="color:#e6db74"&gt;&amp;#34;&lt;/span&gt;$HOSTNAME&lt;span style="color:#e6db74"&gt;&amp;#34;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;sudo cloudflared service install
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;sudo systemctl start cloudflared
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;hr&gt;
-&lt;h2 id="step-1-install-cloudflared"&gt;Step 1: Install cloudflared&lt;/h2&gt;
-&lt;p&gt;Let us create env variables first.&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;NAME&lt;span style="color:#f92672"&gt;=&lt;/span&gt;&lt;span style="color:#e6db74"&gt;&amp;#34;tunnelname&amp;#34;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;HOSTNAME&lt;span style="color:#f92672"&gt;=&lt;/span&gt;&lt;span style="color:#e6db74"&gt;&amp;#34;subdomain.domain.tld&amp;#34;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;PORT&lt;span style="color:#f92672"&gt;=&lt;/span&gt;&lt;span style="color:#e6db74"&gt;&amp;#34;8080&amp;#34;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Now, let us install cloudflared using their package. The commands below are specifically for Ubuntu 22.04. You can find instructions for other operating systems &lt;a href="https://pkg.cloudflare.com/"&gt;here&lt;/a&gt;.&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# Add cloudflare gpg key&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;sudo mkdir -p --mode&lt;span style="color:#f92672"&gt;=&lt;/span&gt;&lt;span style="color:#ae81ff"&gt;0755&lt;/span&gt; /usr/share/keyrings
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;curl -fsSL https://pkg.cloudflare.com/cloudflare-main.gpg | sudo tee /usr/share/keyrings/cloudflare-main.gpg &amp;gt;/dev/null
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# Add this repo to your apt repositories&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;echo &lt;span style="color:#e6db74"&gt;&amp;#39;deb [signed-by=/usr/share/keyrings/cloudflare-main.gpg] https://pkg.cloudflare.com/cloudflared jammy main&amp;#39;&lt;/span&gt; | sudo tee /etc/apt/sources.list.d/cloudflared.list
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# install cloudflared&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;sudo apt-get update &lt;span style="color:#f92672"&gt;&amp;amp;&amp;amp;&lt;/span&gt; sudo apt-get install cloudflared
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;This will install &lt;code&gt;cloudflared&lt;/code&gt;.&lt;/p&gt;
-&lt;h2 id="step-2-authenticate-cloudflared"&gt;Step 2: Authenticate cloudflared&lt;/h2&gt;
-&lt;p&gt;Let us login and authenticate the cloudflared daemon to our account.&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;cloudflared login
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Running the above command will launch the default browser window and prompt you to login to your Cloudflare account. Then, you will be prompted to select a site, which we have created previously. As soon as you have chosen your hostname, Cloudflare will download a certificate file to authenticate &lt;code&gt;cloudflared&lt;/code&gt; with Cloudflare&amp;rsquo;s network. Once authorization is completed successfully, your cert.pem will be download to the default directory. If you&amp;rsquo;re running a headless server (no monitor or keyboard), you could copy the authentication URL and paste it in a browser manually.&lt;/p&gt;
-&lt;h2 id="step-3-create-a-cloudflare-tunnel"&gt;Step 3: Create a Cloudflare Tunnel&lt;/h2&gt;
-&lt;p&gt;Now, we are ready to create a Cloudflare Tunnel that will connect &lt;code&gt;cloudflared&lt;/code&gt; to Cloudflare&amp;rsquo;s edge. Running the following command will create a Tunnel with tht name and generate an ID credentials file for it.&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;cloudflared tunnel create $NAME
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Once the Tunnel is created, a credential file is generated. It&amp;rsquo;s a JSON file that has the Universally Unique Identifier (UUID) assigned for the Tunnel.&lt;/p&gt;
-&lt;p&gt;&lt;em&gt;Note: although the Tunnel is created, the connection is not established yet.&lt;/em&gt;&lt;/p&gt;
-&lt;h2 id="step-4-configure-the-tunnel-details"&gt;Step 4: Configure the Tunnel details&lt;/h2&gt;
-&lt;p&gt;Cloudflare utilizes a configuration file to determine how to route traffic. For a system service, it is best to store everything in &lt;code&gt;/etc/cloudflared/&lt;/code&gt;.&lt;/p&gt;
-&lt;p&gt;First, create the directory and the config file:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;sudo mkdir -p /etc/cloudflared
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;sudo nano /etc/cloudflared/config.yml
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Then, paste your configuration. &lt;strong&gt;Important:&lt;/strong&gt; Ensure you replace the UUID and paths with your actual values generated in Step 3.&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-yaml" data-lang="yaml"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#f92672"&gt;tunnel&lt;/span&gt;: &lt;span style="color:#ae81ff"&gt;&amp;lt;YOUR-TUNNEL-UUID&amp;gt;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#f92672"&gt;credentials-file&lt;/span&gt;: &lt;span style="color:#ae81ff"&gt;/etc/cloudflared/&amp;lt;YOUR-TUNNEL-UUID&amp;gt;.json&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#f92672"&gt;ingress&lt;/span&gt;:
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; - &lt;span style="color:#f92672"&gt;hostname&lt;/span&gt;: &lt;span style="color:#ae81ff"&gt;your-app.example.com&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#f92672"&gt;service&lt;/span&gt;: &lt;span style="color:#ae81ff"&gt;http://localhost:&amp;lt;PORT&amp;gt;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; - &lt;span style="color:#f92672"&gt;service&lt;/span&gt;: &lt;span style="color:#ae81ff"&gt;http_status:404&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id="step-5-create-dns-records-to-route-traffic-to-the-tunnel"&gt;Step 5: Create DNS records to route traffic to the Tunnel&lt;/h2&gt;
-&lt;p&gt;Run the following command from the command line. This command will generate a CNAME record that points to the subdomain of a specific Tunnel. The result is the same as creating a CNAME record from the dashboard.&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;cloudflared tunnel route dns $NAME $HOSTNAME
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;em&gt;Note: unlike the previous Argo Tunnel architecture, this DNS record will not be deleted if the Tunnel disconnects.&lt;/em&gt;&lt;/p&gt;
-&lt;h2 id="step-6-run-and-manage-the-tunnel"&gt;Step 6: Run and manage the Tunnel&lt;/h2&gt;
-&lt;p&gt;The &lt;code&gt;run&lt;/code&gt; command will connect cloudflared to Cloudflare&amp;rsquo;s edge network using the configuration created in step 4. We will not specify a configuration file location so Cloudflared retrieves it from the default location, which is &lt;code&gt;~/.cloudflared/config.yml&lt;/code&gt;.&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;cloudflared tunnel run $NAME
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id="step-7-run-tunnel-as-a-service"&gt;Step 7: Run Tunnel as a service&lt;/h2&gt;
-&lt;p&gt;By running the following command, the tunnel can be installed as a system service. To ensure the service can find your credentials, move the config and the JSON file to the global directory.&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# Move config and credentials to the global directory&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;sudo mv ~/.cloudflared/config.yml /etc/cloudflared/
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;sudo mv ~/.cloudflared/&amp;lt;YOUR-UUID&amp;gt;.json /etc/cloudflared/
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Now, install and start the service:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;sudo cloudflared service install
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;sudo systemctl start cloudflared
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id="step-8-add-more-services-optional"&gt;Step 8: Add more services (optional)&lt;/h2&gt;
-&lt;p&gt;Pair another hostname:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;cloudflared tunnel route dns &amp;lt;UUID or NAME&amp;gt; demo2.example.com
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Add another ingress point to the config:&lt;/p&gt;
-&lt;pre tabindex="0"&gt;&lt;code&gt;ingress:
-- hostname: demo.example.com
-service: http://localhost:80
-- hostname: demo2.example.com
-service: http://localhost:8080
-- service: http_status:404
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Re-install the previous config:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;sudo cloudflared service uninstall
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;sudo cloudflared service install
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Restart service:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;sudo systemctl restart cloudflared
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h1 id="references"&gt;References&lt;/h1&gt;
-&lt;ol&gt;
-&lt;li&gt;&lt;a href="https://dev.to/omarcloud20/a-free-cloudflare-tunnel-running-on-a-raspberry-pi-1jid"&gt;https://dev.to/omarcloud20/a-free-cloudflare-tunnel-running-on-a-raspberry-pi-1jid&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://cyberhost.uk/cloudflare-argo-tunnel"&gt;https://cyberhost.uk/cloudflare-argo-tunnel&lt;/a&gt;&lt;/li&gt;
 &lt;/ol&gt;</content></item><item><title>Create a PostgreSQL server and expose it remotely using Lets Encrypt</title><link>/blog/postgres-expose/</link><pubDate>Sun, 04 Sep 2022 00:00:00 +0000</pubDate><guid>/blog/postgres-expose/</guid><description>&lt;p&gt;I have been trying for some days to create a PostgreSQL server and expose it on the web so that it can be accessed by external clients. This is useful to me for hosting several personal projects that require a database.&lt;/p&gt;
 &lt;p&gt;First things first, let&amp;rsquo;s create our env variables.&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;HOSTNAME&lt;span style="color:#f92672"&gt;=&lt;/span&gt;&lt;span style="color:#e6db74"&gt;&amp;#34;subdomain.domain.tld&amp;#34;&lt;/span&gt; &lt;span style="color:#75715e"&gt;# Hostname of your server&lt;/span&gt;
